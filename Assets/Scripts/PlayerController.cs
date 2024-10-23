@@ -36,19 +36,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float coyoteTime; 
     private float coyoteTimeCounter;
 
-    /* // WIP
-    [Header("DASHING")]
-    [SerializeField] private float dashPower;
-    [SerializeField] private float dashTime;
-    [SerializeField] private float dashCountDown;
-    [SerializeField] private bool isDashing;
-    */
-
     [Header("JUMP LOAD")]
     [SerializeField] private float jumpTime;
     private float jumpTimeCounter;
     public bool isJumping;
-
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -127,7 +118,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         rb.velocity = new Vector2(movement.x * speed, rb.velocity.y);
     }
@@ -145,7 +136,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Jump()
+    private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         isJumping = true;
