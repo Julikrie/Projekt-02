@@ -178,12 +178,20 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(dashTime);
 
-        rb.gravityScale = 1f; 
+        rb.gravityScale = 1f;
         isDashing = false;
 
         trailRenderer.enabled = false;
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("DashResetter"))
+        {
+            canDash = true;
+            Destroy(collision.gameObject);
+        }
     }
 }
