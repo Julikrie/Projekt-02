@@ -82,6 +82,11 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = Mathf.Min(rb.gravityScale + fallGravity * Time.deltaTime, maxGravityScale);
         }
 
+        if (isDashing)
+        {
+            rb.gravityScale = 0f;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpBufferCounter = jumpBufferTime;
@@ -178,7 +183,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(dashTime);
 
-        rb.gravityScale = 1f;
+        rb.gravityScale = dashGravity;
         isDashing = false;
 
         trailRenderer.enabled = false;
