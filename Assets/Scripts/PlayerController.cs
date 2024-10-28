@@ -186,12 +186,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("DashResetter"))
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    { 
+        if (other.gameObject.CompareTag("DashResetter"))
         {
+            Destroy(other.gameObject);
             canDash = true;
-            Destroy(collision.gameObject);
         }
     }
 }
