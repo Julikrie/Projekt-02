@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [Header("FLIP SPRITE")]
     private SpriteRenderer spriteRenderer;
 
-    [Header ("AUDIO")]
+    [Header("AUDIO")]
     public AudioClip jumpAudio;
     private AudioSource audioSource;
 
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public bool isGrounded = true;
 
-    [Header ("GRAVITY SCALE TEST")]
+    [Header("GRAVITY SCALE TEST")]
     [SerializeField] private float fallGravity;
     [SerializeField] private float maxGravityScale;
 
@@ -32,14 +32,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpBufferTime;
     private float jumpBufferCounter;
 
-    [Header ("COYOTE TIME")]
-    [SerializeField] private float coyoteTime; 
+    [Header("COYOTE TIME")]
+    [SerializeField] private float coyoteTime;
     private float coyoteTimeCounter;
 
     [Header("JUMP LOAD")]
     [SerializeField] private float jumpTime;
     private float jumpTimeCounter;
     public bool isJumping;
+
+    [Header("DASH")]
+    public float dashTime;
+    public float dashCooldown;
+    public float dashRange;
+    private TrailRenderer trailRenderer;
+
+    [SerializeField] private bool isDashing;
+    [SerializeField] private bool canDash;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -48,19 +57,19 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = rb.GetComponent<SpriteRenderer>();
+        trailRenderer = rb.GetComponent<TrailRenderer>();
         audioSource = GetComponent<AudioSource>();
+
+        trailRenderer.enabled = false;
     }
 
     void Update()
     {
         movement.x = Input.GetAxis("Horizontal");
 
-        // Grounded 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
         FlipSprite();
 
-        // Checking Grounded & Coyote Time & Jump Counter
         if (isGrounded)
         {
             jumpCounter = 0;
@@ -73,33 +82,27 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = Mathf.Min(rb.gravityScale + fallGravity * Time.deltaTime, maxGravityScale);
         }
 
-        // When Jump start Counter
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpBufferCounter = jumpBufferTime;
         }
 
-        // Decrease Buffer Counter Time
         jumpBufferCounter -= Time.deltaTime;
 
-        // Jump & Coyote Time & Jump Buffer
         if (jumpBufferCounter > 0)
         {
-            // Jump if Grounded or Coyote Time avaiable
             if (isGrounded || coyoteTimeCounter > 0)
             {
                 Jump();
                 jumpBufferCounter = 0f;
             }
-            // Double Jump possible if Counts avaiable 
             else if (!isGrounded && jumpCounter < maxJumpCounter)
             {
                 Jump();
-                jumpBufferCounter = 0f; 
+                jumpBufferCounter = 0f;
             }
         }
 
-        // Jumping when holding Space
         if (Input.GetKey(KeyCode.Space) && isJumping && jumpTimeCounter > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -111,21 +114,27 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
-        // Faster fall
         if (rb.velocity.y < 0f)
         {
             rb.gravityScale += fallGravity * Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            StartCoroutine(Dash());
         }
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(movement.x * speed, rb.velocity.y);
+        if (!isDashing)
+        {
+            rb.velocity = new Vector2(movement.x * speed, rb.velocity.y);
+        }
     }
 
-    void FlipSprite()
+    private void FlipSprite()
     {
-        // Flip Sprite in the moving direction
         if (movement.x > 0)
         {
             spriteRenderer.flipX = false;
@@ -144,5 +153,37 @@ public class PlayerController : MonoBehaviour
         jumpTimeCounter = jumpTime;
         audioSource.PlayOneShot(jumpAudio);
     }
-}
 
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        canDash = false;
+
+        float dashGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        float dashInputX = Input.GetAxis("Horizontal");
+        float dashInputY = Input.GetAxis("Vertical");
+
+        Vector2 dashDirection = new Vector2(dashInputX, dashInputY).normalized;
+
+        if (dashDirection == Vector2.zero)
+        {
+            dashDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
+        }
+
+        rb.velocity = dashDirection * dashRange;
+
+        trailRenderer.enabled = true;
+
+        yield return new WaitForSeconds(dashTime);
+
+        rb.gravityScale = 1f; 
+        isDashing = false;
+
+        trailRenderer.enabled = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
+}
