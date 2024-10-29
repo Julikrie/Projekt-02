@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public float wallSlideSpeed; 
 
     [Header("WALL HANG")]
-    public float WallHangTimer;
+    public float wallHangTimer;
 
     [Header("GRAVITY SCALE TEST")]
     [SerializeField] private float fallGravity;
@@ -215,10 +215,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnWall()
     {
+        isWalled = false;
 
         foreach (Transform wall in wallCheck)
         {
-            if (isWalled = Physics2D.OverlapCircle(wall.position, overlapCheckRadius, wallLayer))
+            if (Physics2D.OverlapCircle(wall.position, overlapCheckRadius, wallLayer))
             {
                 isWalled = true;
                 break;
@@ -228,16 +229,26 @@ public class PlayerController : MonoBehaviour
 
     private void WallHang()
     {
-        if (isWalled && WallHangTimer > 0 && Input.GetKey(KeyCode.Space))
+        if (isWalled && wallHangTimer > 0 && Input.GetKey(KeyCode.Space))
         {
-            WallHangTimer -= Time.deltaTime;
+            wallHangTimer -= Time.deltaTime;
+
+            float colorChangeOverTime = 1 - (wallHangTimer / 2f);
+            spriteRenderer.color = Color.Lerp(Color.white, Color.blue, colorChangeOverTime);
+
             rb.gravityScale = 0f;
             rb.velocity = new Vector2(rb.velocity.x, 0f);
         }
-        else
+        else if (isWalled && wallHangTimer <= 0)
         {
             rb.gravityScale = 1f;
             rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
+            spriteRenderer.color = Color.white;
+        }
+        else if (!isWalled)
+        {
+            spriteRenderer.color = Color.white;
+            wallHangTimer = 2f;
         }
     }
 }

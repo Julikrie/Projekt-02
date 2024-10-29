@@ -4049,7 +4049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 9
-  jumpForce: 12
+  jumpForce: 11
   jumpCounter: 0
   jumpAudio: {fileID: 8300000, guid: 13101992532f2e74c886e270c3740e5d, type: 3}
   overlapCheckRadius: 0.15
@@ -4066,16 +4066,16 @@ MonoBehaviour:
   - {fileID: 198318016}
   isWalled: 0
   wallSlideSpeed: 1
-  WallHangTimer: 2
-  fallGravity: 18
-  maxGravityScale: 12
+  wallHangTimer: 2
+  fallGravity: 25
+  maxGravityScale: 15
   jumpBufferTime: 0.25
   coyoteTime: 0.2
   jumpTime: 0.25
   isJumping: 0
   dashTime: 0.25
-  dashCooldown: 3
-  dashRange: 23
+  dashCooldown: 2
+  dashRange: 25
   isDashing: 0
   canDash: 1
 --- !u!82 &1412456597
