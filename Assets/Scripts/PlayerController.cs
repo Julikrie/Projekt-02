@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         movement.x = Input.GetAxis("Horizontal");
 
+        // Grounded Check
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, overlapCheckRadius, groundLayer);
 
         OnWall();
@@ -91,6 +92,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
+            // Clamp Gravity to max Gravity Scale
             rb.gravityScale = Mathf.Min(rb.gravityScale + fallGravity * Time.deltaTime, maxGravityScale);
         }
 
@@ -120,6 +122,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // Double Jump add Jump to Jump Counter
         if (Input.GetKey(KeyCode.Space) && isJumping && jumpTimeCounter > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -131,6 +134,7 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
+        // Increase Gravity Scale when falling 
         if (rb.velocity.y < 0f)
         {
             rb.gravityScale += fallGravity * Time.deltaTime;
@@ -150,6 +154,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Flip Sprite when Player is moving right/left
     private void FlipSprite()
     {
         if (movement.x > 0)
@@ -166,6 +171,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         isJumping = true;
+        // Increase Jump Counter for double Jump count
         jumpCounter++;
         jumpTimeCounter = jumpTime;
         audioSource.PlayOneShot(jumpAudio);
@@ -176,6 +182,7 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         canDash = false;
 
+        // Set Dash Gravity to 0
         float dashGravity = rb.gravityScale;
         rb.gravityScale = 0f;
 
@@ -184,26 +191,31 @@ public class PlayerController : MonoBehaviour
 
         Vector2 dashDirection = new Vector2(dashInputX, dashInputY).normalized;
 
+        // If no Input turn Player Sprite in direction
         if (dashDirection == Vector2.zero)
         {
             dashDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
         }
 
+        // Dash range
         rb.velocity = dashDirection * dashRange;
 
         trailRenderer.enabled = true;
 
         yield return new WaitForSeconds(dashTime);
 
+        // While dashing set Gravity to 0 and reset dash bool to false;
         rb.gravityScale = dashGravity;
         isDashing = false;
 
         trailRenderer.enabled = false;
 
+        // Start dash cooldown, after cooldown canDash is resetted to true and avaiable
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
 
+    // When player collides with DashResetter his canDash gets resetted
     private void OnTriggerEnter2D(Collider2D other) 
     { 
         if (other.gameObject.CompareTag("DashResetter"))
@@ -213,6 +225,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Checks if the Player is next to a wall layer with two Wall Checks
     private void OnWall()
     {
         isWalled = false;
@@ -229,6 +242,7 @@ public class PlayerController : MonoBehaviour
 
     private void WallHang()
     {
+        // Player can hang on wall till the wallHangTimer is 0, indicated by turning player sprite turning blue
         if (isWalled && wallHangTimer > 0 && Input.GetKey(KeyCode.Space))
         {
             wallHangTimer -= Time.deltaTime;
@@ -239,12 +253,14 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = 0f;
             rb.velocity = new Vector2(rb.velocity.x, 0f);
         }
+        // Slides down wall, when timer is over or no space button held and sets character to normal color white
         else if (isWalled && wallHangTimer <= 0)
         {
             rb.gravityScale = 1f;
             rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
             spriteRenderer.color = Color.white;
         }
+        // Drops and changes to normal sprite color white, resets wallHangTimer
         else if (!isWalled)
         {
             spriteRenderer.color = Color.white;
