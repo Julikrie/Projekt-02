@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -19,10 +17,21 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
 
     [Header("GROUND CHECK")]
-    public float groundCheckRadius;
+    public float overlapCheckRadius;
     public LayerMask groundLayer;
     public Transform groundCheck;
     public bool isGrounded = true;
+
+    [Header("WALL CHECK")]
+    public LayerMask wallLayer;
+    public Transform[] wallCheck;
+    public bool isWalled = false;
+
+    [Header("WALL SLIDE")]
+    public float wallSlideSpeed; 
+
+    [Header("WALL HANG")]
+    public float WallHangTimer;
 
     [Header("GRAVITY SCALE TEST")]
     [SerializeField] private float fallGravity;
@@ -67,7 +76,10 @@ public class PlayerController : MonoBehaviour
     {
         movement.x = Input.GetAxis("Horizontal");
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, overlapCheckRadius, groundLayer);
+
+        OnWall();
+        WallHang();
         FlipSprite();
 
         if (isGrounded)
@@ -198,6 +210,34 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             canDash = true;
+        }
+    }
+
+    private void OnWall()
+    {
+
+        foreach (Transform wall in wallCheck)
+        {
+            if (isWalled = Physics2D.OverlapCircle(wall.position, overlapCheckRadius, wallLayer))
+            {
+                isWalled = true;
+                break;
+            }
+        }
+    }
+
+    private void WallHang()
+    {
+        if (isWalled && WallHangTimer > 0 && Input.GetKey(KeyCode.Space))
+        {
+            WallHangTimer -= Time.deltaTime;
+            rb.gravityScale = 0f;
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+        }
+        else
+        {
+            rb.gravityScale = 1f;
+            rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
         }
     }
 }
