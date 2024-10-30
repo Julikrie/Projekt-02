@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour
     public float dashTime;
     public float dashCooldown;
     public float dashRange;
+    public float dashRangeMin;
+    public float dashRangeMax;
     private TrailRenderer trailRenderer;
 
     [SerializeField] private bool isDashing;
@@ -196,6 +198,9 @@ public class PlayerController : MonoBehaviour
         {
             dashDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
         }
+
+        // Clamps DashRange.y between min and max value
+        dashDirection = new Vector2(dashDirection.x, Mathf.Clamp(dashDirection.y, dashRangeMin, dashRangeMax));
 
         // Dash range
         rb.velocity = dashDirection * dashRange;
