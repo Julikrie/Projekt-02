@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -50,6 +52,12 @@ public class PlayerController : MonoBehaviour
     private float jumpTimeCounter;
     public bool isJumping;
 
+    [Header("TRAMPOLIN")]
+    public float trampolinForce;
+    public float trampolinTimer;
+    public float trampolinCooldown;
+    public GameObject trampolinPrefab; 
+
     [Header("DASH")]
     public float dashTime;
     public float dashCooldown;
@@ -83,6 +91,8 @@ public class PlayerController : MonoBehaviour
 
         OnWall();
         WallHang();
+        WallJump();
+        SpawnTrampolin();
         FlipSprite();
 
         if (isGrounded)
@@ -228,10 +238,26 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             canDash = true;
         }
+
+        if (other.gameObject.CompareTag("Destroyable") && isDashing)
+        {
+            Destroy(other.gameObject);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trampolin"))
+        {
+            if (collision.contacts[0].normal.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, trampolinForce);
+            }
+        }
     }
 
-    // Checks if the Player is next to a wall layer with two Wall Checks
-    private void OnWall()
+
+// Checks if the Player is next to a wall layer with two Wall Checks
+private void OnWall()
     {
         isWalled = false;
 
@@ -244,11 +270,9 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private void WallHang()
     {
-        // Player can hang on wall till the wallHangTimer is 0, indicated by turning player sprite turning blue
-        if (isWalled && wallHangTimer > 0 && Input.GetKey(KeyCode.Space))
+        if (isWalled && wallHangTimer > 0 && Input.GetKey(KeyCode.Q))
         {
             wallHangTimer -= Time.deltaTime;
 
@@ -258,18 +282,50 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = 0f;
             rb.velocity = new Vector2(rb.velocity.x, 0f);
         }
-        // Slides down wall, when timer is over or no space button held and sets character to normal color white
-        else if (isWalled && wallHangTimer <= 0)
+        else if (isWalled && (wallHangTimer <= 0 || !Input.GetKey(KeyCode.E)))
         {
             rb.gravityScale = 1f;
             rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
             spriteRenderer.color = Color.white;
         }
-        // Drops and changes to normal sprite color white, resets wallHangTimer
-        else if (!isWalled)
+
+        if (isGrounded)
         {
             spriteRenderer.color = Color.white;
             wallHangTimer = 2f;
         }
     }
+
+    private void WallJump()
+    {
+        if (isWalled && !isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+
+            float wallDirection = (spriteRenderer.flipX) ? 1f : -1f; 
+            rb.velocity = new Vector2(wallDirection * jumpForce * 0.5f, rb.velocity.y); 
+
+            rb.gravityScale = 1f;
+
+            jumpCounter = 0;
+        }
+    }
+    private void SpawnTrampolin()
+    {
+        Vector2 trampolinOffset = new Vector2(0f, -1f);
+
+        if (rb.velocity.y > 0 && trampolinTimer <= 0 && Input.GetKey(KeyCode.E))
+        {
+            GameObject trampolinSpawn = Instantiate(trampolinPrefab, (Vector2)transform.position + trampolinOffset, Quaternion.identity);
+
+            trampolinTimer = trampolinCooldown;
+
+            Destroy(trampolinSpawn, 1.25f);
+        }
+
+        trampolinTimer -= Time.deltaTime;
+    }
 }
+
+
+
