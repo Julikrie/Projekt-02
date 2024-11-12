@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public float jumpForce;
+    public bool isFalling;
     public ParticleSystem jumpDust;
 
     public int jumpCounter;
@@ -153,9 +154,14 @@ public class PlayerController : MonoBehaviour
         }
 
         // Increase Gravity Scale when falling 
-        if (rb.velocity.y < 0f)
+        if (rb.velocity.y < 0f && !isFalling)
         {
+            isFalling = true;
             rb.gravityScale += fallGravity * Time.deltaTime;
+        }
+        else if (isGrounded)
+        {
+            isFalling = false;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
