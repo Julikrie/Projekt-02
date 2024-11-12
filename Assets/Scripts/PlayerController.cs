@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public float jumpForce;
+    public ParticleSystem jumpDust;
 
     public int jumpCounter;
     private int maxJumpCounter = 2;
@@ -52,6 +53,9 @@ public class PlayerController : MonoBehaviour
     private float jumpTimeCounter;
     public bool isJumping;
 
+    [Header("WALL JUMP")]
+    public float wallPushOff;
+
     [Header("TRAMPOLIN")]
     public float trampolinForce;
     public float trampolinTimer;
@@ -69,6 +73,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isDashing;
     [SerializeField] private bool canDash;
 
+
+    
     private Rigidbody2D rb;
     private Vector2 movement;
 
@@ -186,6 +192,7 @@ public class PlayerController : MonoBehaviour
         // Increase Jump Counter for double Jump count
         jumpCounter++;
         jumpTimeCounter = jumpTime;
+        jumpDust.Play();
         audioSource.PlayOneShot(jumpAudio);
     }
 
@@ -244,17 +251,6 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Trampolin"))
-        {
-            if (collision.contacts[0].normal.y > 0)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, trampolinForce);
-            }
-        }
-    }
-
 
 // Checks if the Player is next to a wall layer with two Wall Checks
 private void OnWall()
@@ -300,16 +296,18 @@ private void OnWall()
     {
         if (isWalled && !isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-
             float wallDirection = (spriteRenderer.flipX) ? 1f : -1f; 
-            rb.velocity = new Vector2(wallDirection * jumpForce * 0.5f, rb.velocity.y); 
+
+            rb.velocity = new Vector2(wallDirection * wallPushOff, jumpForce);
+
+            jumpDust.Play();
 
             rb.gravityScale = 1f;
 
             jumpCounter = 0;
         }
     }
+
     private void SpawnTrampolin()
     {
         Vector2 trampolinOffset = new Vector2(0f, -1f);
@@ -324,6 +322,18 @@ private void OnWall()
         }
 
         trampolinTimer -= Time.deltaTime;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trampolin"))
+        {
+            if (collision.contacts[0].normal.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, trampolinForce);
+                jumpDust.Play();
+            }
+        }
     }
 }
 
