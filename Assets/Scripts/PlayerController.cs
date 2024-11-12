@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     public bool isJumping;
 
     [Header("WALL JUMP")]
-    public float wallPushOff;
+    public float wallPushOff = 20f;
 
     [Header("TRAMPOLIN")]
     public float trampolinForce;
@@ -272,6 +272,7 @@ private void OnWall()
             }
         }
     }
+
     private void WallHang()
     {
         if (isWalled && wallHangTimer > 0 && Input.GetKey(KeyCode.Q))
@@ -339,6 +340,11 @@ private void OnWall()
                 rb.velocity = new Vector2(rb.velocity.x, trampolinForce);
                 jumpDust.Play();
             }
+        }
+
+        if (collision.gameObject.CompareTag("Destroyable") && isDashing)
+        {
+            Destroy(collision.gameObject);
         }
     }
 }
