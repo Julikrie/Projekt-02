@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
+    public float playerGravityScale = 6f;
     public float speed;
     public float jumpForce;
     public bool isFalling;
@@ -36,10 +37,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("WALL HANG")]
     public float wallHangTimer;
-
-    [Header("GRAVITY SCALE TEST")]
-    [SerializeField] private float fallGravity;
-    [SerializeField] private float maxGravityScale;
 
     [Header("JUMP BUFFER")]
     [SerializeField] private float jumpBufferTime;
@@ -106,13 +103,11 @@ public class PlayerController : MonoBehaviour
         {
             jumpCounter = 0;
             coyoteTimeCounter = coyoteTime;
-            rb.gravityScale = 1f;
+            rb.gravityScale = playerGravityScale;
         }
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
-            // Clamp Gravity to max Gravity Scale
-            rb.gravityScale = Mathf.Min(rb.gravityScale + fallGravity * Time.deltaTime, maxGravityScale);
         }
 
         if (isDashing)
@@ -151,17 +146,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) || jumpTimeCounter <= 0)
         {
             isJumping = false;
-        }
-
-        // Increase Gravity Scale when falling 
-        if (rb.velocity.y < 0f && !isFalling)
-        {
-            isFalling = true;
-            rb.gravityScale += fallGravity * Time.deltaTime;
-        }
-        else if (isGrounded)
-        {
-            isFalling = false;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
@@ -287,7 +271,7 @@ private void OnWall()
         }
         else if (isWalled && (wallHangTimer <= 0 || !Input.GetKey(KeyCode.E)))
         {
-            rb.gravityScale = 1f;
+            rb.gravityScale = playerGravityScale;
             rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
             spriteRenderer.color = Color.white;
         }
@@ -309,7 +293,7 @@ private void OnWall()
 
             jumpDust.Play();
 
-            rb.gravityScale = 1f;
+            rb.gravityScale = playerGravityScale;
 
             jumpCounter = 0;
         }
