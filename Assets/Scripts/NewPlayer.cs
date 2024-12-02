@@ -9,6 +9,7 @@ public class NewPlayer : MonoBehaviour
     public float speed = 10f;
     public float jumpForce = 12f;
     public float fallSpeed = -4f;
+    float wallJumpDirection = 1f;
 
     public float overlapCheckRadius;
     public LayerMask groundLayer;
@@ -54,7 +55,11 @@ public class NewPlayer : MonoBehaviour
         GroundCheck();
         WallCheck();
         // WallHang();
-        // WallJump();
+        
+        if (isOnWall && Input.GetKeyDown(KeyCode.Space))
+        {
+            WallJump();
+        }
     }
 
     void FixedUpdate()
@@ -129,7 +134,6 @@ public class NewPlayer : MonoBehaviour
 
     void WallCheck()
     {
-        float wallJumpDirection = 1f;
         isOnWall = false;
 
         foreach (Transform wall in wallCheck)
@@ -145,6 +149,20 @@ public class NewPlayer : MonoBehaviour
         }
     }
 
+    void WallJump()
+    {
+        // Reset vertical velocity and apply the jump force
+        rb.velocity = Vector2.zero;
+
+        // Add force for the wall jump
+        Vector2 jumpForceVector = new Vector2(wallJumpDirection * wallJumpForce, jumpForce);
+        rb.AddForce(jumpForceVector, ForceMode2D.Impulse);
+
+        // Optional: Reset coyote timer and adjust gravity scale if needed
+        coyoteTimer = 0f;
+        rb.gravityScale = airGravityScale;
+
+    }
     void FlipSprite()
     {
         if (movement.x < 0f)
@@ -156,6 +174,5 @@ public class NewPlayer : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
-
-
 }
+

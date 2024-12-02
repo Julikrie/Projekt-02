@@ -268,7 +268,7 @@ Transform:
   m_GameObject: {fileID: 198318015}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -60.6, y: 0, z: 0}
+  m_LocalPosition: {x: -57.5, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1994,7 +1994,7 @@ Transform:
   m_GameObject: {fileID: 351537033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 71.03, y: 0, z: 0}
+  m_LocalPosition: {x: 70.1, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2900,7 +2900,7 @@ MonoBehaviour:
   wallCheck:
   - {fileID: 351537034}
   - {fileID: 198318016}
-  wallJumpForce: 15
+  wallJumpForce: 30
   wallHangTimer: 2
   wallSlideSpeed: 3
   airGravityScale: 3.5
