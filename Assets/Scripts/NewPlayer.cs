@@ -22,7 +22,8 @@ public class NewPlayer : MonoBehaviour
     public float wallSlideSpeed;
     public float airGravityScale = 6f;
 
-    private bool isGrounded = true;
+    public bool isGrounded = true;
+    public bool isOnWall = false;
     private bool isAtJumpApex = false;
 
     private Rigidbody2D rb;
@@ -38,6 +39,7 @@ public class NewPlayer : MonoBehaviour
     public float apexDuration; // Duration to apply reduced gravity at the apex
     public float reducedGravityScale; // Reduced gravity scale during the apex
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -50,7 +52,7 @@ public class NewPlayer : MonoBehaviour
         Jump();
         FlipSprite();
         GroundCheck();
-        // WallCheck();
+        WallCheck();
         // WallHang();
         // WallJump();
     }
@@ -125,6 +127,24 @@ public class NewPlayer : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, overlapCheckRadius, groundLayer);
     }
 
+    void WallCheck()
+    {
+        float wallJumpDirection = 1f;
+        isOnWall = false;
+
+        foreach (Transform wall in wallCheck)
+        {
+            if (Physics2D.OverlapCircle(wall.position, overlapCheckRadius, wallLayer))
+            {
+                isOnWall = true;
+
+                // Determine jump direction based on sprite's facing direction
+                wallJumpDirection = spriteRenderer.flipX ? 1f : -1f; // If flipped, jump right; else, jump left
+                break;
+            }
+        }
+    }
+
     void FlipSprite()
     {
         if (movement.x < 0f)
@@ -136,4 +156,6 @@ public class NewPlayer : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
+
+
 }
