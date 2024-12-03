@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,23 +9,22 @@ public class NewPlayer : MonoBehaviour
     public float speed = 10f;
     public float jumpForce = 12f;
     public float fallSpeed = -4f;
-    float wallJumpDirection = 1f;
+    public float wallJumpDirection = 1f;
+    public float wallJumpDelay;
 
-    public float overlapCheckRadius;
+    public float groundOverlapCheckRadius;
+    public float wallOverlapCheckRadius;
     public LayerMask groundLayer;
-    public Transform groundCheck;
-
     public LayerMask wallLayer;
-    public Transform[] wallCheck;
+    public Transform groundCheck;
+    public Transform wallCheck;
 
-    public float wallJumpForce = 40f;
-    public float wallHangTimer;
-    public float wallSlideSpeed;
+    public Vector2 wallJumpForce;
+    public float slideSpeed;
     public float airGravityScale = 6f;
 
     public bool isGrounded = true;
     public bool isOnWall = false;
-    private bool isAtJumpApex = false;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -34,12 +33,6 @@ public class NewPlayer : MonoBehaviour
 
     private float coyoteTime = 0.2f;
     private float coyoteTimer = 0f;
-
-    // Apex timing
-    private float apexTimeCounter = 0f;
-    public float apexDuration; // Duration to apply reduced gravity at the apex
-    public float reducedGravityScale; // Reduced gravity scale during the apex
-
 
     void Start()
     {
@@ -54,9 +47,9 @@ public class NewPlayer : MonoBehaviour
         FlipSprite();
         GroundCheck();
         WallCheck();
-        // WallHang();
-        
-        if (isOnWall && Input.GetKeyDown(KeyCode.Space))
+        WallHang();
+
+        if (isOnWall && !isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             WallJump();
         }
@@ -78,32 +71,6 @@ public class NewPlayer : MonoBehaviour
         if (!isGrounded)
         {
             coyoteTimer -= Time.deltaTime;
-
-            // Check if we are near the apex (when velocity is near zero)
-            if (rb.velocity.y > 0f && Mathf.Abs(rb.velocity.y) < 0.1f)
-            {
-                isAtJumpApex = true;
-                apexTimeCounter = apexDuration; // Reset the apex timer
-            }
-
-            // If we're at the apex, apply reduced gravity for a short time
-            if (isAtJumpApex)
-            {
-                if (apexTimeCounter > 0f)
-                {
-                    rb.gravityScale = reducedGravityScale;
-                    apexTimeCounter -= Time.deltaTime;
-                }
-                else
-                {
-                    rb.gravityScale = airGravityScale; // Reset gravity after apex duration
-                    isAtJumpApex = false;
-                }
-            }
-            else
-            {
-                rb.gravityScale = airGravityScale;
-            }
         }
 
         if (isGrounded)
@@ -129,50 +96,55 @@ public class NewPlayer : MonoBehaviour
 
     void GroundCheck()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, overlapCheckRadius, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundOverlapCheckRadius, groundLayer);
     }
 
     void WallCheck()
     {
-        isOnWall = false;
+        Vector2 wallCheckPosition = transform.position + new Vector3(spriteRenderer.flipX ? -0.5f : 0.5f, 0f, 0f);  // Adjust the X offset to your character's width
 
-        foreach (Transform wall in wallCheck)
+        Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
+
+        isOnWall = Physics2D.OverlapCircle(wallCheckPosition, wallOverlapCheckRadius, wallLayer);
+
+        if (isOnWall)
         {
-            if (Physics2D.OverlapCircle(wall.position, overlapCheckRadius, wallLayer))
-            {
-                isOnWall = true;
-
-                // Determine jump direction based on sprite's facing direction
-                wallJumpDirection = spriteRenderer.flipX ? 1f : -1f; // If flipped, jump right; else, jump left
-                break;
-            }
+            Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius, 0), Color.green);
         }
     }
 
-    void WallJump()
+    void WallHang()
     {
-        // Reset vertical velocity and apply the jump force
-        rb.velocity = Vector2.zero;
+        if (isOnWall)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -slideSpeed);
+        }
+    }
 
-        // Add force for the wall jump
-        Vector2 jumpForceVector = new Vector2(wallJumpDirection * wallJumpForce, jumpForce);
-        rb.AddForce(jumpForceVector, ForceMode2D.Impulse);
+void WallJump()
+{
+    if (isOnWall && !isGrounded)
+    {
+        float direction = spriteRenderer.flipX ? -1f : 1f; // Determine the direction to jump based on sprite flip
 
-        // Optional: Reset coyote timer and adjust gravity scale if needed
+        // Apply a wall jump force in the correct direction
+        rb.velocity = new Vector2(direction * wallJumpForce.x, wallJumpForce.y); 
+
+        // Reset the coyote timer and apply the air gravity scale to prevent floating
         coyoteTimer = 0f;
         rb.gravityScale = airGravityScale;
-
     }
+}
+
     void FlipSprite()
     {
-        if (movement.x < 0f)
+        if (movement.x < 0f && !spriteRenderer.flipX)
         {
             spriteRenderer.flipX = true;
         }
-        else
+        else if (movement.x > 0f && spriteRenderer.flipX)
         {
             spriteRenderer.flipX = false;
         }
     }
 }
-
