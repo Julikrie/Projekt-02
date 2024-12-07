@@ -1595,7 +1595,7 @@ MonoBehaviour:
   JumpForce: 18
   SlideSpeed: 1
   groundOverlapCheckRadius: 0.1
-  wallOverlapCheckRadius: 0.1
+  wallOverlapCheckRadius: 0.01
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

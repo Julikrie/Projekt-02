@@ -93,12 +93,11 @@ public class PlayerStatemanchine : MonoBehaviour
     private void ExecuteMove()
     {
         _rb.velocity = new Vector2(_movement.x * Speed, _rb.velocity.y);
-        /*
         if (_isGrounded && _movement.x < 0.01f)
         {
             _currentState = MovementState.Idle;
         }
-        */
+
         if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             _currentState = MovementState.Jump;
@@ -122,7 +121,7 @@ public class PlayerStatemanchine : MonoBehaviour
         }
         */
 
-        if (_isGrounded)
+        if (_isGrounded && _rb.velocity.y <= 0f)
         {
             _isJumping = false;
             _currentState = Mathf.Abs(_movement.x) > 0.01f ? MovementState.Move : MovementState.Idle;
