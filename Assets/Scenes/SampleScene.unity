@@ -1044,7 +1044,7 @@ Transform:
   m_GameObject: {fileID: 1023718826}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 13.99, y: 3.59, z: 0}
+  m_LocalPosition: {x: 32.96, y: 3.59, z: 0}
   m_LocalScale: {x: 20, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1604,10 +1604,12 @@ MonoBehaviour:
     m_Bits: 128
   groundCheck: {fileID: 1932020430}
   wallCheck: {fileID: 296282182}
+  _isJumping: 0
   _isOnWall: 0
   _isGrounded: 0
   _coyoteTime: 1
   _coyoteTimer: 0
+  _currentState: 0
 --- !u!1 &1524495327
 GameObject:
   m_ObjectHideFlags: 0
@@ -6953,8 +6955,8 @@ Transform:
   m_GameObject: {fileID: 1983642899}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -6.11, z: 0}
-  m_LocalScale: {x: 30, y: 2, z: 1}
+  m_LocalPosition: {x: 9.5013, y: -6.11, z: 0}
+  m_LocalScale: {x: 49.002, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

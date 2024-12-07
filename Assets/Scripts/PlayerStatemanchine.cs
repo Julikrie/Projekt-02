@@ -26,6 +26,8 @@ public class PlayerStatemanchine : MonoBehaviour
     public Transform wallCheck;
 
     [SerializeField]
+    private bool _isJumping;
+    [SerializeField]
     private bool _isOnWall;
     [SerializeField]
     private bool _isGrounded;
@@ -35,7 +37,7 @@ public class PlayerStatemanchine : MonoBehaviour
     private float _coyoteTimer;
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
-    private MovementState _currentState;
+    public MovementState _currentState;
     private Vector2 _movement;
 
     void Start()
@@ -83,29 +85,31 @@ public class PlayerStatemanchine : MonoBehaviour
 
         if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            PerformJump();
             _currentState = MovementState.Jump;
+            PerformJump();
         }
     }
 
     private void ExecuteMove()
     {
         _rb.velocity = new Vector2(_movement.x * Speed, _rb.velocity.y);
-
-        if (_isGrounded && _movement.x > 0.01f)
+        /*
+        if (_isGrounded && _movement.x < 0.01f)
         {
             _currentState = MovementState.Idle;
         }
-
+        */
         if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            PerformJump();
             _currentState = MovementState.Jump;
+            PerformJump();
+
         }
     }
 
     private void ExecuteJump()
     {
+        _isJumping = true;
         /*
         if (!_isGrounded)
         {
@@ -120,11 +124,13 @@ public class PlayerStatemanchine : MonoBehaviour
 
         if (_isGrounded)
         {
+            _isJumping = false;
             _currentState = Mathf.Abs(_movement.x) > 0.01f ? MovementState.Move : MovementState.Idle;
         }
 
         if (_isOnWall && !_isGrounded)
         {
+            _isJumping = false;
             _currentState = MovementState.WallSlide;
         }
     }
@@ -156,10 +162,7 @@ public class PlayerStatemanchine : MonoBehaviour
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
         _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, wallOverlapCheckRadius, wallLayer);
 
-        if (_isOnWall)
-        {
-            Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius, 0), Color.green);
-        }
+        Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius, 0), Color.green);
     }
 
     private void FlipSprite()
