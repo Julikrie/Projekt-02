@@ -4,12 +4,12 @@ using UnityEngine;
 
 public enum MovementState
 {
-    Idle,
-    Move,
-    Jump,
-    WallJump,
-    WallSlide,
-    Dash
+    Idling,
+    Moving,
+    Jumping,
+    WallJumping,
+    WallSliding,
+    Dashing
 }
 
 public class PlayerStatemanchine : MonoBehaviour
@@ -25,8 +25,6 @@ public class PlayerStatemanchine : MonoBehaviour
     public Transform groundCheck;
     public Transform wallCheck;
 
-    [SerializeField]
-    private bool _isJumping;
     [SerializeField]
     private bool _isOnWall;
     [SerializeField]
@@ -44,7 +42,7 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _currentState = MovementState.Idle;
+        _currentState = MovementState.Idling;
     }
 
     void Update()
@@ -57,58 +55,56 @@ public class PlayerStatemanchine : MonoBehaviour
 
         switch (_currentState)
         {
-            case MovementState.Idle:
-                ExecuteIdle();
+            case MovementState.Idling:
+                ManageIdle();
                 break;
-            case MovementState.Move:
-                ExecuteMove();
+            case MovementState.Moving:
+                ManageMove();
                 break;
-            case MovementState.Jump:
-                ExecuteJump();
+            case MovementState.Jumping:
+                ManageJump();
                 break;
-            case MovementState.WallJump:
+            case MovementState.WallJumping:
                 break;
-            case MovementState.WallSlide:
-                ExecuteWallSlide();
+            case MovementState.WallSliding:
+                ManageWallSlide();
                 break;
-            case MovementState.Dash:
+            case MovementState.Dashing:
                 break;
         }
     }
 
-    private void ExecuteIdle()
+    private void ManageIdle()
     {
         if (_isGrounded && Mathf.Abs(_movement.x) > 0.01f)
         {
-            _currentState = MovementState.Move;
+            _currentState = MovementState.Moving;
         }
 
         if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            _currentState = MovementState.Jump;
-            PerformJump();
+            _currentState = MovementState.Jumping;
+            ExecuteJump();
         }
     }
 
-    private void ExecuteMove()
+    private void ManageMove()
     {
         _rb.velocity = new Vector2(_movement.x * Speed, _rb.velocity.y);
         if (_isGrounded && _movement.x < 0.01f)
         {
-            _currentState = MovementState.Idle;
+            _currentState = MovementState.Idling;
         }
 
         if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            _currentState = MovementState.Jump;
-            PerformJump();
-
+            _currentState = MovementState.Jumping;
+            ExecuteJump();
         }
     }
 
-    private void ExecuteJump()
+    private void ManageJump()
     {
-        _isJumping = true;
         /*
         if (!_isGrounded)
         {
@@ -123,30 +119,28 @@ public class PlayerStatemanchine : MonoBehaviour
 
         if (_isGrounded && _rb.velocity.y <= 0f)
         {
-            _isJumping = false;
-            _currentState = Mathf.Abs(_movement.x) > 0.01f ? MovementState.Move : MovementState.Idle;
+            _currentState = Mathf.Abs(_movement.x) > 0.01f ? MovementState.Moving : MovementState.Idling;
         }
 
         if (_isOnWall && !_isGrounded)
         {
-            _isJumping = false;
-            _currentState = MovementState.WallSlide;
+            _currentState = MovementState.WallSliding;
         }
     }
 
-    private void PerformJump()
+    private void ExecuteJump()
     {
         _rb.velocity = new Vector2(_rb.velocity.x, JumpForce);
     }
 
-    private void ExecuteWallSlide()
+    private void ManageWallSlide()
     {
             Debug.Log("Ich WallSlide");
             _rb.velocity = new Vector2(_rb.velocity.x, -SlideSpeed);
 
         if (_isGrounded)
         {
-            _currentState = MovementState.Move;
+            _currentState = MovementState.Moving;
         }
     }
 
@@ -155,7 +149,7 @@ public class PlayerStatemanchine : MonoBehaviour
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundOverlapCheckRadius, groundLayer);
     }
 
-    void WallCheck()
+    private void WallCheck()
     {
         Vector2 wallCheckPosition = transform.position + new Vector3(_spriteRenderer.flipX ? -0.5f : 0.5f, 0f, 0f);
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
