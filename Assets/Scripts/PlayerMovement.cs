@@ -128,9 +128,6 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(jumpForce, ForceMode2D.Impulse);
 
             wallJumping = true;
-
-            Debug.Log("Wall Jump triggered. Direction: " + wallJumpDirection + " Force: " + jumpForce);
-            Debug.Log("Velocity after force: " + rb.velocity);
         }
     }
 
