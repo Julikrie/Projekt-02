@@ -18,6 +18,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
     public float Speed;
     public float JumpForce;
+    public float JumpStrafe;
     public float SlideSpeed;
 
     public float JumpCounter;
@@ -58,7 +59,6 @@ public class PlayerStatemanchine : MonoBehaviour
 
          GroundCheck();
          WallCheck();
-         FlipSprite();
 
         switch (_currentState)
         {
@@ -97,6 +97,8 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         _rb.velocity = new Vector2(_movement.x * Speed, _rb.velocity.y);
 
+        FlipSprite();
+
         if (JumpCounter <= JumpCounterLimit && Mathf.Abs(_movement.x) < 0.1f)
         {
             _currentState = MovementState.Idling;
@@ -112,6 +114,9 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageJump()
     {
+        // Improves the controll while jumping
+        _rb.AddForce(new Vector2(_movement.x * JumpStrafe, 0), ForceMode2D.Force);
+
         if (JumpCounter < JumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
         {
             ExecuteJump();
@@ -150,13 +155,12 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ExecuteJump()
     {
-        _rb.velocity = new Vector2(_rb.velocity.x, JumpForce);
+        _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
         JumpCounter++;
     }
 
     private void ManageWallSlide()
     {
-        Debug.Log("Ich WallSlide");
         _rb.velocity = new Vector2(_rb.velocity.x, -SlideSpeed);
 
         if (_isGrounded)
@@ -167,6 +171,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
         if (_isOnWall && Mathf.Abs(_rb.velocity.x) >= 0f && Input.GetKeyDown(KeyCode.Space))
         {
+
             _currentState = MovementState.Jumping;
             ExecuteWallJump();
         }
@@ -178,13 +183,13 @@ public class PlayerStatemanchine : MonoBehaviour
         {
             float direction = _spriteRenderer.flipX ? 1f : -1f;
 
-            _spriteRenderer.flipX = direction < 0;
+            _spriteRenderer.flipX = !_spriteRenderer.flipX;
 
             _rb.velocity = new Vector2(direction * WallJumpForce.x, WallJumpForce.y);
 
             _rb.gravityScale = AirGravityScale;
 
-            // Adds a small buffer to the Character, so that the WallCheck isn't to fast and switches instantly back to WallSlide State
+            // Adds a small buffer to the Character, so that the WallCheck isn't too fast and switches instantly back to WallSlide State
             transform.position += new Vector3(direction * 0.1f, 0f, 0f);
 
             _isOnWall = false;
@@ -199,7 +204,6 @@ public class PlayerStatemanchine : MonoBehaviour
     private void WallCheck()
     {
         Vector2 wallCheckPosition = transform.position + new Vector3(_spriteRenderer.flipX ? -0.5f : 0.5f, 0f, 0f);
-
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
         _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, wallOverlapCheckRadius, wallLayer);
 
@@ -208,7 +212,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void FlipSprite()
     {
-        if (_movement.x < 0f && !_spriteRenderer.flipX)
+        if (_movement.x < -0.1f && !_spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = true;
         }

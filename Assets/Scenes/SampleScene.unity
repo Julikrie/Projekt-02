@@ -1594,7 +1594,8 @@ MonoBehaviour:
   _currentState: 0
   Speed: 10
   JumpForce: 18
-  SlideSpeed: 1
+  JumpStrafe: 10
+  SlideSpeed: 4
   JumpCounter: 0
   JumpCounterLimit: 2
   WallJumpForce: {x: 10, y: 18}
