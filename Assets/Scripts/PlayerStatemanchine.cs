@@ -23,6 +23,9 @@ public class PlayerStatemanchine : MonoBehaviour
     public float JumpCounter;
     public int JumpCounterLimit = 2;
 
+    public Vector2 WallJumpForce;
+    public float AirGravityScale;
+
     public float groundOverlapCheckRadius;
     public float wallOverlapCheckRadius;
     public LayerMask groundLayer;
@@ -53,9 +56,9 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         _movement.x = Input.GetAxis("Horizontal");
 
-        GroundCheck();
-        WallCheck();
-        FlipSprite();
+         GroundCheck();
+         WallCheck();
+         FlipSprite();
 
         switch (_currentState)
         {
@@ -68,8 +71,6 @@ public class PlayerStatemanchine : MonoBehaviour
             case MovementState.Jumping:
                 ManageJump();
                 break;
-            case MovementState.WallJumping:
-                break;
             case MovementState.WallSliding:
                 ManageWallSlide();
                 break;
@@ -80,7 +81,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageIdle()
     {
-        if (_isGrounded && Mathf.Abs(_movement.x) > 0.01f)
+        if (_isGrounded && Mathf.Abs(_movement.x) > 0.1f)
         {
             _currentState = MovementState.Moving;
         }
@@ -96,9 +97,10 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         _rb.velocity = new Vector2(_movement.x * Speed, _rb.velocity.y);
 
-        if (JumpCounter <= JumpCounterLimit && _movement.x < 0.01f)
+        if (JumpCounter <= JumpCounterLimit && Mathf.Abs(_movement.x) < 0.1f)
         {
             _currentState = MovementState.Idling;
+            _rb.velocity = Vector2.zero;
         }
 
         if (JumpCounter < JumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
@@ -129,7 +131,14 @@ public class PlayerStatemanchine : MonoBehaviour
 
         if (_isGrounded && _rb.velocity.y <= 0f)
         {
-            _currentState = Mathf.Abs(_movement.x) > 0.01f ? MovementState.Moving : MovementState.Idling;
+            if (Mathf.Abs(_movement.x) > 0.01f)
+            {
+                _currentState = MovementState.Moving;
+            } 
+            else
+            {
+                _currentState = MovementState.Idling;
+            } 
             JumpCounter = 0;
         }
 
@@ -147,12 +156,38 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageWallSlide()
     {
-            Debug.Log("Ich WallSlide");
-            _rb.velocity = new Vector2(_rb.velocity.x, -SlideSpeed);
+        Debug.Log("Ich WallSlide");
+        _rb.velocity = new Vector2(_rb.velocity.x, -SlideSpeed);
 
         if (_isGrounded)
         {
             _currentState = MovementState.Moving;
+            JumpCounter = 0;
+        }
+
+        if (_isOnWall && Mathf.Abs(_rb.velocity.x) >= 0f && Input.GetKeyDown(KeyCode.Space))
+        {
+            _currentState = MovementState.Jumping;
+            ExecuteWallJump();
+        }
+    }
+
+    private void ExecuteWallJump()
+    {
+        if (_isOnWall && !_isGrounded)
+        {
+            float direction = _spriteRenderer.flipX ? 1f : -1f;
+
+            _spriteRenderer.flipX = direction < 0;
+
+            _rb.velocity = new Vector2(direction * WallJumpForce.x, WallJumpForce.y);
+
+            _rb.gravityScale = AirGravityScale;
+
+            // Adds a small buffer to the Character, so that the WallCheck isn't to fast and switches instantly back to WallSlide State
+            transform.position += new Vector3(direction * 0.1f, 0f, 0f);
+
+            _isOnWall = false;
         }
     }
 
@@ -164,6 +199,7 @@ public class PlayerStatemanchine : MonoBehaviour
     private void WallCheck()
     {
         Vector2 wallCheckPosition = transform.position + new Vector3(_spriteRenderer.flipX ? -0.5f : 0.5f, 0f, 0f);
+
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
         _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, wallOverlapCheckRadius, wallLayer);
 
@@ -176,7 +212,7 @@ public class PlayerStatemanchine : MonoBehaviour
         {
             _spriteRenderer.flipX = true;
         }
-        else if (_movement.x > 0f && _spriteRenderer.flipX)
+        else if (_movement.x > 0.1f && _spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = false;
         }
