@@ -1591,9 +1591,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3663c6e908addff46b550f8aa5f53d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentState: 0
   Speed: 10
   JumpForce: 18
   SlideSpeed: 1
+  JumpCounter: 0
+  MaxJumps: 2
   groundOverlapCheckRadius: 0.1
   wallOverlapCheckRadius: 0.01
   groundLayer:
@@ -1604,12 +1607,10 @@ MonoBehaviour:
     m_Bits: 128
   groundCheck: {fileID: 1932020430}
   wallCheck: {fileID: 296282182}
-  _isJumping: 0
   _isOnWall: 0
   _isGrounded: 0
   _coyoteTime: 1
   _coyoteTimer: 0
-  _currentState: 0
 --- !u!1 &1524495327
 GameObject:
   m_ObjectHideFlags: 0

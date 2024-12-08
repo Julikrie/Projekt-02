@@ -14,9 +14,14 @@ public enum MovementState
 
 public class PlayerStatemanchine : MonoBehaviour
 {
+    public MovementState _currentState;
+
     public float Speed;
     public float JumpForce;
     public float SlideSpeed;
+
+    public float JumpCounter;
+    public int JumpCounterLimit = 2;
 
     public float groundOverlapCheckRadius;
     public float wallOverlapCheckRadius;
@@ -35,7 +40,6 @@ public class PlayerStatemanchine : MonoBehaviour
     private float _coyoteTimer;
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
-    public MovementState _currentState;
     private Vector2 _movement;
 
     void Start()
@@ -91,12 +95,13 @@ public class PlayerStatemanchine : MonoBehaviour
     private void ManageMove()
     {
         _rb.velocity = new Vector2(_movement.x * Speed, _rb.velocity.y);
-        if (_isGrounded && _movement.x < 0.01f)
+
+        if (JumpCounter <= JumpCounterLimit && _movement.x < 0.01f)
         {
             _currentState = MovementState.Idling;
         }
 
-        if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (JumpCounter < JumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
         {
             _currentState = MovementState.Jumping;
             ExecuteJump();
@@ -105,6 +110,11 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageJump()
     {
+        if (JumpCounter < JumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
+        {
+            ExecuteJump();
+        }
+
         /*
         if (!_isGrounded)
         {
@@ -120,6 +130,7 @@ public class PlayerStatemanchine : MonoBehaviour
         if (_isGrounded && _rb.velocity.y <= 0f)
         {
             _currentState = Mathf.Abs(_movement.x) > 0.01f ? MovementState.Moving : MovementState.Idling;
+            JumpCounter = 0;
         }
 
         if (_isOnWall && !_isGrounded)
@@ -131,6 +142,7 @@ public class PlayerStatemanchine : MonoBehaviour
     private void ExecuteJump()
     {
         _rb.velocity = new Vector2(_rb.velocity.x, JumpForce);
+        JumpCounter++;
     }
 
     private void ManageWallSlide()
