@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,28 +35,43 @@ public class PlayerStatemanchine : MonoBehaviour
     public Transform groundCheck;
     public Transform wallCheck;
 
+    public float dashTime;
+    public float dashCooldown;
+    public float dashRange;
+    public float dashRangeMin;
+    public float dashRangeMax;
+
     [SerializeField]
     private bool _isOnWall;
     [SerializeField]
     private bool _isGrounded;
+
     [SerializeField]
-    private float _coyoteTime;
+    private float _coyoteTime = 0.2f;
     [SerializeField]
     private float _coyoteTimer;
+
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
+    private TrailRenderer _trailRenderer;
     private Vector2 _movement;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _trailRenderer = GetComponent<TrailRenderer>();
         _currentState = MovementState.Idling;
     }
 
     void Update()
     {
         _movement.x = Input.GetAxis("Horizontal");
+
+        if (_isGrounded)
+        {
+            _coyoteTimer -= Time.deltaTime;
+        }
 
          GroundCheck();
          WallCheck();
@@ -156,6 +172,16 @@ public class PlayerStatemanchine : MonoBehaviour
     private void ExecuteJump()
     {
         _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
+
+        _coyoteTime = _coyoteTimer;
+
+        if (_isGrounded && _coyoteTime >= 0)
+        {
+            _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
+        }
+
+        _coyoteTimer = 0;
+
         JumpCounter++;
     }
 
@@ -196,9 +222,44 @@ public class PlayerStatemanchine : MonoBehaviour
         }
     }
 
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        canDash = false;
+
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        Vector2 dashDirection = new Vector2(movement.x, movement.y).normalized;
+        if (dashDirection == Vector2.zero)
+        {
+            dashDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
+        }
+
+        rb.velocity = dashDirection * dashRange;
+
+        _trailRenderer.enabled = true;
+
+        yield return new WaitForSeconds(dashTime);
+
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = originalGravity;
+
+        isDashing = false;
+        _trailRenderer.enabled = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
+
     private void GroundCheck()
     {
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundOverlapCheckRadius, groundLayer);
+        
+        if (_isGrounded)
+        {
+            _coyoteTimer = _coyoteTime;
+        }
     }
 
     private void WallCheck()

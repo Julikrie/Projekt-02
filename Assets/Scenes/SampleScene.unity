@@ -1612,7 +1612,7 @@ MonoBehaviour:
   wallCheck: {fileID: 296282182}
   _isOnWall: 0
   _isGrounded: 0
-  _coyoteTime: 1
+  _coyoteTime: 0.2
   _coyoteTimer: 0
 --- !u!1 &1523136773
 GameObject:
