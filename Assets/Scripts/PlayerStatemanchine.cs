@@ -38,8 +38,8 @@ public class PlayerStatemanchine : MonoBehaviour
     public float dashTime;
     public float dashCooldown;
     public float dashRange;
-    public float dashRangeMin;
-    public float dashRangeMax;
+    public bool _isDashing;
+    public bool _canDash;
 
     [SerializeField]
     private bool _isOnWall;
@@ -68,11 +68,6 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         _movement.x = Input.GetAxis("Horizontal");
 
-        if (_isGrounded)
-        {
-            _coyoteTimer -= Time.deltaTime;
-        }
-
          GroundCheck();
          WallCheck();
 
@@ -91,7 +86,13 @@ public class PlayerStatemanchine : MonoBehaviour
                 ManageWallSlide();
                 break;
             case MovementState.Dashing:
+                ManageDash();
                 break;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(Dash());
         }
     }
 
@@ -173,14 +174,10 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
 
-        _coyoteTime = _coyoteTimer;
-
-        if (_isGrounded && _coyoteTime >= 0)
+        if (_isGrounded && _coyoteTime > 0)
         {
             _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
         }
-
-        _coyoteTimer = 0;
 
         JumpCounter++;
     }
@@ -222,34 +219,40 @@ public class PlayerStatemanchine : MonoBehaviour
         }
     }
 
+    private void ManageDash()
+    {
+
+    }
+
     private IEnumerator Dash()
     {
-        isDashing = true;
-        canDash = false;
+        _isDashing = true;
+        _canDash = false;
 
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
+        float originalGravity = _rb.gravityScale;
+        _rb.gravityScale = 0f;
 
-        Vector2 dashDirection = new Vector2(movement.x, movement.y).normalized;
+        Vector2 dashDirection = new Vector2(_movement.x, _movement.y).normalized;
+
         if (dashDirection == Vector2.zero)
         {
-            dashDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
+            dashDirection = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
         }
 
-        rb.velocity = dashDirection * dashRange;
+        _rb.velocity = dashDirection * dashRange;
 
         _trailRenderer.enabled = true;
 
         yield return new WaitForSeconds(dashTime);
 
-        rb.velocity = Vector2.zero;
-        rb.gravityScale = originalGravity;
+        _rb.velocity = Vector2.zero;
+        _rb.gravityScale = originalGravity;
 
-        isDashing = false;
+        _isDashing = false;
         _trailRenderer.enabled = false;
 
         yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
+        _canDash = true;
     }
 
     private void GroundCheck()
@@ -259,6 +262,10 @@ public class PlayerStatemanchine : MonoBehaviour
         if (_isGrounded)
         {
             _coyoteTimer = _coyoteTime;
+        }
+        else
+        {
+            _coyoteTimer -= Time.deltaTime;
         }
     }
 

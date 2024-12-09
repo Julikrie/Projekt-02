@@ -1610,6 +1610,13 @@ MonoBehaviour:
     m_Bits: 128
   groundCheck: {fileID: 1523136774}
   wallCheck: {fileID: 296282182}
+  dashTime: 0.25
+  dashCooldown: 2
+  dashRange: 25
+  dashRangeMin: 1
+  dashRangeMax: 25
+  _isDashing: 0
+  _canDash: 0
   _isOnWall: 0
   _isGrounded: 0
   _coyoteTime: 0.2
