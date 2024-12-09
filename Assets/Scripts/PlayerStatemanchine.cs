@@ -67,6 +67,7 @@ public class PlayerStatemanchine : MonoBehaviour
     void Update()
     {
         _movement.x = Input.GetAxis("Horizontal");
+        _movement.y = Input.GetAxis("Vertical");
 
          GroundCheck();
          WallCheck();
