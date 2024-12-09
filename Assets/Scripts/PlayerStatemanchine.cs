@@ -90,10 +90,7 @@ public class PlayerStatemanchine : MonoBehaviour
                 break;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            StartCoroutine(Dash());
-        }
+
     }
 
     private void ManageIdle()
@@ -107,6 +104,12 @@ public class PlayerStatemanchine : MonoBehaviour
         {
             _currentState = MovementState.Jumping;
             ExecuteJump();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(ExecuteDash());
+            _currentState = MovementState.Dashing;
         }
     }
 
@@ -127,6 +130,12 @@ public class PlayerStatemanchine : MonoBehaviour
             _currentState = MovementState.Jumping;
             ExecuteJump();
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(ExecuteDash());
+            _currentState = MovementState.Dashing;
+        }
     }
 
     private void ManageJump()
@@ -138,18 +147,6 @@ public class PlayerStatemanchine : MonoBehaviour
         {
             ExecuteJump();
         }
-
-        /*
-        if (!_isGrounded)
-        {
-            _coyoteTimer -= Time.deltaTime;
-        }
-
-        if (_isGrounded && _coyoteTimer <= 0f)
-        {
-            _coyoteTimer = _coyoteTime;
-        }
-        */
 
         if (_isGrounded && _rb.velocity.y <= 0f)
         {
@@ -167,6 +164,12 @@ public class PlayerStatemanchine : MonoBehaviour
         if (_isOnWall && !_isGrounded)
         {
             _currentState = MovementState.WallSliding;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(ExecuteDash());
+            _currentState = MovementState.Dashing;
         }
     }
 
@@ -198,6 +201,12 @@ public class PlayerStatemanchine : MonoBehaviour
             _currentState = MovementState.Jumping;
             ExecuteWallJump();
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(ExecuteDash());
+            _currentState = MovementState.Dashing;
+        }
     }
 
     private void ExecuteWallJump()
@@ -221,15 +230,36 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageDash()
     {
+        if (!_isDashing &&_isGrounded && _rb.velocity.y <= 0f)
+        {
+            if (Mathf.Abs(_movement.x) > 0.01f)
+            {
+                _currentState = MovementState.Moving;
+            }
+            else
+            {
+                _currentState = MovementState.Idling;
+            }
+            JumpCounter = 0;
+        }
 
+        if (!_isDashing && !_isGrounded)
+        {
+            _currentState = MovementState.Jumping;
+        }
+
+        if (!_isDashing && _isOnWall && !_isGrounded)
+        {
+            _currentState = MovementState.WallSliding;
+        }
     }
 
-    private IEnumerator Dash()
+    private IEnumerator ExecuteDash()
     {
         _isDashing = true;
         _canDash = false;
 
-        float originalGravity = _rb.gravityScale;
+        float originalGravity = 6f;
         _rb.gravityScale = 0f;
 
         Vector2 dashDirection = new Vector2(_movement.x, _movement.y).normalized;
