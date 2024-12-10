@@ -38,8 +38,10 @@ public class PlayerStatemanchine : MonoBehaviour
     public float dashTime;
     public float dashCooldown;
     public float dashRange;
-    public bool _isDashing;
-    public bool _canDash;
+    [SerializeField]
+    private bool _isDashing;
+    [SerializeField]
+    private bool _canDash;
 
     [SerializeField]
     private bool _isOnWall;
@@ -50,6 +52,11 @@ public class PlayerStatemanchine : MonoBehaviour
     private float _coyoteTime = 0.2f;
     [SerializeField]
     private float _coyoteTimer;
+
+    [SerializeField]
+    private float _jumpBufferTime = 0.25f;
+    [SerializeField]
+    private float _jumpBufferTimer;
 
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
@@ -120,7 +127,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
         FlipSprite();
 
-        if (JumpCounter <= JumpCounterLimit && Mathf.Abs(_movement.x) < 0.1f)
+        if (JumpCounter < JumpCounterLimit && Mathf.Abs(_movement.x) < 0.1f)
         {
             _currentState = MovementState.Idling;
             _rb.velocity = Vector2.zero;
@@ -177,8 +184,9 @@ public class PlayerStatemanchine : MonoBehaviour
     private void ExecuteJump()
     {
         _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
+        _jumpBufferTimer = _jumpBufferTime;
 
-        if (_isGrounded && _coyoteTime > 0)
+        if (_isGrounded && _coyoteTimer > 0 && _jumpBufferTimer > 0)
         {
             _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
         }
@@ -293,9 +301,11 @@ public class PlayerStatemanchine : MonoBehaviour
         if (_isGrounded)
         {
             _coyoteTimer = _coyoteTime;
+            _jumpBufferTimer = 0;
         }
         else
         {
+            _jumpBufferTimer -= Time.deltaTime;
             _coyoteTimer -= Time.deltaTime;
         }
     }
