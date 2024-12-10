@@ -17,6 +17,7 @@ public class Leaf : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, 0);
             _playerRigidbody.AddForce(Vector2.up * ForcePower, ForceMode2D.Impulse);
         }
     }

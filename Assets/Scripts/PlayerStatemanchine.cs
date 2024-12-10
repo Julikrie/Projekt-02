@@ -34,8 +34,9 @@ public class PlayerStatemanchine : MonoBehaviour
     public float wallOverlapCheckRadius;
     public LayerMask groundLayer;
     public LayerMask wallLayer;
-    public Transform groundCheck;
+
     public Transform wallCheck;
+    public Transform groundCheck;
 
     public float dashTime;
     public float dashCooldown;
@@ -311,6 +312,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Changed the Collision Rate to 0.001
         if (other.gameObject.CompareTag("Destroyable") && _isDashing)
         {
             Destroy(other.transform.parent.gameObject);
