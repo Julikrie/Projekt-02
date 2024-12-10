@@ -97,8 +97,6 @@ public class PlayerStatemanchine : MonoBehaviour
                 ManageDash();
                 break;
         }
-
-
     }
 
     private void ManageIdle()
@@ -184,8 +182,7 @@ public class PlayerStatemanchine : MonoBehaviour
     private void ExecuteJump()
     {
         _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
-        _jumpBufferTimer = _jumpBufferTime;
-
+        
         if (_isGrounded && _coyoteTimer > 0 && _jumpBufferTimer > 0)
         {
             _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
@@ -301,11 +298,9 @@ public class PlayerStatemanchine : MonoBehaviour
         if (_isGrounded)
         {
             _coyoteTimer = _coyoteTime;
-            _jumpBufferTimer = 0;
         }
         else
         {
-            _jumpBufferTimer -= Time.deltaTime;
             _coyoteTimer -= Time.deltaTime;
         }
     }

@@ -1477,7 +1477,7 @@ MonoBehaviour:
   JumpStrafe: 10
   SlideSpeed: 4
   JumpCounter: 0
-  JumpCounterLimit: 2
+  JumpCounterLimit: 1
   WallJumpForce: {x: 10, y: 18}
   AirGravityScale: 6
   groundOverlapCheckRadius: 0.55
