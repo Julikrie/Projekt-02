@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum MovementState
@@ -10,7 +11,8 @@ public enum MovementState
     Jumping,
     WallJumping,
     WallSliding,
-    Dashing
+    Dashing,
+    Swinging
 }
 
 public class PlayerStatemanchine : MonoBehaviour
@@ -58,6 +60,9 @@ public class PlayerStatemanchine : MonoBehaviour
     [SerializeField]
     private float _jumpBufferTimer;
 
+    [SerializeField]
+    private bool _isSwinging;
+
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private TrailRenderer _trailRenderer;
@@ -95,6 +100,9 @@ public class PlayerStatemanchine : MonoBehaviour
                 break;
             case MovementState.Dashing:
                 ManageDash();
+                break;
+            case MovementState.Swinging:
+                ManageSwing();
                 break;
         }
     }
@@ -289,6 +297,24 @@ public class PlayerStatemanchine : MonoBehaviour
 
         yield return new WaitForSeconds(dashCooldown);
         _canDash = true;
+    }
+
+    private void ManageSwing()
+    {
+
+    }
+
+    private void ExecuteSwing()
+    {
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Destroyable") && _isDashing)
+        {
+            Destroy(other.transform.parent.gameObject);
+        }
     }
 
     private void GroundCheck()
