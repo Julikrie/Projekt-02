@@ -2171,6 +2171,8 @@ MonoBehaviour:
   JumpForce: 18
   JumpStrafe: 16
   SlideSpeed: 4
+  TrampolineForce: 25
+  TrampolinePrefab: {fileID: 6000997960001365919, guid: f28a3ec6db49c254cb2b4c549f353cef, type: 3}
   JumpCounter: 0
   JumpCounterLimit: 2
   WallJumpForce: {x: 10, y: 18}

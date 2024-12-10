@@ -24,6 +24,9 @@ public class PlayerStatemanchine : MonoBehaviour
     public float JumpStrafe;
     public float SlideSpeed;
 
+    public float TrampolineForce;
+    public GameObject TrampolinePrefab;
+
     public float JumpCounter;
     public int JumpCounterLimit = 2;
 
@@ -82,8 +85,9 @@ public class PlayerStatemanchine : MonoBehaviour
         _movement.x = Input.GetAxis("Horizontal");
         _movement.y = Input.GetAxis("Vertical");
 
-         GroundCheck();
-         WallCheck();
+        GroundCheck();
+        WallCheck();
+        SpawnTrampoline();
 
         switch (_currentState)
         {
@@ -310,6 +314,29 @@ public class PlayerStatemanchine : MonoBehaviour
 
     }
 
+    private void SpawnTrampoline()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Vector3 spawnPosition = transform.position + new Vector3(0f, -1f, 0f);
+            
+            GameObject spawnedTrampoline = Instantiate(TrampolinePrefab, spawnPosition, Quaternion.identity);
+
+            Destroy(spawnedTrampoline, 0.5f);
+        }
+    }
+
+    // Spawn Trampoline under Player and give him a bounce
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trampoline"))
+        {
+            _rb.velocity = new Vector2(_movement.x, 0);
+            _rb.AddForce(Vector2.up * TrampolineForce, ForceMode2D.Impulse);
+        }
+    }
+
+    // Dash through destroyable objects without getting stuck
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Changed the Collision Rate to 0.001
