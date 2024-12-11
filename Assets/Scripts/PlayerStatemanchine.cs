@@ -378,12 +378,12 @@ public class PlayerStatemanchine : MonoBehaviour
         Debug.DrawRay(characterTop + new Vector2(-0.4f, 0f), Vector2.left * rayLength, Color.blue);
         Debug.DrawRay(characterTop + new Vector2(-0.5f, 0f), Vector2.up * rayLength, Color.blue);
 
-        if (isLeftCorner && !isRightCorner)
+        if (isLeftCorner && !isRightCorner && !_isOnWall)
         {
             _spriteRenderer.flipX = false;
             RedirectAroundCorner();
         }
-        else if (isRightCorner && !isLeftCorner)
+        else if (isRightCorner && !isLeftCorner && !_isOnWall)
         {
             _spriteRenderer.flipX = true;
             RedirectAroundCorner(); 
