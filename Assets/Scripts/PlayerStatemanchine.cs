@@ -66,6 +66,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
     public float rayLength;
     public float cornerPushForce = 2f;
+    public float offSetUnderCeiling;
 
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
@@ -374,27 +375,31 @@ public class PlayerStatemanchine : MonoBehaviour
 
         Debug.DrawRay(characterTop + new Vector2(0.4f, 0f), Vector2.right * rayLength, Color.red);
         Debug.DrawRay(characterTop + new Vector2(0.5f, 0f), Vector2.up * rayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(-0.48f, 0f), Vector2.left * rayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(-0.4f, 0f), Vector2.left * rayLength, Color.blue);
         Debug.DrawRay(characterTop + new Vector2(-0.5f, 0f), Vector2.up * rayLength, Color.blue);
 
-        Vector2 currentVelocity = _rb.velocity;
-
-        if (isLeftCorner && !isRightCorner && !_isOnWall)
+        if (isLeftCorner && !isRightCorner)
         {
-            float horizontalPushDirection = 1f;
-            Vector2 targetVelocity = new Vector2(horizontalPushDirection * cornerPushForce, JumpForce);
-
-            _rb.velocity += Vector2.Lerp(currentVelocity, targetVelocity, 5f);
+            _spriteRenderer.flipX = false;
+            RedirectAroundCorner();
         }
-        else if (isRightCorner && !isLeftCorner && !_isOnWall)
+        else if (isRightCorner && !isLeftCorner)
         {
-            Debug.Log("Right corner detected");
-            float horizontalPushDirection = -1f;
-
-            Vector2 targetVelocity = new Vector2(horizontalPushDirection * cornerPushForce, JumpForce);
-
-            _rb.velocity += Vector2.Lerp(currentVelocity, targetVelocity, 5f);
+            _spriteRenderer.flipX = true;
+            RedirectAroundCorner(); 
         }
+    }
+
+    private void RedirectAroundCorner()
+    {
+        float pushDirection = _spriteRenderer.flipX ? -1f : 1f;
+
+        Vector2 currentPosition = _rb.position;
+        Vector2 targetPosition = currentPosition + new Vector2(pushDirection * offSetUnderCeiling, 0);
+
+        _rb.position = targetPosition;
+
+        _rb.velocity = new Vector2(pushDirection * cornerPushForce, JumpForce);
     }
 
     private void WallCheck()

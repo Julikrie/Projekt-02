@@ -2233,6 +2233,7 @@ MonoBehaviour:
   _isSwinging: 0
   rayLength: 0.1
   cornerPushForce: 1
+  offSetUnderCeiling: 0.1
 --- !u!1 &1523136773
 GameObject:
   m_ObjectHideFlags: 0
