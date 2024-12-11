@@ -364,35 +364,36 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         Vector2 characterTop = (Vector2)transform.position + new Vector2(0f, 0.6f);
 
-        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.35f, 0f), Vector2.right, rayLength, wallLayer);
-        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.35f, 0f), Vector2.up, rayLength, wallLayer);
+        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.4f, 0f), Vector2.right, rayLength, wallLayer);
+        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.5f, 0f), Vector2.up, rayLength, wallLayer);
         bool isRightCorner = rightWallHit && rightCeilingHit;
 
-        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.35f, 0f), Vector2.left, rayLength, wallLayer);
-        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.35f, 0f), Vector2.up, rayLength, wallLayer);
+        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.4f, 0f), Vector2.left, rayLength, wallLayer);
+        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.5f, 0f), Vector2.up, rayLength, wallLayer);
         bool isLeftCorner = leftWallHit && leftCeilingHit;
 
-        // Debug visuals
-        Debug.DrawRay(characterTop + new Vector2(0.35f, 0f), Vector2.right * rayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(0.35f, 0f), Vector2.up * rayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(-0.35f, 0f), Vector2.left * rayLength, Color.blue);
-        Debug.DrawRay(characterTop + new Vector2(-0.35f, 0f), Vector2.up * rayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(0.4f, 0f), Vector2.right * rayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(0.5f, 0f), Vector2.up * rayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(-0.48f, 0f), Vector2.left * rayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(-0.5f, 0f), Vector2.up * rayLength, Color.blue);
 
         Vector2 currentVelocity = _rb.velocity;
 
-        if (isLeftCorner && !isRightCorner)
+        if (isLeftCorner && !isRightCorner && !_isOnWall)
         {
             float horizontalPushDirection = 1f;
             Vector2 targetVelocity = new Vector2(horizontalPushDirection * cornerPushForce, JumpForce);
 
-            _rb.velocity = Vector2.Lerp(currentVelocity, targetVelocity, 5f);
+            _rb.velocity += Vector2.Lerp(currentVelocity, targetVelocity, 5f);
         }
-        else if (isRightCorner && !isLeftCorner)
+        else if (isRightCorner && !isLeftCorner && !_isOnWall)
         {
             Debug.Log("Right corner detected");
             float horizontalPushDirection = -1f;
+
             Vector2 targetVelocity = new Vector2(horizontalPushDirection * cornerPushForce, JumpForce);
-            _rb.velocity = Vector2.Lerp(currentVelocity, targetVelocity, 5f);
+
+            _rb.velocity += Vector2.Lerp(currentVelocity, targetVelocity, 5f);
         }
     }
 
