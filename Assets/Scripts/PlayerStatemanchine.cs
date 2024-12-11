@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using System.Collections;
 using UnityEngine;
 
 public enum MovementState
@@ -67,6 +64,9 @@ public class PlayerStatemanchine : MonoBehaviour
     [SerializeField]
     private bool _isSwinging;
 
+    public float rayLength;
+    public float cornerPushForce = 2f;
+
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private TrailRenderer _trailRenderer;
@@ -88,6 +88,7 @@ public class PlayerStatemanchine : MonoBehaviour
         GroundCheck();
         WallCheck();
         SpawnTrampoline();
+        CheckForCorner();
 
         switch (_currentState)
         {
@@ -359,6 +360,41 @@ public class PlayerStatemanchine : MonoBehaviour
             _coyoteTimer -= Time.deltaTime;
         }
     }
+    private void CheckForCorner()
+    {
+        Vector2 characterTop = (Vector2)transform.position + new Vector2(0f, 0.6f);
+
+        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.35f, 0f), Vector2.right, rayLength, wallLayer);
+        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.35f, 0f), Vector2.up, rayLength, wallLayer);
+        bool isRightCorner = rightWallHit && rightCeilingHit;
+
+        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.35f, 0f), Vector2.left, rayLength, wallLayer);
+        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.35f, 0f), Vector2.up, rayLength, wallLayer);
+        bool isLeftCorner = leftWallHit && leftCeilingHit;
+
+        // Debug visuals
+        Debug.DrawRay(characterTop + new Vector2(0.35f, 0f), Vector2.right * rayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(0.35f, 0f), Vector2.up * rayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(-0.35f, 0f), Vector2.left * rayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(-0.35f, 0f), Vector2.up * rayLength, Color.blue);
+
+        Vector2 currentVelocity = _rb.velocity;
+
+        if (isLeftCorner && !isRightCorner)
+        {
+            float horizontalPushDirection = 1f;
+            Vector2 targetVelocity = new Vector2(horizontalPushDirection * cornerPushForce, JumpForce);
+
+            _rb.velocity = Vector2.Lerp(currentVelocity, targetVelocity, 5f);
+        }
+        else if (isRightCorner && !isLeftCorner)
+        {
+            Debug.Log("Right corner detected");
+            float horizontalPushDirection = -1f;
+            Vector2 targetVelocity = new Vector2(horizontalPushDirection * cornerPushForce, JumpForce);
+            _rb.velocity = Vector2.Lerp(currentVelocity, targetVelocity, 5f);
+        }
+    }
 
     private void WallCheck()
     {
@@ -366,7 +402,7 @@ public class PlayerStatemanchine : MonoBehaviour
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
         _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, wallOverlapCheckRadius, wallLayer);
 
-        Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius, 0), Color.green);
+        Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius, 0), Color.magenta);
     }
 
     private void FlipSprite()
