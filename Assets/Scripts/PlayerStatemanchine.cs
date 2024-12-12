@@ -21,6 +21,9 @@ public class PlayerStatemanchine : MonoBehaviour
     public float JumpStrafe;
     public float SlideSpeed;
 
+    public float detachJumpForce;
+    public float swingForce;
+
     public float TrampolineForce;
     public GameObject TrampolinePrefab;
 
@@ -89,7 +92,7 @@ public class PlayerStatemanchine : MonoBehaviour
         GroundCheck();
         WallCheck();
         SpawnTrampoline();
-        CheckForCorner();
+        CornerCorrection();
 
         switch (_currentState)
         {
@@ -126,7 +129,7 @@ public class PlayerStatemanchine : MonoBehaviour
             _currentState = MovementState.Jumping;
             ExecuteJump();
         }
-        
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             StartCoroutine(ExecuteDash());
@@ -174,11 +177,11 @@ public class PlayerStatemanchine : MonoBehaviour
             if (Mathf.Abs(_movement.x) > 0.01f)
             {
                 _currentState = MovementState.Moving;
-            } 
+            }
             else
             {
                 _currentState = MovementState.Idling;
-            } 
+            }
             JumpCounter = 0;
         }
 
@@ -197,7 +200,7 @@ public class PlayerStatemanchine : MonoBehaviour
     private void ExecuteJump()
     {
         _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
-        
+
         if (_isGrounded && _coyoteTimer > 0 && _jumpBufferTimer > 0)
         {
             _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
@@ -251,7 +254,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageDash()
     {
-        if (!_isDashing &&_isGrounded && _rb.velocity.y <= 0f)
+        if (!_isDashing && _isGrounded && _rb.velocity.y <= 0f)
         {
             if (Mathf.Abs(_movement.x) > 0.01f)
             {
@@ -308,12 +311,21 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageSwing()
     {
+        Rigidbody2D ropeRb = transform.parent.GetComponent<Rigidbody2D>();
 
-    }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            ropeRb.AddTorque(swingForce * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            ropeRb.AddTorque(-swingForce * Time.deltaTime);
+        }
 
-    private void ExecuteSwing()
-    {
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ExecuteDetachFromRope();
+        }
     }
 
     private void SpawnTrampoline()
@@ -321,7 +333,7 @@ public class PlayerStatemanchine : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Vector3 spawnPosition = transform.position + new Vector3(0f, -1f, 0f);
-            
+
             GameObject spawnedTrampoline = Instantiate(TrampolinePrefab, spawnPosition, Quaternion.identity);
 
             Destroy(spawnedTrampoline, 0.5f);
@@ -335,6 +347,11 @@ public class PlayerStatemanchine : MonoBehaviour
         {
             _rb.velocity = new Vector2(_movement.x, 0);
             _rb.AddForce(Vector2.up * TrampolineForce, ForceMode2D.Impulse);
+        }
+
+        if (collision.gameObject.CompareTag("SwingObject"))
+        {
+            ExecuteAttachToRope(collision.gameObject);
         }
     }
 
@@ -351,7 +368,7 @@ public class PlayerStatemanchine : MonoBehaviour
     private void GroundCheck()
     {
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundOverlapCheckRadius, groundLayer);
-        
+
         if (_isGrounded)
         {
             _coyoteTimer = _coyoteTime;
@@ -361,7 +378,7 @@ public class PlayerStatemanchine : MonoBehaviour
             _coyoteTimer -= Time.deltaTime;
         }
     }
-    private void CheckForCorner()
+    private void CornerCorrection()
     {
         Vector2 characterTop = (Vector2)transform.position + new Vector2(0f, 0.6f);
 
@@ -386,7 +403,7 @@ public class PlayerStatemanchine : MonoBehaviour
         else if (isRightCorner && !isLeftCorner && !_isOnWall)
         {
             _spriteRenderer.flipX = true;
-            RedirectAroundCorner(); 
+            RedirectAroundCorner();
         }
     }
 
@@ -405,9 +422,10 @@ public class PlayerStatemanchine : MonoBehaviour
     private void WallCheck()
     {
         Vector2 wallCheckPosition = transform.position + new Vector3(_spriteRenderer.flipX ? -0.5f : 0.5f, 0f, 0f);
-        Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
+
         _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, wallOverlapCheckRadius, wallLayer);
 
+        Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius, 0), Color.magenta);
     }
 
@@ -420,6 +438,47 @@ public class PlayerStatemanchine : MonoBehaviour
         else if (_movement.x > 0.1f && _spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = false;
+        }
+    }
+
+    private void ExecuteAttachToRope(GameObject swingableObject)
+    {
+        if (_currentState != MovementState.Swinging)
+        {
+            _currentState = MovementState.Swinging;
+
+            Rigidbody2D swingableObjectRb = swingableObject.GetComponent<Rigidbody2D>();
+
+            Vector2 playerVelocity = _rb.velocity;
+            
+            swingableObjectRb.AddForceAtPosition(playerVelocity * _rb.mass, transform.position, ForceMode2D.Impulse);
+
+            transform.parent = swingableObject.transform;
+
+            _rb.isKinematic = true;
+        }
+    }
+
+    private void ExecuteDetachFromRope()
+    {
+        if (_currentState == MovementState.Swinging)
+        {
+            _currentState = MovementState.Jumping;
+
+            transform.parent = null;
+
+            _rb.isKinematic = false;
+
+            Rigidbody2D ropeRb = GetComponentInParent<Rigidbody2D>();
+            
+            if (ropeRb != null)
+            {
+                _rb.velocity = ropeRb.velocity + new Vector2(0f, detachJumpForce);
+            }
+            else
+            {
+                _rb.velocity += new Vector2(0f, detachJumpForce);
+            }
         }
     }
 }

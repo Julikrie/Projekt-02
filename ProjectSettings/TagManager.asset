@@ -6,8 +6,8 @@ TagManager:
   tags:
   - DashResetter
   - Destroyable
-  - Vine
   - Trampoline
+  - SwingObject
   layers:
   - Default
   - TransparentFX
