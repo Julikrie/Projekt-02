@@ -15,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Floor
+  - Ground
   - Wall
   - Destroyable
   - Vine

@@ -74,7 +74,8 @@ public class PlayerStatemanchine : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private TrailRenderer _trailRenderer;
-    private Vector2 _movement;
+    private float _movementX;
+    private float _movementY;
 
     void Start()
     {
@@ -86,8 +87,8 @@ public class PlayerStatemanchine : MonoBehaviour
 
     void Update()
     {
-        _movement.x = Input.GetAxis("Horizontal");
-        _movement.y = Input.GetAxis("Vertical");
+        _movementX = Input.GetAxis("Horizontal");
+        _movementY = Input.GetAxis("Vertical");
 
         GroundCheck();
         WallCheck();
@@ -119,9 +120,13 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageIdle()
     {
-        if (_isGrounded && Mathf.Abs(_movement.x) > 0.1f)
+        if (Mathf.Abs(_movementX) > 0.1f)
         {
             _currentState = MovementState.Moving;
+        }
+        else
+        {
+            _rb.velocity = new Vector2(0, _rb.velocity.y);
         }
 
         if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
@@ -130,7 +135,7 @@ public class PlayerStatemanchine : MonoBehaviour
             ExecuteJump();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
         {
             StartCoroutine(ExecuteDash());
             _currentState = MovementState.Dashing;
@@ -139,14 +144,13 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageMove()
     {
-        _rb.velocity = new Vector2(_movement.x * Speed, _rb.velocity.y);
+        _rb.velocity = new Vector2(_movementX * Speed, _rb.velocity.y);
 
         FlipSprite();
 
-        if (JumpCounter < JumpCounterLimit && Mathf.Abs(_movement.x) < 0.1f)
+        if (Mathf.Abs(_movementX) < 0.1f)
         {
             _currentState = MovementState.Idling;
-            _rb.velocity = Vector2.zero;
         }
 
         if (JumpCounter < JumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
@@ -164,8 +168,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageJump()
     {
-        // Improves the controll while jumping
-        _rb.AddForce(new Vector2(_movement.x * JumpStrafe, 0), ForceMode2D.Force);
+        _rb.AddForce(new Vector2(_movementX * JumpStrafe * Time.deltaTime, 0), ForceMode2D.Force);
 
         if (JumpCounter < JumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
         {
@@ -174,7 +177,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
         if (_isGrounded && _rb.velocity.y <= 0f)
         {
-            if (Mathf.Abs(_movement.x) > 0.01f)
+            if (Mathf.Abs(_movementX) > 0.01f)
             {
                 _currentState = MovementState.Moving;
             }
@@ -199,11 +202,11 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ExecuteJump()
     {
-        _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
+        _rb.velocity = new Vector2(_movementX * Speed, JumpForce);
 
         if (_isGrounded && _coyoteTimer > 0 && _jumpBufferTimer > 0)
         {
-            _rb.velocity = new Vector2(_movement.x * Speed, JumpForce);
+            _rb.velocity = new Vector2(_movementX * Speed * Time.deltaTime, JumpForce);
         }
 
         JumpCounter++;
@@ -221,7 +224,6 @@ public class PlayerStatemanchine : MonoBehaviour
 
         if (_isOnWall && Mathf.Abs(_rb.velocity.x) >= 0f && Input.GetKeyDown(KeyCode.Space))
         {
-
             _currentState = MovementState.Jumping;
             ExecuteWallJump();
         }
@@ -245,7 +247,6 @@ public class PlayerStatemanchine : MonoBehaviour
 
             _rb.gravityScale = AirGravityScale;
 
-            // Adds a small buffer to the Character, so that the WallCheck isn't too fast and switches instantly back to WallSlide State
             transform.position += new Vector3(direction * 0.1f, 0f, 0f);
 
             _isOnWall = false;
@@ -256,7 +257,7 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         if (!_isDashing && _isGrounded && _rb.velocity.y <= 0f)
         {
-            if (Mathf.Abs(_movement.x) > 0.01f)
+            if (Mathf.Abs(_movementX) > 0.01f)
             {
                 _currentState = MovementState.Moving;
             }
@@ -286,14 +287,14 @@ public class PlayerStatemanchine : MonoBehaviour
         float originalGravity = 6f;
         _rb.gravityScale = 0f;
 
-        Vector2 dashDirection = new Vector2(_movement.x, _movement.y).normalized;
+        Vector2 dashDirection = new Vector2(_movementX, _movementY).normalized;
 
         if (dashDirection == Vector2.zero)
         {
             dashDirection = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
         }
 
-        _rb.velocity = dashDirection * dashRange;
+        _rb.velocity = dashDirection * dashRange / dashTime;
 
         _trailRenderer.enabled = true;
 
@@ -345,7 +346,7 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Trampoline"))
         {
-            _rb.velocity = new Vector2(_movement.x, 0);
+            _rb.velocity = new Vector2(_movementX, 0);
             _rb.AddForce(Vector2.up * TrampolineForce, ForceMode2D.Impulse);
         }
 
@@ -355,10 +356,9 @@ public class PlayerStatemanchine : MonoBehaviour
         }
     }
 
-    // Dash through destroyable objects without getting stuck
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Changed the Collision Rate to 0.001
         if (other.gameObject.CompareTag("Destroyable") && _isDashing)
         {
             Destroy(other.transform.parent.gameObject);
@@ -378,6 +378,7 @@ public class PlayerStatemanchine : MonoBehaviour
             _coyoteTimer -= Time.deltaTime;
         }
     }
+
     private void CornerCorrection()
     {
         Vector2 characterTop = (Vector2)transform.position + new Vector2(0f, 0.6f);
@@ -395,12 +396,12 @@ public class PlayerStatemanchine : MonoBehaviour
         Debug.DrawRay(characterTop + new Vector2(-0.4f, 0f), Vector2.left * rayLength, Color.blue);
         Debug.DrawRay(characterTop + new Vector2(-0.5f, 0f), Vector2.up * rayLength, Color.blue);
 
-        if (isLeftCorner && !isRightCorner && !_isOnWall)
+        if (isLeftCorner && !isRightCorner && !_isOnWall && !_isGrounded)
         {
             _spriteRenderer.flipX = false;
             RedirectAroundCorner();
         }
-        else if (isRightCorner && !isLeftCorner && !_isOnWall)
+        else if (isRightCorner && !isLeftCorner && !_isOnWall && !_isGrounded)
         {
             _spriteRenderer.flipX = true;
             RedirectAroundCorner();
@@ -425,17 +426,17 @@ public class PlayerStatemanchine : MonoBehaviour
 
         _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, wallOverlapCheckRadius, wallLayer);
 
-        Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
-        Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius, 0), Color.magenta);
+        Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up * Time.deltaTime, Color.red);
+        Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius * Time.deltaTime, 0), Color.magenta);
     }
 
     private void FlipSprite()
     {
-        if (_movement.x < -0.1f && !_spriteRenderer.flipX)
+        if (_movementX < -0.1f && !_spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = true;
         }
-        else if (_movement.x > 0.1f && _spriteRenderer.flipX)
+        else if (_movementX > 0.1f && _spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = false;
         }
@@ -450,7 +451,7 @@ public class PlayerStatemanchine : MonoBehaviour
             Rigidbody2D swingableObjectRb = swingableObject.GetComponent<Rigidbody2D>();
 
             Vector2 playerVelocity = _rb.velocity;
-            
+
             swingableObjectRb.AddForceAtPosition(playerVelocity * _rb.mass, transform.position, ForceMode2D.Impulse);
 
             transform.parent = swingableObject.transform;
@@ -470,7 +471,7 @@ public class PlayerStatemanchine : MonoBehaviour
             _rb.isKinematic = false;
 
             Rigidbody2D ropeRb = GetComponentInParent<Rigidbody2D>();
-            
+
             if (ropeRb != null)
             {
                 _rb.velocity = ropeRb.velocity + new Vector2(0f, detachJumpForce);
