@@ -77,6 +77,11 @@ public class PlayerStatemanchine : MonoBehaviour
     private float _movementX;
     private float _movementY;
 
+    private HingeJoint2D _hingeJoint;
+    private float _swingAttachCooldown = 0f;
+
+
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -89,6 +94,11 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         _movementX = Input.GetAxis("Horizontal");
         _movementY = Input.GetAxis("Vertical");
+
+        if (_swingAttachCooldown > 0f)
+        {
+            _swingAttachCooldown -= Time.deltaTime;
+        }
 
         GroundCheck();
         WallCheck();
@@ -310,25 +320,6 @@ public class PlayerStatemanchine : MonoBehaviour
         _canDash = true;
     }
 
-    private void ManageSwing()
-    {
-        Rigidbody2D ropeRb = transform.parent.GetComponent<Rigidbody2D>();
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            ropeRb.AddTorque(swingForce * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            ropeRb.AddTorque(-swingForce * Time.deltaTime);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ExecuteDetachFromRope();
-        }
-    }
-
     private void SpawnTrampoline()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -352,7 +343,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
         if (collision.gameObject.CompareTag("SwingObject"))
         {
-            ExecuteAttachToRope(collision.gameObject);
+            ExecuteAttachToSwing(collision.gameObject);
         }
     }
 
@@ -442,44 +433,121 @@ public class PlayerStatemanchine : MonoBehaviour
         }
     }
 
-    private void ExecuteAttachToRope(GameObject swingableObject)
+    private void ManageSwing()
     {
+        _swingAttachCooldown = 0.2f;
+
+        if (_hingeJoint == null || _hingeJoint.connectedBody == null)
+        {
+            return;
+        }
+
+        Rigidbody2D swingRb = _hingeJoint.connectedBody;
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            swingRb.AddTorque(swingForce);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            swingRb.AddTorque(-swingForce);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ExecuteDetachFromSwing();
+        }
+    }
+
+    private void ExecuteAttachToSwing(GameObject swingableObject)
+    {
+        if (_swingAttachCooldown > 0f) return;
+
         if (_currentState != MovementState.Swinging)
         {
             _currentState = MovementState.Swinging;
 
-            Rigidbody2D swingableObjectRb = swingableObject.GetComponent<Rigidbody2D>();
+            _rb.freezeRotation = true;
+
+            if (_hingeJoint == null)
+            {
+                _hingeJoint = gameObject.AddComponent<HingeJoint2D>();
+            }
+
+            Rigidbody2D swingRb = swingableObject.GetComponent<Rigidbody2D>();
+
+            if (swingRb == null)
+            {
+                return;
+            }
+
+            _hingeJoint.connectedBody = swingRb;
+
+            _hingeJoint.autoConfigureConnectedAnchor = false;
+
+            _hingeJoint.anchor = Vector2.zero;
+
+            Vector2 localGrabPoint = swingRb.transform.InverseTransformPoint(transform.position);
+            _hingeJoint.connectedAnchor = localGrabPoint;
 
             Vector2 playerVelocity = _rb.velocity;
-
-            swingableObjectRb.AddForceAtPosition(playerVelocity * _rb.mass, transform.position, ForceMode2D.Impulse);
-
-            transform.parent = swingableObject.transform;
-
-            _rb.isKinematic = true;
+            swingRb.AddForceAtPosition(playerVelocity * _rb.mass * 0.2f, transform.position, ForceMode2D.Impulse);
         }
     }
 
-    private void ExecuteDetachFromRope()
+    private void ExecuteDetachFromSwing()
     {
         if (_currentState == MovementState.Swinging)
         {
             _currentState = MovementState.Jumping;
 
-            transform.parent = null;
+            Rigidbody2D swingRb = null;
+
+            if (_hingeJoint != null && _hingeJoint.connectedBody != null)
+            {
+                swingRb = _hingeJoint.connectedBody;
+            }
+
+            Vector2 swingVelocity = swingRb.velocity;
+
+            if (_hingeJoint != null)
+            {
+                Destroy(_hingeJoint);
+                _hingeJoint = null;
+            }
+
+            if (swingRb != null)
+            {
+                Collider2D swingCollider = swingRb.GetComponent<Collider2D>();
+                Collider2D playerCollider = GetComponent<Collider2D>();
+
+                if (swingCollider != null && playerCollider != null)
+                {
+                    Physics2D.IgnoreCollision(playerCollider, swingCollider, true);
+
+                    StartCoroutine(ReenableCollision(playerCollider, swingCollider, 0.5f));
+                }
+            }
+
+            Vector2 baseJumpVelocity = new Vector2(_movementX * Speed * 1.2f, 12f);
+
+            float swingJumpFactor = 1.4f;
+
+            Vector2 detachVelocity = baseJumpVelocity + swingVelocity * swingJumpFactor;
 
             _rb.isKinematic = false;
+            _rb.freezeRotation = true;
+            _rb.velocity = detachVelocity;
+        }
+    }
 
-            Rigidbody2D ropeRb = GetComponentInParent<Rigidbody2D>();
+    private IEnumerator ReenableCollision(Collider2D playerCollider, Collider2D swingCollider, float delay)
+    {
+        yield return new WaitForSeconds(delay);
 
-            if (ropeRb != null)
-            {
-                _rb.velocity = ropeRb.velocity + new Vector2(0f, detachJumpForce);
-            }
-            else
-            {
-                _rb.velocity += new Vector2(0f, detachJumpForce);
-            }
+        if (playerCollider != null && swingCollider != null)
+        {
+            Physics2D.IgnoreCollision(playerCollider, swingCollider, false);
         }
     }
 }
