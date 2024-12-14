@@ -224,7 +224,10 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private void ManageWallSlide()
     {
-        _rb.velocity = new Vector2(_rb.velocity.x, -SlideSpeed);
+        if (_isOnWall)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, -SlideSpeed);
+        }
 
         if (_isGrounded)
         {
@@ -347,26 +350,11 @@ public class PlayerStatemanchine : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Destroyable") && _isDashing)
         {
             Destroy(other.transform.parent.gameObject);
-        }
-    }
-
-    private void GroundCheck()
-    {
-        _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundOverlapCheckRadius, groundLayer);
-
-        if (_isGrounded)
-        {
-            _coyoteTimer = _coyoteTime;
-        }
-        else
-        {
-            _coyoteTimer -= Time.deltaTime;
         }
     }
 
@@ -409,6 +397,20 @@ public class PlayerStatemanchine : MonoBehaviour
         _rb.position = targetPosition;
 
         _rb.velocity = new Vector2(pushDirection * cornerPushForce, JumpForce);
+    }
+
+    private void GroundCheck()
+    {
+        _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundOverlapCheckRadius, groundLayer);
+
+        if (_isGrounded)
+        {
+            _coyoteTimer = _coyoteTime;
+        }
+        else
+        {
+            _coyoteTimer -= Time.deltaTime;
+        }
     }
 
     private void WallCheck()
