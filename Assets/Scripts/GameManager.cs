@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject CameraTarget;
     public GameObject CurrentRoomTrigger;
     public Vector3 TargetNewPosition;
+    public float DeactivateTime;
 
     void Start()
     {
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentRoomTrigger.SetActive(false);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(DeactivateTime);
 
         CurrentRoomTrigger.SetActive(true);
     }

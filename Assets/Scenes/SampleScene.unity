@@ -1615,8 +1615,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1412456591}
   CameraTarget: {fileID: 27963529}
-  TargetNewPosition: {x: 25, y: 0, z: 0}
   CurrentRoomTrigger: {fileID: 1768001424}
+  TargetNewPosition: {x: 25, y: 0, z: 0}
+  DeactivateTime: 0.5
 --- !u!1001 &796947362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2132,8 +2133,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   CameraTarget: {fileID: 0}
-  TargetNewPosition: {x: 0, y: 0, z: 0}
   CurrentRoomTrigger: {fileID: 0}
+  TargetNewPosition: {x: 0, y: 0, z: 0}
+  DeactivateTime: 0
 --- !u!4 &964639733
 Transform:
   m_ObjectHideFlags: 0
@@ -3621,8 +3623,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1412456591}
   CameraTarget: {fileID: 27963529}
-  TargetNewPosition: {x: -25, y: 0, z: 0}
   CurrentRoomTrigger: {fileID: 752754575}
+  TargetNewPosition: {x: -25, y: 0, z: 0}
+  DeactivateTime: 0.5
 --- !u!61 &1768001426
 BoxCollider2D:
   m_ObjectHideFlags: 0
