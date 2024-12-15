@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class GameManager : MonoBehaviour
+public class RoomSwitcher : MonoBehaviour
 {
     public GameObject Player;
     public GameObject CameraTarget;
