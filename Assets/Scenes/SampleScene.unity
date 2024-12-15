@@ -235,7 +235,7 @@ Transform:
   m_GameObject: {fileID: 27963529}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1162,7 +1162,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2445,8 +2445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6d313fa5167a84d9c98be463668c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1412456591}
   ForcePower: 15
+  Player: {fileID: 1412456591}
 --- !u!212 &958607456
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3111,7 +3111,7 @@ Transform:
   m_GameObject: {fileID: 1412456591}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.1, y: -0.44, z: 0}
+  m_LocalPosition: {x: -8.21, y: -3.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3374,6 +3374,7 @@ MonoBehaviour:
   JumpForce: 18
   JumpStrafe: 7
   SlideSpeed: 2
+  JumpDust: {fileID: 1821043279}
   detachJumpForce: 500
   swingForce: 45
   TrampolineForce: 25
@@ -7974,7 +7975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!199 &1821043278
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -12781,7 +12782,7 @@ Transform:
   m_GameObject: {fileID: 1821043277}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.833334, y: -122.25, z: 0}
+  m_LocalPosition: {x: -0.45, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

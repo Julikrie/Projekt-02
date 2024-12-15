@@ -12,7 +12,7 @@ public enum MovementState
     Swinging
 }
 
-public class PlayerStatemanchine : MonoBehaviour
+public class PlayerStateMachine : MonoBehaviour
 {
     public MovementState _currentState;
 
@@ -20,6 +20,8 @@ public class PlayerStatemanchine : MonoBehaviour
     public float JumpForce;
     public float JumpStrafe;
     public float SlideSpeed;
+
+    public ParticleSystem JumpDust;
 
     public float detachJumpForce;
     public float swingForce;
@@ -79,8 +81,6 @@ public class PlayerStatemanchine : MonoBehaviour
 
     private HingeJoint2D _hingeJoint;
     private float _swingAttachCooldown = 0f;
-
-
 
     void Start()
     {
@@ -214,6 +214,8 @@ public class PlayerStatemanchine : MonoBehaviour
     {
         _rb.velocity = new Vector2(_movementX * Speed, JumpForce);
 
+        JumpDust.Play();
+
         if (_isGrounded && _coyoteTimer > 0 && _jumpBufferTimer > 0)
         {
             _rb.velocity = new Vector2(_movementX * Speed * Time.deltaTime, JumpForce);
@@ -261,6 +263,8 @@ public class PlayerStatemanchine : MonoBehaviour
             _rb.gravityScale = AirGravityScale;
 
             transform.position += new Vector3(direction * 0.1f, 0f, 0f);
+
+            JumpDust.Play();
 
             _isOnWall = false;
         }
@@ -529,6 +533,7 @@ public class PlayerStatemanchine : MonoBehaviour
 
                     StartCoroutine(ReenableCollision(playerCollider, swingCollider, 0.5f));
                 }
+
             }
 
             Vector2 baseJumpVelocity = new Vector2(_movementX * Speed * 1.2f, 12f);
@@ -540,6 +545,8 @@ public class PlayerStatemanchine : MonoBehaviour
             _rb.isKinematic = false;
             _rb.freezeRotation = true;
             _rb.velocity = detachVelocity;
+
+            JumpDust.Play();
         }
     }
 
