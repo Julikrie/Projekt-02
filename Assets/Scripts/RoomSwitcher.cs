@@ -1,28 +1,17 @@
-using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class RoomSwitcher : MonoBehaviour
 {
-    public GameObject Player;
     public GameObject CameraTarget;
-    public GameObject CurrentRoomTrigger;
+    public GameObject DeactivatedRoomTrigger;
     public Vector3 TargetNewPosition;
     public float DeactivateTime;
 
-    void Start()
+    private void Start()
     {
-        
+        CameraTarget.transform.position = new Vector3(25f, 0f, 0f);
     }
-
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -34,11 +23,11 @@ public class RoomSwitcher : MonoBehaviour
 
     private IEnumerator RoomTriggerCooldown()
     {
-        CurrentRoomTrigger.SetActive(false);
+        DeactivatedRoomTrigger.SetActive(false);
 
         yield return new WaitForSeconds(DeactivateTime);
 
-        CurrentRoomTrigger.SetActive(true);
+        DeactivatedRoomTrigger.SetActive(true);
     }
 }
 
