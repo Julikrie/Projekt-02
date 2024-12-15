@@ -2446,7 +2446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1412456591}
-  ForcePower: 14
+  ForcePower: 15
 --- !u!212 &958607456
 SpriteRenderer:
   m_ObjectHideFlags: 0

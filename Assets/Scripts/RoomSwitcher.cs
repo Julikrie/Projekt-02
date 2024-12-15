@@ -10,7 +10,7 @@ public class RoomSwitcher : MonoBehaviour
 
     private void Start()
     {
-        CameraTarget.transform.position = new Vector3(25f, 0f, 0f);
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
