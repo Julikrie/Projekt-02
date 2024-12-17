@@ -26,7 +26,7 @@ public class RoomSwitcher : MonoBehaviour
         DeactivatedRoomTrigger.SetActive(false);
 
         yield return new WaitForSeconds(DeactivateTime);
-
+        
         DeactivatedRoomTrigger.SetActive(true);
     }
 }
