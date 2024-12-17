@@ -178,7 +178,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void ManageJump()
     {
-        _rb.AddForce(new Vector2(_movementX * JumpStrafe * Time.deltaTime, 0), ForceMode2D.Force);
+        _rb.AddForce(new Vector2(_movementX * JumpStrafe, 0), ForceMode2D.Force);
 
         if (JumpCounter < JumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
         {
@@ -218,7 +218,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (_isGrounded && _coyoteTimer > 0 && _jumpBufferTimer > 0)
         {
-            _rb.velocity = new Vector2(_movementX * Speed * Time.deltaTime, JumpForce);
+            _rb.velocity = new Vector2(_movementX * Speed, JumpForce);
         }
 
         JumpCounter++;
@@ -423,8 +423,8 @@ public class PlayerStateMachine : MonoBehaviour
 
         _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, wallOverlapCheckRadius, wallLayer);
 
-        Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up * Time.deltaTime, Color.red);
-        Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius * Time.deltaTime, 0), Color.magenta);
+        Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
+        Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius, 0), Color.magenta);
     }
 
     private void FlipSprite()
