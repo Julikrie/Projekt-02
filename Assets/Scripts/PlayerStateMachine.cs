@@ -14,38 +14,55 @@ public enum MovementState
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    public MovementState _currentState;
-
-    public float Speed;
-    public float JumpForce;
-    public float JumpStrafe;
-    public float SlideSpeed;
+    [SerializeField]
+    private MovementState _currentState;
 
     public ParticleSystem JumpDust;
-
-    public float detachJumpForce;
-    public float swingForce;
-
-    public float TrampolineForce;
     public GameObject TrampolinePrefab;
 
-    public float JumpCounter;
-    public int JumpCounterLimit = 2;
-
-    public Vector2 WallJumpForce;
-    public float AirGravityScale;
-
-    public float groundOverlapCheckRadius;
-    public float wallOverlapCheckRadius;
     public LayerMask groundLayer;
     public LayerMask wallLayer;
 
-    public Transform wallCheck;
     public Transform groundCheck;
+    public Transform wallCheck;
 
-    public float dashTime;
-    public float dashCooldown;
-    public float dashRange;
+    [SerializeField]
+    private float _speed;
+    [SerializeField]
+    private float _jumpForce;
+    [SerializeField]
+    private float _jumpStrafe;
+    [SerializeField]
+    private float _slideSpeed;
+
+    [SerializeField]
+    private float _detachJumpForce;
+    [SerializeField]
+    private float _swingForce;
+
+    [SerializeField]
+    private float _trampolineForce;
+
+    [SerializeField]
+    private float _jumpCounter;
+    private int _jumpCounterLimit = 2;
+
+    [SerializeField]
+    private Vector2 _wallJumpForce;
+    [SerializeField]
+    private float _airGravityScale;
+
+    [SerializeField]
+    private float _groundOverlapCheckRadius;
+    [SerializeField]
+    private float _wallOverlapCheckRadius;
+
+    [SerializeField]
+    private float _dashTime;
+    [SerializeField]
+    private float _dashCooldown;
+    [SerializeField]
+    private float _dashRange;
     [SerializeField]
     private bool _isDashing;
     [SerializeField]
@@ -69,9 +86,12 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]
     private bool _isSwinging;
 
-    public float rayLength;
-    public float cornerPushForce = 2f;
-    public float offSetUnderCeiling;
+    [SerializeField]
+    private float _rayLength;
+    [SerializeField]
+    private float _cornerPushForce;
+    [SerializeField]
+    private float _offSetUnderCeiling;
 
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
@@ -154,7 +174,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void ManageMove()
     {
-        _rb.velocity = new Vector2(_movementX * Speed, _rb.velocity.y);
+        _rb.velocity = new Vector2(_movementX * _speed, _rb.velocity.y);
 
         FlipSprite();
 
@@ -163,7 +183,7 @@ public class PlayerStateMachine : MonoBehaviour
             _currentState = MovementState.Idling;
         }
 
-        if (JumpCounter < JumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
+        if (_jumpCounter < _jumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
         {
             _currentState = MovementState.Jumping;
             ExecuteJump();
@@ -178,9 +198,9 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void ManageJump()
     {
-        _rb.AddForce(new Vector2(_movementX * JumpStrafe, 0), ForceMode2D.Force);
+        _rb.AddForce(new Vector2(_movementX * _jumpStrafe, 0), ForceMode2D.Force);
 
-        if (JumpCounter < JumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
+        if (_jumpCounter < _jumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
         {
             ExecuteJump();
         }
@@ -195,7 +215,7 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 _currentState = MovementState.Idling;
             }
-            JumpCounter = 0;
+            _jumpCounter = 0;
         }
 
         if (_isOnWall && !_isGrounded)
@@ -212,29 +232,29 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void ExecuteJump()
     {
-        _rb.velocity = new Vector2(_movementX * Speed, JumpForce);
+        _rb.velocity = new Vector2(_movementX * _speed, _jumpForce);
 
         JumpDust.Play();
 
         if (_isGrounded && _coyoteTimer > 0 && _jumpBufferTimer > 0)
         {
-            _rb.velocity = new Vector2(_movementX * Speed, JumpForce);
+            _rb.velocity = new Vector2(_movementX * _speed, _jumpForce);
         }
 
-        JumpCounter++;
+        _jumpCounter++;
     }
 
     private void ManageWallSlide()
     {
         if (_isOnWall)
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, -SlideSpeed);
+            _rb.velocity = new Vector2(_rb.velocity.x, -_slideSpeed);
         }
 
         if (_isGrounded)
         {
             _currentState = MovementState.Moving;
-            JumpCounter = 0;
+            _jumpCounter = 0;
         }
 
         if (_isOnWall && Mathf.Abs(_rb.velocity.x) >= 0f && Input.GetKeyDown(KeyCode.Space))
@@ -258,9 +278,9 @@ public class PlayerStateMachine : MonoBehaviour
 
             _spriteRenderer.flipX = !_spriteRenderer.flipX;
 
-            _rb.velocity = new Vector2(direction * WallJumpForce.x, WallJumpForce.y);
+            _rb.velocity = new Vector2(direction * _wallJumpForce.x, _wallJumpForce.y);
 
-            _rb.gravityScale = AirGravityScale;
+            _rb.gravityScale = _airGravityScale;
 
             transform.position += new Vector3(direction * 0.1f, 0f, 0f);
 
@@ -282,7 +302,7 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 _currentState = MovementState.Idling;
             }
-            JumpCounter = 0;
+            _jumpCounter = 0;
         }
 
         if (!_isDashing && !_isGrounded)
@@ -311,11 +331,11 @@ public class PlayerStateMachine : MonoBehaviour
             dashDirection = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
         }
 
-        _rb.velocity = dashDirection * dashRange / dashTime;
+        _rb.velocity = dashDirection * _dashRange / _dashTime;
 
         _trailRenderer.enabled = true;
 
-        yield return new WaitForSeconds(dashTime);
+        yield return new WaitForSeconds(_dashTime);
 
         _rb.velocity = Vector2.zero;
         _rb.gravityScale = originalGravity;
@@ -323,7 +343,7 @@ public class PlayerStateMachine : MonoBehaviour
         _isDashing = false;
         _trailRenderer.enabled = false;
 
-        yield return new WaitForSeconds(dashCooldown);
+        yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
     }
 
@@ -345,7 +365,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (collision.gameObject.CompareTag("Trampoline"))
         {
             _rb.velocity = new Vector2(_movementX, 0);
-            _rb.AddForce(Vector2.up * TrampolineForce, ForceMode2D.Impulse);
+            _rb.AddForce(Vector2.up * _trampolineForce, ForceMode2D.Impulse);
         }
 
         if (collision.gameObject.CompareTag("SwingObject"))
@@ -366,18 +386,18 @@ public class PlayerStateMachine : MonoBehaviour
     {
         Vector2 characterTop = (Vector2)transform.position + new Vector2(0f, 0.6f);
 
-        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.4f, 0f), Vector2.right, rayLength, wallLayer);
-        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.5f, 0f), Vector2.up, rayLength, wallLayer);
+        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.4f, 0f), Vector2.right, _rayLength, wallLayer);
+        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.5f, 0f), Vector2.up, _rayLength, wallLayer);
         bool isRightCorner = rightWallHit && rightCeilingHit;
 
-        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.4f, 0f), Vector2.left, rayLength, wallLayer);
-        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.5f, 0f), Vector2.up, rayLength, wallLayer);
+        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.4f, 0f), Vector2.left, _rayLength, wallLayer);
+        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.5f, 0f), Vector2.up, _rayLength, wallLayer);
         bool isLeftCorner = leftWallHit && leftCeilingHit;
 
-        Debug.DrawRay(characterTop + new Vector2(0.4f, 0f), Vector2.right * rayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(0.5f, 0f), Vector2.up * rayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(-0.4f, 0f), Vector2.left * rayLength, Color.blue);
-        Debug.DrawRay(characterTop + new Vector2(-0.5f, 0f), Vector2.up * rayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(0.4f, 0f), Vector2.right * _rayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(0.5f, 0f), Vector2.up * _rayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(-0.4f, 0f), Vector2.left * _rayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(-0.5f, 0f), Vector2.up * _rayLength, Color.blue);
 
         if (isLeftCorner && !isRightCorner && !_isOnWall && !_isGrounded)
         {
@@ -396,16 +416,16 @@ public class PlayerStateMachine : MonoBehaviour
         float pushDirection = _spriteRenderer.flipX ? -1f : 1f;
 
         Vector2 currentPosition = _rb.position;
-        Vector2 targetPosition = currentPosition + new Vector2(pushDirection * offSetUnderCeiling, 0);
+        Vector2 targetPosition = currentPosition + new Vector2(pushDirection * _offSetUnderCeiling, 0);
 
         _rb.position = targetPosition;
 
-        _rb.velocity = new Vector2(pushDirection * cornerPushForce, JumpForce);
+        _rb.velocity = new Vector2(pushDirection * _cornerPushForce, _jumpForce);
     }
 
     private void GroundCheck()
     {
-        _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundOverlapCheckRadius, groundLayer);
+        _isGrounded = Physics2D.OverlapCircle(groundCheck.position, _groundOverlapCheckRadius, groundLayer);
 
         if (_isGrounded)
         {
@@ -421,10 +441,10 @@ public class PlayerStateMachine : MonoBehaviour
     {
         Vector2 wallCheckPosition = transform.position + new Vector3(_spriteRenderer.flipX ? -0.5f : 0.5f, 0f, 0f);
 
-        _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, wallOverlapCheckRadius, wallLayer);
+        _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, _wallOverlapCheckRadius, wallLayer);
 
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
-        Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(wallOverlapCheckRadius, 0), Color.magenta);
+        Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(_wallOverlapCheckRadius, 0), Color.magenta);
     }
 
     private void FlipSprite()
@@ -452,11 +472,11 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            swingRb.AddTorque(swingForce);
+            swingRb.AddTorque(_swingForce);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            swingRb.AddTorque(-swingForce);
+            swingRb.AddTorque(-_swingForce);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -536,7 +556,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             }
 
-            Vector2 baseJumpVelocity = new Vector2(_movementX * Speed * 1.2f, 12f);
+            Vector2 baseJumpVelocity = new Vector2(_movementX * _speed * 1.2f, 12f);
 
             float swingJumpFactor = 1.4f;
 
