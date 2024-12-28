@@ -34,8 +34,6 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]
     private float _jumpForce;
     [SerializeField]
-    private float _jumpStrafe;
-    [SerializeField]
     private float _slideSpeed;
 
     [SerializeField]
@@ -201,7 +199,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void HandleJump()
     {
-        _rb.AddForce(new Vector2(_movementX * _jumpStrafe, 0), ForceMode2D.Force);
+        _rb.velocity = new Vector2(_movementX * _speed, _rb.velocity.y);
 
         if (_jumpCounter < _jumpCounterLimit && Input.GetKeyDown(KeyCode.Space))
         {
@@ -235,7 +233,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void ExecuteJump()
     {
-        _rb.velocity = new Vector2(_movementX * _speed, _jumpForce);
+        _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
 
         JumpDust.Play();
 
