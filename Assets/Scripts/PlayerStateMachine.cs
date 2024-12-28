@@ -24,6 +24,8 @@ public class PlayerStateMachine : MonoBehaviour
     public LayerMask GroundLayer;
     public LayerMask WallLayer;
 
+    private float _groundCheckRayLength = 0.015f;
+
     public Transform GroundCheckTarget;
     public Transform WallCheckTarget;
 
@@ -129,27 +131,27 @@ public class PlayerStateMachine : MonoBehaviour
         switch (_currentState)
         {
             case MovementState.Idling:
-                ManageIdle();
+                HandleIdle();
                 break;
             case MovementState.Moving:
-                ManageMove();
+                HandleMove();
                 break;
             case MovementState.Jumping:
-                ManageJump();
+                HandleJump();
                 break;
             case MovementState.WallSliding:
-                ManageWallSlide();
+                HandleWallSlide();
                 break;
             case MovementState.Dashing:
-                ManageDash();
+                HandleDash();
                 break;
             case MovementState.Swinging:
-                ManageSwing();
+                HandleSwing();
                 break;
         }
     }
 
-    private void ManageIdle()
+    private void HandleIdle()
     {
         if (Mathf.Abs(_movementX) > 0.1f)
         {
@@ -173,7 +175,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-    private void ManageMove()
+    private void HandleMove()
     {
         _rb.velocity = new Vector2(_movementX * _speed, _rb.velocity.y);
 
@@ -197,7 +199,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-    private void ManageJump()
+    private void HandleJump()
     {
         _rb.AddForce(new Vector2(_movementX * _jumpStrafe, 0), ForceMode2D.Force);
 
@@ -245,7 +247,7 @@ public class PlayerStateMachine : MonoBehaviour
         _jumpCounter++;
     }
 
-    private void ManageWallSlide()
+    private void HandleWallSlide()
     {
         if (_isOnWall)
         {
@@ -291,7 +293,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-    private void ManageDash()
+    private void HandleDash()
     {
         if (!_isDashing && _isGrounded && _rb.velocity.y <= 0f)
         {
@@ -426,7 +428,10 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void GroundCheck()
     {
-        _isGrounded = Physics2D.OverlapCircle(GroundCheckTarget.position, _groundOverlapCheckRadius, GroundLayer);
+        _isGrounded = Physics2D.Raycast(GroundCheckTarget.position, Vector2.down, _groundCheckRayLength);
+        //_isGrounded = Physics2D.OverlapCircle(GroundCheckTarget.position, _groundOverlapCheckRadius, GroundLayer);
+
+        Debug.DrawRay(GroundCheckTarget.position, Vector2.down * _groundCheckRayLength, Color.blue);
 
         if (_isGrounded)
         {
@@ -460,7 +465,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-    private void ManageSwing()
+    private void HandleSwing()
     {
         _swingAttachCooldown = 0.2f;
 
