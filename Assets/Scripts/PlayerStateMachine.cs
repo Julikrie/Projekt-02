@@ -21,11 +21,11 @@ public class PlayerStateMachine : MonoBehaviour
     public GameObject TrampolinePrefab;
 
     // Groß schreiben
-    public LayerMask groundLayer;
-    public LayerMask wallLayer;
+    public LayerMask GroundLayer;
+    public LayerMask WallLayer;
 
-    public Transform groundCheck;
-    public Transform wallCheck;
+    public Transform GroundCheckTarget;
+    public Transform WallCheckTarget;
 
     [SerializeField]
     private float _speed;
@@ -387,12 +387,12 @@ public class PlayerStateMachine : MonoBehaviour
     {
         Vector2 characterTop = (Vector2)transform.position + new Vector2(0f, 0.6f);
 
-        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.4f, 0f), Vector2.right, _rayLength, wallLayer);
-        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.5f, 0f), Vector2.up, _rayLength, wallLayer);
+        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.4f, 0f), Vector2.right, _rayLength, WallLayer);
+        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.5f, 0f), Vector2.up, _rayLength, WallLayer);
         bool isRightCorner = rightWallHit && rightCeilingHit;
 
-        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.4f, 0f), Vector2.left, _rayLength, wallLayer);
-        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.5f, 0f), Vector2.up, _rayLength, wallLayer);
+        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.4f, 0f), Vector2.left, _rayLength, WallLayer);
+        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.5f, 0f), Vector2.up, _rayLength, WallLayer);
         bool isLeftCorner = leftWallHit && leftCeilingHit;
 
         Debug.DrawRay(characterTop + new Vector2(0.4f, 0f), Vector2.right * _rayLength, Color.red);
@@ -426,7 +426,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void GroundCheck()
     {
-        _isGrounded = Physics2D.OverlapCircle(groundCheck.position, _groundOverlapCheckRadius, groundLayer);
+        _isGrounded = Physics2D.OverlapCircle(GroundCheckTarget.position, _groundOverlapCheckRadius, GroundLayer);
 
         if (_isGrounded)
         {
@@ -442,7 +442,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         Vector2 wallCheckPosition = transform.position + new Vector3(_spriteRenderer.flipX ? -0.5f : 0.5f, 0f, 0f);
 
-        _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, _wallOverlapCheckRadius, wallLayer);
+        _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, _wallOverlapCheckRadius, WallLayer);
 
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(_wallOverlapCheckRadius, 0), Color.magenta);
