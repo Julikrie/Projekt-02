@@ -20,6 +20,7 @@ public class PlayerStateMachine : MonoBehaviour
     public ParticleSystem JumpDust;
     public GameObject TrampolinePrefab;
 
+    // Groß schreiben
     public LayerMask groundLayer;
     public LayerMask wallLayer;
 
