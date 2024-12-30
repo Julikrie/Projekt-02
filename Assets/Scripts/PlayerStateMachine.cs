@@ -21,7 +21,6 @@ public class PlayerStateMachine : MonoBehaviour
     public ParticleSystem JumpDust;
     public GameObject TrampolinePrefab;
 
-    // Groß schreiben
     public LayerMask GroundLayer;
     public LayerMask WallLayer;
 
@@ -69,7 +68,6 @@ public class PlayerStateMachine : MonoBehaviour
     private bool _isDashing;
     [SerializeField]
     private bool _canDash;
-
     [SerializeField]
     private bool _isOnWall;
     [SerializeField]
@@ -110,6 +108,8 @@ public class PlayerStateMachine : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _trailRenderer = GetComponent<TrailRenderer>();
         _currentState = MovementState.Idling;
+
+        _canDash = true;
     }
 
     void Update()
@@ -194,7 +194,7 @@ public class PlayerStateMachine : MonoBehaviour
             ExecuteJump();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
         {
             StartCoroutine(ExecuteDash());
             _currentState = MovementState.Dashing;
@@ -228,7 +228,7 @@ public class PlayerStateMachine : MonoBehaviour
             _currentState = MovementState.WallSliding;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
         {
             StartCoroutine(ExecuteDash());
             _currentState = MovementState.Dashing;
@@ -268,7 +268,7 @@ public class PlayerStateMachine : MonoBehaviour
             ExecuteWallJump();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
         {
             StartCoroutine(ExecuteDash());
             _currentState = MovementState.Dashing;
@@ -344,6 +344,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     private IEnumerator ExecuteDash()
     {
+
+        Debug.Log("HEllo");
         _isDashing = true;
         _canDash = false;
 
@@ -368,7 +370,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         _isDashing = false;
         _trailRenderer.enabled = false;
-
+        Debug.Log("HEllo");
         yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
     }
@@ -407,7 +409,6 @@ public class PlayerStateMachine : MonoBehaviour
             Destroy(other.transform.parent.gameObject);
         }
     }
-
     
     private void CornerCorrection()
     {
