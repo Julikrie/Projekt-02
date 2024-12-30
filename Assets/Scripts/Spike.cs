@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class Spike : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject Player;
+    public Vector2 _saveLocationRoom;
+
+
+    [SerializeField]
+
     void Start()
     {
         
@@ -18,9 +24,10 @@ public class Spike : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
+            Player.transform.position = new Vector2(_saveLocationRoom.x, _saveLocationRoom.y);
             SceneManager.LoadScene(0);
         }
     }
