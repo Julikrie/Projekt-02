@@ -251,7 +251,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void HandleWallSlide()
     {
-        if (_isOnWall)
+        if (_isOnWall && !_isOnWall)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, -_slideSpeed);
         }
@@ -344,16 +344,27 @@ public class PlayerStateMachine : MonoBehaviour
 
     private IEnumerator ExecuteDash()
     {
-
-        Debug.Log("HEllo");
         _isDashing = true;
         _canDash = false;
 
         float originalGravity = 6f;
         _rb.gravityScale = 0f;
 
-        Vector2 dashDirection = new Vector2(_movementX, _movementY).normalized;
+        Vector2 dashDirection = Vector2.zero;
 
+        if (Mathf.Abs(_movementX) > Mathf.Abs(_movementY))
+        {
+            dashDirection = new Vector2(Mathf.Sign(_movementX), 0);
+        }
+        else if (Mathf.Abs(_movementY) > Mathf.Abs(_movementX))
+        {
+            dashDirection = new Vector2(0, Mathf.Sign(_movementY));
+        }
+
+        if (dashDirection == Vector2.zero)
+        {
+            dashDirection = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
+        }
         if (dashDirection == Vector2.zero)
         {
             dashDirection = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
@@ -370,7 +381,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         _isDashing = false;
         _trailRenderer.enabled = false;
-        Debug.Log("HEllo");
+
         yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
     }
@@ -407,6 +418,14 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.gameObject.CompareTag("Destroyable") && _isDashing)
         {
             Destroy(other.transform.parent.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("DashResetter"))
+        {
+            Destroy(other.gameObject);
+
+            _isDashing = false;
+            _canDash = true;
         }
     }
     
