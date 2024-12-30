@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum MovementState
@@ -137,6 +138,9 @@ public class PlayerStateMachine : MonoBehaviour
             case MovementState.Jumping:
                 HandleJump();
                 break;
+            case MovementState.WallJumping:
+                HandleWallJump();
+                break;
             case MovementState.WallSliding:
                 HandleWallSlide();
                 break;
@@ -260,7 +264,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (_isOnWall && Mathf.Abs(_rb.velocity.x) >= 0f && Input.GetKeyDown(KeyCode.Space))
         {
-            _currentState = MovementState.Jumping;
+            _currentState = MovementState.WallJumping;
             ExecuteWallJump();
         }
 
@@ -268,6 +272,27 @@ public class PlayerStateMachine : MonoBehaviour
         {
             StartCoroutine(ExecuteDash());
             _currentState = MovementState.Dashing;
+        }
+    }
+
+    private void HandleWallJump()
+    {
+        if (_isGrounded && _rb.velocity.y <= 0f)
+        {
+            if (Mathf.Abs(_movementX) > 0.01f)
+            {
+                _currentState = MovementState.Moving;
+            }
+            else
+            {
+                _currentState = MovementState.Idling;
+            }
+        }
+
+        if (_isOnWall && !_isGrounded)
+        {
+            Debug.Log("Ich Wall Slide gerade");
+            _currentState = MovementState.WallSliding;
         }
     }
 
@@ -383,22 +408,23 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+    
     private void CornerCorrection()
     {
         Vector2 characterTop = (Vector2)transform.position + new Vector2(0f, 0.6f);
 
-        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.4f, 0f), Vector2.right, _rayLength, WallLayer);
-        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.5f, 0f), Vector2.up, _rayLength, WallLayer);
+        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.3f, 0f), Vector2.right, _rayLength, WallLayer);
+        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.4f, 0f), Vector2.up, _rayLength, WallLayer);
         bool isRightCorner = rightWallHit && rightCeilingHit;
 
-        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.4f, 0f), Vector2.left, _rayLength, WallLayer);
-        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.5f, 0f), Vector2.up, _rayLength, WallLayer);
+        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.3f, 0f), Vector2.left, _rayLength, WallLayer);
+        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.4f, 0f), Vector2.up, _rayLength, WallLayer);
         bool isLeftCorner = leftWallHit && leftCeilingHit;
 
-        Debug.DrawRay(characterTop + new Vector2(0.4f, 0f), Vector2.right * _rayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(0.5f, 0f), Vector2.up * _rayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(-0.4f, 0f), Vector2.left * _rayLength, Color.blue);
-        Debug.DrawRay(characterTop + new Vector2(-0.5f, 0f), Vector2.up * _rayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(0.3f, 0f), Vector2.right * _rayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(0.4f, 0f), Vector2.up * _rayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(-0.3f, 0f), Vector2.left * _rayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(-0.4f, 0f), Vector2.up * _rayLength, Color.blue);
 
         if (isLeftCorner && !isRightCorner && !_isOnWall && !_isGrounded)
         {
@@ -411,19 +437,18 @@ public class PlayerStateMachine : MonoBehaviour
             RedirectAroundCorner();
         }
     }
-
     private void RedirectAroundCorner()
     {
         float pushDirection = _spriteRenderer.flipX ? -1f : 1f;
 
         Vector2 currentPosition = _rb.position;
         Vector2 targetPosition = currentPosition + new Vector2(pushDirection * _offSetUnderCeiling, 0);
+        Debug.Log("Ich Corner Correct");
 
         _rb.position = targetPosition;
 
         _rb.velocity = new Vector2(pushDirection * _cornerPushForce, _jumpForce);
     }
-
     private void GroundCheck()
     {
         _isGrounded = Physics2D.Raycast(GroundCheckTarget.position, Vector2.down, _groundCheckRayLength);
