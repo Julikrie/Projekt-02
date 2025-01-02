@@ -28,7 +28,6 @@ public class Spike : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Player.transform.position = new Vector2(_saveLocationRoom.x, _saveLocationRoom.y);
-            SceneManager.LoadScene(0);
         }
     }
 }
