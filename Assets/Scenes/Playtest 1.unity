@@ -1928,7 +1928,7 @@ GameObject:
   - component: {fileID: 493058639}
   - component: {fileID: 493058638}
   m_Layer: 5
-  m_Name: ControllPanel
+  m_Name: ControlPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4428,7 +4428,7 @@ GameObject:
   - component: {fileID: 1179878684}
   - component: {fileID: 1179878685}
   m_Layer: 0
-  m_Name: ControllPanelManager
+  m_Name: ControlPanelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4476,7 +4476,7 @@ GameObject:
   - component: {fileID: 1194344251}
   - component: {fileID: 1194344250}
   m_Layer: 5
-  m_Name: ShowControllPanel
+  m_Name: ShowControlPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22949,12 +22949,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1869722168}
   m_Layer: 0
-  m_Name: ---- ControllPanel ----
+  m_Name: ---- ControlPanel ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1869722168
 Transform:
   m_ObjectHideFlags: 0
