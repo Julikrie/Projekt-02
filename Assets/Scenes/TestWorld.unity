@@ -5187,7 +5187,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7345f11cc3d6d5d479edc3996ba2335d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e3f687d1afe2cb4ca5a96ab9d364b30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5259,10 +5259,11 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 10.033294, y: -3.838697}
       - {x: 9.96971, y: -5.7201166}
+      - {x: 9.96971, y: -5.7201166}
       - {x: -28.478231, y: -5.9877777}
       - {x: -28.444445, y: -8}
-      - {x: 28.50203, y: -8.001232}
-      - {x: 28.47018, y: -6.032796}
+      - {x: 13.187963, y: -8.03327}
+      - {x: 13.220189, y: -5.904645}
       - {x: 13.224166, y: -5.9028645}
       - {x: 13.15492, y: -3.8458335}
   m_UseDelaunayMesh: 0
