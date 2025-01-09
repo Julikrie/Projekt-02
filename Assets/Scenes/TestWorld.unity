@@ -5085,7 +5085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
+  m_TrackedObjectOffset: {x: 0, y: 5.45, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
@@ -5138,7 +5138,6 @@ GameObject:
   m_Component:
   - component: {fileID: 721702056}
   - component: {fileID: 721702055}
-  - component: {fileID: 721702058}
   - component: {fileID: 721702057}
   m_Layer: 7
   m_Name: Intro_Level
@@ -5188,7 +5187,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 22b3a2e8eb95dcc4991fe6748d695585, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7345f11cc3d6d5d479edc3996ba2335d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5208,7 +5207,7 @@ Transform:
   m_GameObject: {fileID: 721702053}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.22, y: 0, z: 0}
+  m_LocalPosition: {x: 14.22, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5258,58 +5257,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 9.970035, y: -1.9619961}
+    - - {x: 10.033294, y: -3.838697}
       - {x: 9.96971, y: -5.7201166}
       - {x: -28.478231, y: -5.9877777}
       - {x: -28.444445, y: -8}
-      - {x: 14.424556, y: -8.0166}
-      - {x: 14.462285, y: -1.9691324}
+      - {x: 28.50203, y: -8.001232}
+      - {x: 28.47018, y: -6.032796}
+      - {x: 13.224166, y: -5.9028645}
+      - {x: 13.15492, y: -3.8458335}
   m_UseDelaunayMesh: 0
---- !u!61 &721702058
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721702053}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -7.044249, y: -6.9855404}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 56.88889, y: 16}
-    newSize: {x: 28.444445, y: 16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 42.928684, y: 2.0289192}
-  m_EdgeRadius: 0
 --- !u!1 &859284809
 GameObject:
   m_ObjectHideFlags: 0
@@ -5517,7 +5473,7 @@ Transform:
   m_GameObject: {fileID: 859284809}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.01, z: -10}
+  m_LocalPosition: {x: 0, y: 5.45, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5551,7 +5507,7 @@ Transform:
   m_GameObject: {fileID: 951318946}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -5.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10663,7 +10619,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Time: 0.25
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -10892,7 +10848,7 @@ Transform:
   m_GameObject: {fileID: 1314394668}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
