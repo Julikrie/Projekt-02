@@ -1,31 +1,38 @@
+using System.Collections;
 using UnityEngine;
 
 public class RoomSwitcher : MonoBehaviour
 {
     public GameObject CameraTarget;
-   // public GameObject DeactivatedRoomTrigger;
+    public GameObject Player;
     public Vector3 TargetNewPosition;
-   // public float DeactivateTime;
+    public float CloseTime = 1f;
+    private BoxCollider2D _collider;
+
+
+    private void Start()
+    {
+        _collider = GetComponent<BoxCollider2D>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             CameraTarget.transform.position += TargetNewPosition;
-         // StartCoroutine(RoomTriggerCooldown());
+
+            Player.transform.position += new Vector3(5f, 0, 0);
+
+            StartCoroutine(ClosingRoom());
         }
+    }
+
+    private IEnumerator ClosingRoom()
+    {
+        yield return new WaitForSeconds(CloseTime);
+
+        _collider.isTrigger = false;
     }
 }
 
-/*
-private IEnumerator RoomTriggerCooldown()
-{
-    DeactivatedRoomTrigger.SetActive(false);
-
-    yield return new WaitForSeconds(DeactivateTime);
-
-    DeactivatedRoomTrigger.SetActive(true);
-}
-}
-*/
 
