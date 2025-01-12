@@ -11054,8 +11054,8 @@ MonoBehaviour:
     m_Bits: 128
   GroundCheckTarget: {fileID: 1176807194}
   WallCheckTarget: {fileID: 2024989045}
-  _speed: 10
-  _jumpForce: 19
+  _speed: 8
+  _jumpForce: 20
   _slideSpeed: 2
   _detachJumpForce: 500
   _swingForce: 45
