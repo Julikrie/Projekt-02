@@ -7,6 +7,9 @@ public class RoomSwitcher : MonoBehaviour
     public GameObject Player;
     public Vector3 TargetNewPosition;
     public float CloseTime = 1f;
+
+    [SerializeField]
+    private Vector3 _moveCharacter;
     private BoxCollider2D _collider;
 
 
@@ -21,7 +24,7 @@ public class RoomSwitcher : MonoBehaviour
         {
             CameraTarget.transform.position += TargetNewPosition;
 
-            Player.transform.position += new Vector3(5f, 0, 0);
+            Player.transform.position += _moveCharacter;
 
             StartCoroutine(ClosingRoom());
         }
