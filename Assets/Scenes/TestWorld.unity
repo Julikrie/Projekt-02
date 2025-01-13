@@ -6516,7 +6516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574756215397110572, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000003714196
+      value: 0.0000016127954
       objectReference: {fileID: 0}
     - target: {fileID: 5092337057915812915, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6532,7 +6532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5874841936074337319, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.023147263
+      value: -0.023146318
       objectReference: {fileID: 0}
     - target: {fileID: 5874841936074337319, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -6610,15 +6610,15 @@ MonoBehaviour:
   - {fileID: 390532669}
   m_Weight: 1
   m_SolverEditorData:
-  - color: {r: 0, g: 1, b: 0, a: 1}
+  - color: {r: 0.2392157, g: 0.5686275, b: 1, a: 1}
     showGizmo: 1
-  - color: {r: 0, g: 1, b: 0, a: 1}
+  - color: {r: 0.24056602, g: 0.570009, b: 1, a: 1}
     showGizmo: 1
-  - color: {r: 0, g: 1, b: 0, a: 1}
+  - color: {r: 1, g: 0.6745098, b: 0, a: 1}
     showGizmo: 1
-  - color: {r: 0, g: 1, b: 0, a: 1}
+  - color: {r: 1, g: 0.6732015, b: 0, a: 1}
     showGizmo: 1
-  - color: {r: 0, g: 1, b: 0, a: 1}
+  - color: {r: 1, g: 0.06041284, b: 0, a: 1}
     showGizmo: 1
   - color: {r: 0, g: 1, b: 0, a: 1}
     showGizmo: 1
@@ -17761,7 +17761,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118074917}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.0000021365358, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0000010372381, w: 1}
   m_LocalPosition: {x: 0.088, y: -0.005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
