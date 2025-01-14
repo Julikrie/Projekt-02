@@ -5700,9 +5700,9 @@ MonoBehaviour:
     - {x: 0, y: 0, z: 0.00017651518, w: 1}
     - {x: 0, y: 0, z: 0, w: 1}
     m_StoredLocalRotations:
-    - {x: 0, y: 0, z: -0.00704259, w: 0.9999752}
-    - {x: 0, y: 0, z: -0.0003960453, w: 1}
-    - {x: 0, y: 0, z: 0.00008421852, w: 1}
+    - {x: 0, y: 0, z: -0.0070425905, w: 0.9999752}
+    - {x: 0, y: 0, z: -0.00039604414, w: 1}
+    - {x: 0, y: 0, z: 0.000084218336, w: 1}
   m_Flip: 0
 --- !u!4 &390532670
 Transform:
@@ -11244,7 +11244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061063961}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.00008421852, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.0000842185, w: 1}
   m_LocalPosition: {x: 1.072, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11349,7 +11349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4512574003313855412, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0003960453
+      value: -0.00039600278
       objectReference: {fileID: 0}
     - target: {fileID: -4512574003313855412, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -16706,7 +16706,7 @@ GameObject:
   - component: {fileID: 1314394670}
   - component: {fileID: 1314394669}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_Old
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17093,7 +17093,7 @@ Transform:
   m_GameObject: {fileID: 1314394668}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.456398, y: -0.005780697, z: 0.00020815004}
+  m_LocalPosition: {x: 9.98, y: -5.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17101,7 +17101,7 @@ Transform:
   - {fileID: 1176807194}
   - {fileID: 2024989045}
   - {fileID: 1243602419}
-  m_Father: {fileID: 1774182253}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1333301635
 GameObject:
@@ -17542,7 +17542,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1314394675}
   - {fileID: 1111075546}
   - {fileID: 983225248}
   m_Father: {fileID: 0}
@@ -22699,6 +22698,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1314394675}
   - {fileID: 859284815}
   - {fileID: 1253408166}
   - {fileID: 1176902282}
