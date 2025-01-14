@@ -114,6 +114,7 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState = MovementState.Idling;
 
         _canDash = true;
+
     }
 
     void Update()
@@ -504,13 +505,13 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void FlipSprite()
     {
-        if (_movementX < -0.05f && !_spriteRenderer.flipX)
+        if (_movementX < -0.05f)
         {
-            _spriteRenderer.flipX = true;
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
-        else if (_movementX > 0.05f && _spriteRenderer.flipX)
+        else if (_movementX > 0.05f)
         {
-            _spriteRenderer.flipX = false;
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
     }
 
