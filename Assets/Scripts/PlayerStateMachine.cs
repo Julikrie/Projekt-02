@@ -24,6 +24,7 @@ public class PlayerStateMachine : MonoBehaviour
     public LayerMask GroundLayer;
     public LayerMask WallLayer;
 
+    [SerializeField]
     private float _groundCheckRayLength = 0.015f;
 
     public Transform GroundCheckTarget;
@@ -102,10 +103,13 @@ public class PlayerStateMachine : MonoBehaviour
     private HingeJoint2D _hingeJoint;
     private float _swingAttachCooldown = 0f;
 
+    private Animator _animator;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
         _trailRenderer = GetComponent<TrailRenderer>();
         _currentState = MovementState.Idling;
 
@@ -116,6 +120,8 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _movementX = Input.GetAxis("Horizontal");
         _movementY = Input.GetAxis("Vertical");
+
+        HandleAnimation();
 
         if (_swingAttachCooldown > 0f)
         {
@@ -498,11 +504,11 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void FlipSprite()
     {
-        if (_movementX < -0.1f && !_spriteRenderer.flipX)
+        if (_movementX < -0.05f && !_spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = true;
         }
-        else if (_movementX > 0.1f && _spriteRenderer.flipX)
+        else if (_movementX > 0.05f && _spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = false;
         }
@@ -627,6 +633,12 @@ public class PlayerStateMachine : MonoBehaviour
         {
             Physics2D.IgnoreCollision(playerCollider, swingCollider, false);
         }
+    }
+
+    private void HandleAnimation()
+    {
+        _animator.SetBool("isIdling", _currentState == MovementState.Idling);
+        _animator.SetBool("isMoving", _currentState == MovementState.Moving);
     }
 }
 
