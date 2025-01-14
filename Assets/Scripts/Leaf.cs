@@ -6,15 +6,24 @@ public class Leaf : MonoBehaviour
 {
     public float ForcePower;
     public GameObject Player;
+   // public GameObject LeafPrefab;
 
     private PlayerStateMachine _playerStateMachine;
     private Rigidbody2D _playerRigidbody;
 
     private void Start()
     {
+        if (Player == null)
+        {
+            Player = GameObject.FindGameObjectWithTag("Player");
+        }
+
         _playerStateMachine = Player.GetComponent<PlayerStateMachine>();
         _playerRigidbody = Player.GetComponent<Rigidbody2D>();
+
+       // InvokeRepeating("SpawnLeaves", 1f, 2f);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -25,4 +34,11 @@ public class Leaf : MonoBehaviour
             _playerStateMachine.JumpDust.Play();
         }
     }
+
+    /*
+    private void SpawnLeaves()
+    {
+        Instantiate(LeafPrefab, new Vector3(49f, -5.6f, 0f), Quaternion.identity);
+    }
+    */
 }

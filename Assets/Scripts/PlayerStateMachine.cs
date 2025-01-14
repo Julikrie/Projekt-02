@@ -19,6 +19,7 @@ public class PlayerStateMachine : MonoBehaviour
     private MovementState _currentState;
 
     public ParticleSystem JumpDust;
+    public GameObject DashIndicator;
     public GameObject TrampolinePrefab;
 
     public LayerMask GroundLayer;
@@ -354,6 +355,8 @@ public class PlayerStateMachine : MonoBehaviour
         _isDashing = true;
         _canDash = false;
 
+        DashIndicator.SetActive(false);
+
         float originalGravity = 6f;
         _rb.gravityScale = 0f;
 
@@ -391,6 +394,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
+        DashIndicator.SetActive(true);
     }
 
     private void SpawnTrampoline()
