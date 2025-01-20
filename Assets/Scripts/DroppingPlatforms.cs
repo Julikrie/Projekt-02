@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class DroppingPlatforms : MonoBehaviour
 {
+    public GameObject PlatformCrumble;
     public float ShakeForce = 1f;
     public float DropDelay;
     public float DestroyTime;
@@ -16,6 +17,8 @@ public class DroppingPlatforms : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
+
+        PlatformCrumble.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -25,8 +28,13 @@ public class DroppingPlatforms : MonoBehaviour
             StartCoroutine(DroppingPlatform());
 
             _impulseSource.GenerateImpulseWithForce(ShakeForce);
+            PlatformCrumble.SetActive(true);
 
             Destroy(gameObject, DestroyTime);
+        }
+        else
+        {
+            PlatformCrumble.SetActive(false);
         }
     }
 
