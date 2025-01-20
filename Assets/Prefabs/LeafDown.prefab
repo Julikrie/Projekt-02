@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 63791504148262714}
   - component: {fileID: 4055065170295918996}
   - component: {fileID: 4425653529185891527}
+  - component: {fileID: -8063104914213021924}
+  - component: {fileID: 8850266608181164922}
   m_Layer: 6
-  m_Name: Leaf
+  m_Name: LeafDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,8 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForcePower: 20
+  MoveDirection: -1
+  Speed: 3
   Player: {fileID: 0}
-  LeafPrefab: {fileID: 0}
 --- !u!61 &4425653529185891527
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131,9 +134,9 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00680542, y: -0.20421028}
+  m_Offset: {x: -0.00680542, y: -0.06908333}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -144,5 +147,38 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9212112, y: 0.31929922}
+  m_Size: {x: 1.9212112, y: 0.049045324}
   m_EdgeRadius: 0
+--- !u!114 &-8063104914213021924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6239124083244230152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SwaySpeed: 12
+  SwayAmount: 2
+--- !u!251 &8850266608181164922
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6239124083244230152}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
