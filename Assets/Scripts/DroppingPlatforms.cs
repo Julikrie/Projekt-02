@@ -5,12 +5,17 @@ using Cinemachine;
 
 public class DroppingPlatforms : MonoBehaviour
 {
-    public float dropDelay;
+    public float ShakeForce = 1f;
+    public float DropDelay;
+    public float DestroyTime;
 
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
+    private CinemachineImpulseSource _impulseSource;
+
     public void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -18,13 +23,16 @@ public class DroppingPlatforms : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(DroppingPlatform());
-            Destroy(gameObject, 1.25f);
+
+            _impulseSource.GenerateImpulseWithForce(ShakeForce);
+
+            Destroy(gameObject, DestroyTime);
         }
     }
 
     private IEnumerator DroppingPlatform()
     {
-        yield return new WaitForSeconds(dropDelay);
-        rb.bodyType = RigidbodyType2D.Dynamic;
+        yield return new WaitForSeconds(DropDelay);
+        _rb.bodyType = RigidbodyType2D.Dynamic;
     }
 }
