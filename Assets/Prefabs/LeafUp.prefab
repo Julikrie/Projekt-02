@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 12
-  SwayAmount: 2
+  SwaySpeed: 4
+  SwayAmount: 6
 --- !u!251 &8850266608181164922
 PlatformEffector2D:
   m_ObjectHideFlags: 0

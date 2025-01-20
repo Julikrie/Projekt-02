@@ -5915,7 +5915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeafPrefab: {fileID: 6239124083244230152, guid: 89553746374691a419e5038fbfed3155, type: 3}
   SpawnTime: 3
-  SpawnInterval: 2.5
+  SpawnInterval: 2
   DestroyTimer: 5.7
 --- !u!4 &442475991
 Transform:
@@ -23413,7 +23413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeafPrefab: {fileID: 6239124083244230152, guid: a3f5a0a75f80dbc4188092de5309c215, type: 3}
   SpawnTime: 3
-  SpawnInterval: 2.5
+  SpawnInterval: 2
   DestroyTimer: 5.7
 --- !u!4 &1538010397
 Transform:
@@ -28804,7 +28804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeafPrefab: {fileID: 6239124083244230152, guid: a3f5a0a75f80dbc4188092de5309c215, type: 3}
   SpawnTime: 3
-  SpawnInterval: 2.5
+  SpawnInterval: 2
   DestroyTimer: 5.7
 --- !u!4 &2067951048
 Transform:
@@ -28936,7 +28936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeafPrefab: {fileID: 6239124083244230152, guid: 89553746374691a419e5038fbfed3155, type: 3}
   SpawnTime: 3
-  SpawnInterval: 2.5
+  SpawnInterval: 2
   DestroyTimer: 5.7
 --- !u!4 &2111563077
 Transform:
