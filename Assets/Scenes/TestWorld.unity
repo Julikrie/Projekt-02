@@ -5330,17 +5330,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 855987771}
+  - {fileID: 778457893}
+  - {fileID: 1457680627}
+  - {fileID: 345702649}
+  - {fileID: 1438970334}
+  - {fileID: 1917030710}
   - {fileID: 957845503}
   - {fileID: 380932002}
   - {fileID: 1414760261}
   - {fileID: 1058554663}
   - {fileID: 920804787}
-  - {fileID: 1917030710}
-  - {fileID: 1438970334}
-  - {fileID: 345702649}
-  - {fileID: 1457680627}
-  - {fileID: 778457893}
-  - {fileID: 855987771}
   - {fileID: 2022209487}
   - {fileID: 2039358235}
   - {fileID: 1668637796}
@@ -5706,7 +5706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 1
+  SwaySpeed: 2
   SwayAmount: 2.5
 --- !u!212 &236679240
 SpriteRenderer:
@@ -6252,7 +6252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 1.2
+  SwaySpeed: 2
   SwayAmount: 2.5
 --- !u!4 &425165309 stripped
 Transform:
@@ -17007,7 +17007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 1
+  SwaySpeed: 2
   SwayAmount: 2.5
 --- !u!212 &920804786
 SpriteRenderer:
@@ -17245,7 +17245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 1.2
+  SwaySpeed: 2
   SwayAmount: 2.5
 --- !u!1 &963468759
 GameObject:
@@ -22354,7 +22354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 1.2
+  SwaySpeed: 2
   SwayAmount: 2.5
 --- !u!1001 &1111075537
 PrefabInstance:
@@ -33453,7 +33453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 1
+  SwaySpeed: 2
   SwayAmount: 2.5
 --- !u!212 &1271203113
 SpriteRenderer:
@@ -38929,7 +38929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 1.2
+  SwaySpeed: 2
   SwayAmount: 2.5
 --- !u!1 &1416265706
 GameObject:
@@ -44286,7 +44286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 1
+  SwaySpeed: 2
   SwayAmount: 2.5
 --- !u!212 &1668637795
 SpriteRenderer:
@@ -45133,9 +45133,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.7
-      minScalar: 5
+      minMaxState: 3
+      scalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -45629,15 +45629,15 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
-    angle: 25
+    type: 18
+    angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 4, y: 1, z: 1}
+    m_Scale: {x: 10.5, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -45835,7 +45835,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 2
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -46459,9 +46459,9 @@ ParticleSystem:
     enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
-      minScalar: 0
+      minMaxState: 3
+      scalar: 0.5
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -46512,9 +46512,9 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 1
-      minScalar: 0
+      minMaxState: 3
+      scalar: 0.7
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -46565,7 +46565,7 @@ ParticleSystem:
         m_RotationOrder: 4
     z:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -46619,7 +46619,7 @@ ParticleSystem:
     orbitalX:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -46778,7 +46778,7 @@ ParticleSystem:
     orbitalOffsetX:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -46831,7 +46831,7 @@ ParticleSystem:
     orbitalOffsetY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: -9
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -46990,7 +46990,7 @@ ParticleSystem:
     speedModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -47158,7 +47158,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -47211,7 +47211,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -47264,7 +47264,7 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -47541,7 +47541,7 @@ ParticleSystem:
     magnitude:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -47593,7 +47593,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxis: 0
     inWorldSpace: 0
-    multiplyDragByParticleSize: 1
+    multiplyDragByParticleSize: 0
     multiplyDragByParticleVelocity: 1
     dampen: 0
     drag:
@@ -47654,7 +47654,7 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: -1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -47811,7 +47811,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 1
+    frequency: 0.15
     damping: 1
     octaves: 1
     octaveMultiplier: 0.5
@@ -47820,7 +47820,7 @@ ParticleSystem:
     scrollSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -48033,7 +48033,7 @@ ParticleSystem:
     positionAmount:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -48904,8 +48904,8 @@ ParticleSystem:
     ratio: 1
     lifetime:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.25
+      minMaxState: 3
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -49729,8 +49729,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958762917}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 36.6264, y: 2.55, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 37.11, y: -2.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49799,7 +49799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 1
+  SwaySpeed: 2
   SwayAmount: 2.5
 --- !u!212 &2022209486
 SpriteRenderer:
@@ -49898,7 +49898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwaySpeed: 1
+  SwaySpeed: 2
   SwayAmount: 2.5
 --- !u!212 &2039358234
 SpriteRenderer:
