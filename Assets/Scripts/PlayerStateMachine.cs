@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using Cinemachine;
 
 public enum MovementState
 {
@@ -17,6 +17,9 @@ public class PlayerStateMachine : MonoBehaviour
 {
     [SerializeField]
     private MovementState _currentState;
+    private CinemachineImpulseSource _impulseSource;
+
+    public float ShakeForce;
 
     public ParticleSystem JumpDust;
     public GameObject DashIndicator;
@@ -112,6 +115,7 @@ public class PlayerStateMachine : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _trailRenderer = GetComponent<TrailRenderer>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
         _currentState = MovementState.Idling;
 
         _canDash = true;
@@ -249,12 +253,12 @@ public class PlayerStateMachine : MonoBehaviour
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
 
         JumpDust.Play();
+        _impulseSource.GenerateImpulse(ShakeForce);
 
         if (_isGrounded && _coyoteTimer > 0 && _jumpBufferTimer > 0)
         {
             _rb.velocity = new Vector2(_movementX * _speed, _jumpForce);
         }
-
         _jumpCounter++;
     }
 
