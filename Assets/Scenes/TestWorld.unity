@@ -403,7 +403,7 @@ MonoBehaviour:
   Player: {fileID: 1111075538}
   TargetNewPosition: {x: 28.47, y: 0, z: 0}
   CloseTime: 0.2
-  _moveCharacter: {x: 1, y: 0, z: 0}
+  _moveCharacter: {x: 2, y: 0, z: 0}
 --- !u!212 &145442884
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5811,10 +5811,11 @@ GameObject:
   m_Component:
   - component: {fileID: 369097468}
   - component: {fileID: 369097467}
-  - component: {fileID: 369097466}
   - component: {fileID: 369097469}
-  - component: {fileID: 369097470}
   - component: {fileID: 369097471}
+  - component: {fileID: 369097466}
+  - component: {fileID: 369097470}
+  - component: {fileID: 369097472}
   m_Layer: 0
   m_Name: DroppingPlatform
   m_TagString: Untagged
@@ -5852,9 +5853,9 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.3129208}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5865,7 +5866,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.37415838}
   m_EdgeRadius: 0
 --- !u!212 &369097467
 SpriteRenderer:
@@ -5948,9 +5949,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlatformCrumble: {fileID: 1242435077}
-  ShakeForce: 3
+  ShakeForce: 2
   DropDelay: 2
-  DestroyTime: 3
+  RespawnTime: 5
 --- !u!50 &369097470
 Rigidbody2D:
   serializedVersion: 4
@@ -5999,7 +6000,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ImpulseDuration: 1
+    m_ImpulseDuration: 2
     m_ImpulseType: 0
     m_DissipationRate: 0.25
     m_RawSignal: {fileID: 0}
@@ -6031,6 +6032,25 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0.2, y: 0.2, z: 0}
+--- !u!251 &369097472
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369097465}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &380932000
 GameObject:
   m_ObjectHideFlags: 0
@@ -18329,7 +18349,7 @@ MonoBehaviour:
   Player: {fileID: 1111075538}
   TargetNewPosition: {x: 28.47, y: 0, z: 0}
   CloseTime: 0.2
-  _moveCharacter: {x: 1, y: 0, z: 0}
+  _moveCharacter: {x: 2, y: 0, z: 0}
 --- !u!212 &1167571763
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -18484,7 +18504,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18727,7 +18747,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0, b: 0, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -18791,7 +18811,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.15
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -19492,21 +19512,21 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          inSlope: -1
+          outSlope: -1
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         - serializedVersion: 3
-          time: 0.99261475
+          time: 1
           value: 0
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 0
+          inSlope: -1
+          outSlope: -1
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -19820,7 +19840,7 @@ ParticleSystem:
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 18890
+        ctime0: 17733
         ctime1: 65535
         ctime2: 0
         ctime3: 0
@@ -19828,8 +19848,8 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 38165
-        atime1: 50115
+        atime0: 38743
+        atime1: 43947
         atime2: 0
         atime3: 0
         atime4: 0
@@ -22443,9 +22463,9 @@ ParticleSystem:
     ratio: 1
     lifetime:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 1
-      minScalar: 1
+      minMaxState: 3
+      scalar: 0.5
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -22494,7 +22514,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    minVertexDistance: 0.2
+    minVertexDistance: 1
     textureMode: 0
     textureScale: {x: 1, y: 1}
     ribbonCount: 1
@@ -22503,7 +22523,7 @@ ParticleSystem:
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
-    inheritParticleColor: 1
+    inheritParticleColor: 0
     generateLightingData: 0
     splitSubEmitterRibbons: 0
     attachRibbonsToTransform: 0
