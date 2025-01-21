@@ -116,6 +116,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         _canDash = true;
 
+        _jumpCounter = 0f;
     }
 
     void Update()
