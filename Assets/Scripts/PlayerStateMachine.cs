@@ -394,6 +394,7 @@ public class PlayerStateMachine : MonoBehaviour
         _trailRenderer.enabled = false;
 
         yield return new WaitForSeconds(_dashCooldown);
+
         _canDash = true;
         DashIndicator.SetActive(true);
     }
