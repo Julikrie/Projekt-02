@@ -19,6 +19,8 @@ public class PlayerStateMachine : MonoBehaviour
     private MovementState _currentState;
     private CinemachineImpulseSource _impulseSource;
 
+    private Vector3 _saveSpot;
+
     public float ShakeForce;
 
     public ParticleSystem JumpDust;
@@ -121,6 +123,8 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState = MovementState.Idling;
 
         _canDash = true;
+
+        _saveSpot = transform.position;
 
         _jumpCounter = 0f;
     }
@@ -429,6 +433,12 @@ public class PlayerStateMachine : MonoBehaviour
         if (collision.gameObject.CompareTag("SwingObject"))
         {
             ExecuteAttachToSwing(collision.gameObject);
+        }
+
+        if (collision.collider.CompareTag("Danger"))
+        {
+            transform.position = _saveSpot;
+            _rb.velocity = Vector2.zero;
         }
     }
 

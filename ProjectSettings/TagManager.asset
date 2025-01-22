@@ -8,6 +8,7 @@ TagManager:
   - Destroyable
   - Trampoline
   - SwingObject
+  - Danger
   layers:
   - Default
   - TransparentFX
