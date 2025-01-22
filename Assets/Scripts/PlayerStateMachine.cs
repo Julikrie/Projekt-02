@@ -30,6 +30,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     [SerializeField]
     private float _groundCheckRayLength = 0.015f;
+    [SerializeField]
+    private float _wallCheckRayLength = 0.015f;
 
     public Transform GroundCheckTarget;
     public Transform WallCheckTarget;
@@ -489,6 +491,7 @@ public class PlayerStateMachine : MonoBehaviour
     private void GroundCheck()
     {
         _isGrounded = Physics2D.Raycast(GroundCheckTarget.position, Vector2.down, _groundCheckRayLength);
+
         //_isGrounded = Physics2D.OverlapCircle(GroundCheckTarget.position, _groundOverlapCheckRadius, GroundLayer);
 
         Debug.DrawRay(GroundCheckTarget.position, Vector2.down * _groundCheckRayLength, Color.blue);
@@ -505,12 +508,19 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void WallCheck()
     {
-        Vector2 wallCheckPosition = transform.position + new Vector3(_spriteRenderer.flipX ? -0.5f : 0.5f, 0f, 0f);
+        /*Vector2 wallCheckPosition = transform.position + new Vector3(_spriteRenderer.flipX ? -0.5f : 1f, 0f, 0f);
 
         _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, _wallOverlapCheckRadius, WallLayer);
 
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
         Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(_wallOverlapCheckRadius, 0), Color.magenta);
+        */
+        Vector2 direction = transform.localScale.x < 0 ? Vector2.left : Vector2.right;
+
+        _isOnWall = Physics2D.Raycast(WallCheckTarget.position, direction, _wallCheckRayLength, WallLayer);
+
+        Debug.DrawRay(WallCheckTarget.position, direction * _wallCheckRayLength, Color.red);
+
     }
 
     private void FlipSprite()
