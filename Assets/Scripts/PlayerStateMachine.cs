@@ -23,6 +23,7 @@ public class PlayerStateMachine : MonoBehaviour
     public Transform GroundCheckTarget;
     public Transform WallCheckTarget;
     public ParticleSystem JumpDust;
+    public ParticleSystem WallSlideDust;
 
     [Header("PLAYER STATE")]
     [SerializeField]
@@ -312,6 +313,12 @@ public class PlayerStateMachine : MonoBehaviour
         if (_isOnWall && !_isGrounded)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, -_slideSpeed);
+
+            WallSlideDust.Play();
+        }
+        else if (_isGrounded)
+        {
+            WallSlideDust.Stop();
         }
 
         if (_isGrounded)
