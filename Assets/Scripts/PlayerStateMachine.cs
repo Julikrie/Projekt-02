@@ -24,7 +24,6 @@ public class PlayerStateMachine : MonoBehaviour
     public Transform WallCheckTarget;
     public ParticleSystem JumpDust;
 
-
     [Header("PLAYER STATE")]
     [SerializeField]
     private MovementState _currentState;
@@ -150,7 +149,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     #endregion Components Player
 
-    void Start()
+    private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -166,7 +165,7 @@ public class PlayerStateMachine : MonoBehaviour
         _jumpCounter = 0f;
     }
 
-    void Update()
+    private void Update()
     {
         _movementX = Input.GetAxis("Horizontal");
         _movementY = Input.GetAxis("Vertical");
@@ -176,6 +175,7 @@ public class PlayerStateMachine : MonoBehaviour
             _swingAttachCooldown -= Time.deltaTime;
         }
 
+        FlipSprite();
         GroundCheck();
         WallCheck();
         PlatformCheck();
@@ -238,8 +238,6 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _rb.velocity = new Vector2(_movementX * _speed, _rb.velocity.y);
 
-        FlipSprite();
-
         if (Mathf.Abs(_movementX) < 0.1f)
         {
             _currentState = MovementState.Idling;
@@ -266,6 +264,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             ExecuteJump();
         }
+
 
         if (_isGrounded && _rb.velocity.y <= 0f)
         {
@@ -296,6 +295,8 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
 
+
+
         JumpDust.Play();
         _impulseSource.GenerateImpulse(ShakeForce);
 
@@ -308,7 +309,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void HandleWallSlide()
     {
-        if (_isOnWall && !_isOnWall)
+        if (_isOnWall && !_isGrounded)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, -_slideSpeed);
         }
@@ -357,7 +358,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (_isOnWall && !_isGrounded)
         {
-            float direction = _spriteRenderer.flipX ? 1f : -1f;
+            float direction = transform.localScale.x > 0 ? -1f : 1f;
 
             _spriteRenderer.flipX = !_spriteRenderer.flipX;
 
@@ -569,11 +570,11 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void FlipSprite()
     {
-        if (_movementX < -0.05f)
+        if (_movementX < -0.05f && transform.localScale.x > 0f)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
-        else if (_movementX > 0.05f)
+        else if (_movementX > 0.05f && transform.localScale.x < 0f)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
@@ -714,6 +715,7 @@ public class PlayerStateMachine : MonoBehaviour
         _animator.SetBool("isIdling", _currentState == MovementState.Idling);
         _animator.SetBool("isRunning", _currentState == MovementState.Moving);
         _animator.SetBool("isJumping", _currentState == MovementState.Jumping);
+        _animator.SetBool("isWallSliding", _currentState == MovementState.WallSliding);
     }
 }
 
