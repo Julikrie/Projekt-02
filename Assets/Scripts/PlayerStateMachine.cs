@@ -15,58 +15,53 @@ public enum MovementState
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    [SerializeField]
-    private MovementState _currentState;
-    private CinemachineImpulseSource _impulseSource;
-
-    private Vector3 _saveSpot;
-
     public float ShakeForce;
-
-    public ParticleSystem JumpDust;
     public GameObject DashIndicator;
     public GameObject TrampolinePrefab;
-
     public LayerMask GroundLayer;
     public LayerMask WallLayer;
-
-    [SerializeField]
-    private float _groundCheckRayLength = 0.015f;
-    [SerializeField]
-    private float _wallCheckRayLength = 0.015f;
-
     public Transform GroundCheckTarget;
     public Transform WallCheckTarget;
+    public ParticleSystem JumpDust;
 
+    [Header("PLAYER STATE")]
+    [SerializeField]
+    private MovementState _currentState;
+
+    #region Movement
+
+    [Header("MOVE")]
     [SerializeField]
     private float _speed;
+    private float _movementX;
+    private float _movementY;
+
+    [Header("JUMP")]
     [SerializeField]
     private float _jumpForce;
     [SerializeField]
-    private float _slideSpeed;
-
-    [SerializeField]
-    private float _detachJumpForce;
-    [SerializeField]
-    private float _swingForce;
-
-    [SerializeField]
-    private float _trampolineForce;
-
+    private int _jumpCounterLimit = 2;
     [SerializeField]
     private float _jumpCounter;
-    private int _jumpCounterLimit = 2;
+    private float _airGravityScale;
+    [SerializeField]
+    private float _coyoteTime = 0.2f;
+    [SerializeField]
+    private float _coyoteTimer;
+    [SerializeField]
+    private float _jumpBufferTime = 0.25f;
+    [SerializeField]
+    private float _jumpBufferTimer;
 
+    [Header("WALL JUMP")]
     [SerializeField]
     private Vector2 _wallJumpForce;
-    [SerializeField]
-    private float _airGravityScale;
 
+    [Header("WALL SLIDE")]
     [SerializeField]
-    private float _groundOverlapCheckRadius;
-    [SerializeField]
-    private float _wallOverlapCheckRadius;
+    private float _slideSpeed;
 
+    [Header("DASH")]
     [SerializeField]
     private float _dashTime;
     [SerializeField]
@@ -77,41 +72,72 @@ public class PlayerStateMachine : MonoBehaviour
     private bool _isDashing;
     [SerializeField]
     private bool _canDash;
+
+    [Header("SWING ON OBJECT")]
+    [SerializeField]
+    private float _detachJumpForce;
+    private float _swingAttachCooldown = 0f;
+    [SerializeField]
+    private float _swingForce;
+    [SerializeField]
+    private bool _isSwinging;
+
+    [Header("TRAMPOLINE")]
+    [SerializeField]
+    private float _trampolineForce;
+
+    #endregion Movement
+
+    #region Collision Checks
+
+    [Header("GROUND- AND WALLCHECK")]
+    [SerializeField]
+    private float _groundCheckRayLength = 0.015f;
+    [SerializeField]
+    private float _wallCheckRayLength = 0.015f;
+    [SerializeField]
+    private float _groundOverlapCheckRadius;
+    [SerializeField]
+    private float _wallOverlapCheckRadius;
     [SerializeField]
     private bool _isOnWall;
     [SerializeField]
     private bool _isGrounded;
 
+    [Header("CORNER CORRECTION")]
     [SerializeField]
-    private float _coyoteTime = 0.2f;
-    [SerializeField]
-    private float _coyoteTimer;
-
-    [SerializeField]
-    private float _jumpBufferTime = 0.25f;
-    [SerializeField]
-    private float _jumpBufferTimer;
-
-    [SerializeField]
-    private bool _isSwinging;
-
-    [SerializeField]
-    private float _rayLength;
+    private float _cornerCheckRayLength;
     [SerializeField]
     private float _cornerPushForce;
     [SerializeField]
     private float _offSetUnderCeiling;
 
+    #endregion Collision Checks
+
+    #region Saving
+
+    [Header("SAVE MECHANIC")]
+    private Vector3 _saveSpot;
+
+    #endregion Saving
+
+    #region Game Juice
+
+    [Header("SCREEN SHAKE")]
+    private CinemachineImpulseSource _impulseSource;
+
+    #endregion Game Juice
+
+    #region Components Player
+
+    [Header("COMPONENTS")]
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private TrailRenderer _trailRenderer;
-    private float _movementX;
-    private float _movementY;
-
     private HingeJoint2D _hingeJoint;
-    private float _swingAttachCooldown = 0f;
-
     private Animator _animator;
+
+    #endregion Components Player
 
     void Start()
     {
@@ -462,18 +488,18 @@ public class PlayerStateMachine : MonoBehaviour
     {
         Vector2 characterTop = (Vector2)transform.position + new Vector2(0f, 0.6f);
 
-        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.3f, 0f), Vector2.right, _rayLength, WallLayer);
-        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.4f, 0f), Vector2.up, _rayLength, WallLayer);
+        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.3f, 0f), Vector2.right, _cornerCheckRayLength, WallLayer);
+        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.4f, 0f), Vector2.up, _cornerCheckRayLength, WallLayer);
         bool isRightCorner = rightWallHit && rightCeilingHit;
 
-        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.3f, 0f), Vector2.left, _rayLength, WallLayer);
-        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.4f, 0f), Vector2.up, _rayLength, WallLayer);
+        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.3f, 0f), Vector2.left, _cornerCheckRayLength, WallLayer);
+        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.4f, 0f), Vector2.up, _cornerCheckRayLength, WallLayer);
         bool isLeftCorner = leftWallHit && leftCeilingHit;
 
-        Debug.DrawRay(characterTop + new Vector2(0.3f, 0f), Vector2.right * _rayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(0.4f, 0f), Vector2.up * _rayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(-0.3f, 0f), Vector2.left * _rayLength, Color.blue);
-        Debug.DrawRay(characterTop + new Vector2(-0.4f, 0f), Vector2.up * _rayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(0.3f, 0f), Vector2.right * _cornerCheckRayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(0.4f, 0f), Vector2.up * _cornerCheckRayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(-0.3f, 0f), Vector2.left * _cornerCheckRayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(-0.4f, 0f), Vector2.up * _cornerCheckRayLength, Color.blue);
 
         if (isLeftCorner && !isRightCorner && !_isOnWall && !_isGrounded)
         {
