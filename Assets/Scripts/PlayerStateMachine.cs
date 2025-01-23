@@ -112,12 +112,22 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]
     private float _offSetUnderCeiling;
 
+    [Header("PLATFORM CHECK")]
+    [SerializeField] 
+    private float _platformRayLength;
+    [SerializeField]
+    private LayerMask _platformLayer;
+    [SerializeField]
+    private Transform _platformCheckTarget;
+
     #endregion Collision Checks
 
     #region Saving
 
     [Header("SAVE MECHANIC")]
     private Vector3 _saveSpot;
+    [SerializeField]
+    private bool _isOnPlatform = false;
 
     #endregion Saving
 
@@ -167,6 +177,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         GroundCheck();
         WallCheck();
+        PlatformCheck();
         SpawnTrampoline();
         CornerCorrection();
         HandleSaveSpot();
@@ -540,6 +551,11 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+    private void PlatformCheck()
+    {
+        _isOnPlatform = Physics2D.Raycast(_platformCheckTarget.position, Vector2.down, _platformRayLength, _platformLayer);
+    }
+
     private void WallCheck()
     {
         Vector2 direction = transform.localScale.x < 0 ? Vector2.left : Vector2.right;
@@ -684,7 +700,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
     private void HandleSaveSpot()
     {
-        if (_rb.velocity.y == 0)
+        if (_rb.velocity.y == 0 && !_isOnPlatform)
         {
             _saveSpot = transform.position;
             _rb.velocity = Vector2.zero;

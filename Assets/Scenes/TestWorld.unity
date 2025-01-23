@@ -5839,7 +5839,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad091eafb59d64449e1e00b503d37ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1111075538}
 --- !u!4 &188831694
 Transform:
   m_ObjectHideFlags: 0
@@ -6156,7 +6155,7 @@ GameObject:
   - component: {fileID: 369097466}
   - component: {fileID: 369097470}
   - component: {fileID: 369097472}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DroppingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6490,6 +6489,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwaySpeed: 2
   SwayAmount: 2.5
+--- !u!1 &422726629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 422726630}
+  m_Layer: 0
+  m_Name: PlatformCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &422726630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422726629}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1111075546}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &425165309 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6580996022299002465, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
@@ -6853,7 +6883,7 @@ GameObject:
   - component: {fileID: 639430092}
   - component: {fileID: 639430091}
   - component: {fileID: 639430090}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlatformCrumble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23628,6 +23658,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -7552582706839291426, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 308545180}
+    - targetCorrespondingSourceObject: {fileID: -7552582706839291426, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 422726630}
     - targetCorrespondingSourceObject: {fileID: 8024374875752866506, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1044889692}
@@ -23828,6 +23861,12 @@ MonoBehaviour:
   _cornerCheckRayLength: 0
   _cornerPushForce: 1
   _offSetUnderCeiling: 0.1
+  _platformRayLength: 0.1
+  _platformLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  _platformCheckTarget: {fileID: 422726630}
+  _isOnPlatform: 0
 --- !u!70 &1111075550
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -29198,7 +29237,7 @@ GameObject:
   - component: {fileID: 1242435078}
   - component: {fileID: 1242435080}
   - component: {fileID: 1242435079}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlatformCrumble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34063,7 +34102,7 @@ GameObject:
   - component: {fileID: 1265889594}
   - component: {fileID: 1265889593}
   - component: {fileID: 1265889592}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DroppingPlatform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39338,6 +39377,12 @@ MonoBehaviour:
   _cornerCheckRayLength: 0
   _cornerPushForce: 1
   _offSetUnderCeiling: 0.1
+  _platformRayLength: 0
+  _platformLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _platformCheckTarget: {fileID: 0}
+  _isOnPlatform: 0
 --- !u!50 &1314394671
 Rigidbody2D:
   serializedVersion: 4
@@ -40315,7 +40360,7 @@ GameObject:
   - component: {fileID: 1650264207}
   - component: {fileID: 1650264206}
   - component: {fileID: 1650264205}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlatformCrumble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45794,7 +45839,7 @@ GameObject:
   - component: {fileID: 1878110501}
   - component: {fileID: 1878110500}
   - component: {fileID: 1878110499}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DroppingPlatform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
