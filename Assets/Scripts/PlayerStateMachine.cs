@@ -24,6 +24,7 @@ public class PlayerStateMachine : MonoBehaviour
     public Transform WallCheckTarget;
     public ParticleSystem JumpDust;
 
+
     [Header("PLAYER STATE")]
     [SerializeField]
     private MovementState _currentState;
@@ -551,11 +552,6 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-    private void PlatformCheck()
-    {
-        _isOnPlatform = Physics2D.Raycast(_platformCheckTarget.position, Vector2.down, _platformRayLength, _platformLayer);
-    }
-
     private void WallCheck()
     {
         Vector2 direction = transform.localScale.x < 0 ? Vector2.left : Vector2.right;
@@ -564,6 +560,11 @@ public class PlayerStateMachine : MonoBehaviour
 
         Debug.DrawRay(WallCheckTarget.position, direction * _wallCheckRayLength, Color.red);
 
+    }
+
+    private void PlatformCheck()
+    {
+        _isOnPlatform = Physics2D.Raycast(_platformCheckTarget.position, Vector2.down, _platformRayLength, _platformLayer);
     }
 
     private void FlipSprite()
@@ -698,6 +699,7 @@ public class PlayerStateMachine : MonoBehaviour
             Physics2D.IgnoreCollision(playerCollider, swingCollider, false);
         }
     }
+
     private void HandleSaveSpot()
     {
         if (_rb.velocity.y == 0 && !_isOnPlatform)
@@ -710,7 +712,8 @@ public class PlayerStateMachine : MonoBehaviour
     private void HandleAnimation()
     {
         _animator.SetBool("isIdling", _currentState == MovementState.Idling);
-        _animator.SetBool("isMoving", _currentState == MovementState.Moving);
+        _animator.SetBool("isRunning", _currentState == MovementState.Moving);
+        _animator.SetBool("isJumping", _currentState == MovementState.Jumping);
     }
 }
 
