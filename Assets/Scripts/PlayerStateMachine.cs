@@ -160,8 +160,6 @@ public class PlayerStateMachine : MonoBehaviour
         _movementX = Input.GetAxis("Horizontal");
         _movementY = Input.GetAxis("Vertical");
 
-        HandleAnimation();
-
         if (_swingAttachCooldown > 0f)
         {
             _swingAttachCooldown -= Time.deltaTime;
@@ -171,6 +169,8 @@ public class PlayerStateMachine : MonoBehaviour
         WallCheck();
         SpawnTrampoline();
         CornerCorrection();
+        HandleSaveSpot();
+        HandleAnimation();
 
         switch (_currentState)
         {
@@ -528,8 +528,6 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _isGrounded = Physics2D.Raycast(GroundCheckTarget.position, Vector2.down, _groundCheckRayLength);
 
-        //_isGrounded = Physics2D.OverlapCircle(GroundCheckTarget.position, _groundOverlapCheckRadius, GroundLayer);
-
         Debug.DrawRay(GroundCheckTarget.position, Vector2.down * _groundCheckRayLength, Color.blue);
 
         if (_isGrounded)
@@ -544,13 +542,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void WallCheck()
     {
-        /*Vector2 wallCheckPosition = transform.position + new Vector3(_spriteRenderer.flipX ? -0.5f : 1f, 0f, 0f);
-
-        _isOnWall = Physics2D.OverlapCircle(wallCheckPosition, _wallOverlapCheckRadius, WallLayer);
-
-        Debug.DrawLine(wallCheckPosition, wallCheckPosition + Vector2.up, Color.red);
-        Debug.DrawLine(wallCheckPosition, wallCheckPosition + new Vector2(_wallOverlapCheckRadius, 0), Color.magenta);
-        */
         Vector2 direction = transform.localScale.x < 0 ? Vector2.left : Vector2.right;
 
         _isOnWall = Physics2D.Raycast(WallCheckTarget.position, direction, _wallCheckRayLength, WallLayer);
@@ -689,6 +680,14 @@ public class PlayerStateMachine : MonoBehaviour
         if (playerCollider != null && swingCollider != null)
         {
             Physics2D.IgnoreCollision(playerCollider, swingCollider, false);
+        }
+    }
+    private void HandleSaveSpot()
+    {
+        if (_rb.velocity.y == 0)
+        {
+            _saveSpot = transform.position;
+            _rb.velocity = Vector2.zero;
         }
     }
 
