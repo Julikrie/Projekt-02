@@ -49,3 +49,6 @@ TagManager:
   - name: Player
     uniqueID: 16634889
     locked: 0
+  - name: NoLight
+    uniqueID: 3047250033
+    locked: 0
