@@ -419,23 +419,21 @@ public class PlayerStateMachine : MonoBehaviour
 
         Vector2 dashDirection = Vector2.zero;
 
-        if (Mathf.Abs(_movementX) > Mathf.Abs(_movementY))
+        if (Mathf.Abs(_movementX) > Mathf.Abs(_movementY) && Mathf.Abs(_movementX) > 0.1f)
         {
             dashDirection = new Vector2(Mathf.Sign(_movementX), 0);
         }
-        else if (Mathf.Abs(_movementY) > Mathf.Abs(_movementX))
+        else if (Mathf.Abs(_movementY) >= Mathf.Abs(_movementX) && Mathf.Abs(_movementY) > 0.1f)
         {
             dashDirection = new Vector2(0, Mathf.Sign(_movementY));
         }
 
         if (dashDirection == Vector2.zero)
         {
-            dashDirection = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
+            dashDirection = _isFacingRight ? Vector2.left : Vector2.right;
         }
-        if (dashDirection == Vector2.zero)
-        {
-            dashDirection = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
-        }
+
+        dashDirection = dashDirection.normalized;
 
         _rb.velocity = dashDirection * _dashRange / _dashTime;
 
