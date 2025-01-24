@@ -25,6 +25,8 @@ public class PlayerStateMachine : MonoBehaviour
     public ParticleSystem JumpDust;
     public ParticleSystem WallSlideDust;
 
+    public bool _isFacingRight;
+
     [Header("PLAYER STATE")]
     [SerializeField]
     private MovementState _currentState;
@@ -365,13 +367,11 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (_isOnWall && !_isGrounded)
         {
-            float direction = transform.localScale.x > 0 ? -1f : 1f;
-
-            _spriteRenderer.flipX = !_spriteRenderer.flipX;
+            float direction = _isFacingRight ? 1 : -1;
 
             _rb.velocity = new Vector2(direction * _wallJumpForce.x, _wallJumpForce.y);
 
-            _rb.gravityScale = _airGravityScale;
+            Flip();
 
             transform.position += new Vector3(direction * 0.1f, 0f, 0f);
 
@@ -577,14 +577,25 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void FlipSprite()
     {
-        if (_movementX < -0.05f && transform.localScale.x > 0f)
+
+
+        if (_movementX < -0.05f && !_isFacingRight)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            Flip();
         }
-        else if (_movementX > 0.05f && transform.localScale.x < 0f)
+        else if (_movementX > 0.05f && _isFacingRight)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            Flip();
         }
+    }
+    
+    private void Flip()
+    {
+        _isFacingRight = !_isFacingRight;
+
+        Vector3 flipScale = transform.localScale;
+        flipScale.x *= -1;
+        transform.localScale = flipScale;
     }
 
     private void HandleSwing()
