@@ -122,6 +122,105 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &50997853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 50997856}
+  - component: {fileID: 50997855}
+  - component: {fileID: 50997854}
+  m_Layer: 0
+  m_Name: TreeLeafs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &50997854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50997853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec7db72021bb8f4d926309b547d6c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SwaySpeed: 0.5
+  SwayAmount: 1.2
+--- !u!212 &50997855
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50997853}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 21300000, guid: b4556691bf1aaef468143d32ae2914cb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 85.423164, y: 6.34}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &50997856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50997853}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.49, y: 4.83, z: 0}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &64966846
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,9 +424,9 @@ MonoBehaviour:
   m_LightType: 2
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.5653702, g: 0.990566, b: 0.60935605, a: 0.62352943}
-  m_Intensity: 2.3
-  m_LightVolumeIntensity: 0.012
+  m_Color: {r: 0.79294235, g: 0.9716981, b: 0.81228936, a: 1}
+  m_Intensity: 1.4
+  m_LightVolumeIntensity: 0.01
   m_LightVolumeIntensityEnabled: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 21300000, guid: 8aa02c17813ed854bad44420f5417e20, type: 3}
@@ -338,7 +437,7 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensityEnabled: 0
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
@@ -565,7 +664,7 @@ GameObject:
   - component: {fileID: 154685270}
   - component: {fileID: 154685269}
   m_Layer: 0
-  m_Name: Particle Dust
+  m_Name: ParticleDust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5451,6 +5550,7 @@ GameObject:
   - component: {fileID: 168008736}
   - component: {fileID: 168008735}
   - component: {fileID: 168008739}
+  - component: {fileID: 168008740}
   m_Layer: 7
   m_Name: Colliders
   m_TagString: Untagged
@@ -5759,6 +5859,82 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1973114, y: 5.9734607}
   m_EdgeRadius: 0
+--- !u!60 &168008740
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168008731}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 50.008507, y: 8.327497}
+      - {x: 52.908142, y: 2.5242968}
+      - {x: 53.349968, y: 1.8136498}
+      - {x: 53.649666, y: 1.5055118}
+      - {x: 54.134476, y: 0.9998849}
+      - {x: 54.540306, y: 0.65634996}
+      - {x: 54.74768, y: 0.52357787}
+      - {x: 54.7399, y: -0.2306759}
+      - {x: 54.564632, y: -1.2151662}
+      - {x: 54.85074, y: -1.10943}
+      - {x: 55.080345, y: -0.8657914}
+      - {x: 55.47354, y: -0.50185686}
+      - {x: 55.77681, y: -0.46629614}
+      - {x: 56.242126, y: -0.21291521}
+      - {x: 56.70955, y: -0.82563484}
+      - {x: 56.72854, y: -1.9636267}
+      - {x: 56.763847, y: -2.359084}
+      - {x: 56.75544, y: -2.6984036}
+      - {x: 56.6416, y: -3.1166375}
+      - {x: 56.63433, y: -3.3760247}
+      - {x: 56.725845, y: -3.9115207}
+      - {x: 56.72824, y: -3.981787}
+      - {x: 56.687965, y: -5.197241}
+      - {x: 56.65796, y: -5.535935}
+      - {x: 56.64512, y: -5.827295}
+      - {x: 56.634453, y: -7.989139}
+      - {x: 56.88356, y: -7.991971}
+      - {x: 56.89132, y: -5.5366893}
+      - {x: 56.874214, y: -0.9234716}
+      - {x: 56.897438, y: 2.1017628}
+      - {x: 54.150745, y: 8.311934}
+  m_UseDelaunayMesh: 0
 --- !u!4 &181050942 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8024374875752866506, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
@@ -6070,9 +6246,9 @@ MonoBehaviour:
   m_LightType: 2
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.86543256, g: 0.9811321, b: 0.87954223, a: 0.8}
-  m_Intensity: 2.3
-  m_LightVolumeIntensity: 0.012
+  m_Color: {r: 0.79294235, g: 0.9716981, b: 0.81228936, a: 1}
+  m_Intensity: 1.4
+  m_LightVolumeIntensity: 0.01
   m_LightVolumeIntensityEnabled: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 21300000, guid: 8aa02c17813ed854bad44420f5417e20, type: 3}
@@ -6083,7 +6259,7 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensityEnabled: 0
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
@@ -6251,9 +6427,9 @@ MonoBehaviour:
   m_LightType: 2
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.5653702, g: 0.990566, b: 0.60935605, a: 0.62352943}
-  m_Intensity: 2.3
-  m_LightVolumeIntensity: 0.012
+  m_Color: {r: 0.79294235, g: 0.9716981, b: 0.81228936, a: 1}
+  m_Intensity: 1.4
+  m_LightVolumeIntensity: 0.01
   m_LightVolumeIntensityEnabled: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 21300000, guid: 8aa02c17813ed854bad44420f5417e20, type: 3}
@@ -6264,7 +6440,7 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensityEnabled: 0
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
@@ -6680,7 +6856,6 @@ Transform:
   - {fileID: 154685271}
   - {fileID: 1958762920}
   - {fileID: 1306486061}
-  - {fileID: 811824342}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519666037
@@ -12345,7 +12520,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 3
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -12949,7 +13124,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 100
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -13017,7 +13192,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 180, z: 0}
-    m_Scale: {x: 85.8, y: 1, z: 1}
+    m_Scale: {x: 30, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -13092,7 +13267,7 @@ ParticleSystem:
     m_TextureColorAffectsParticles: 1
     m_TextureAlphaAffectsParticles: 1
     m_TextureBilinearFiltering: 0
-    randomDirectionAmount: 0
+    randomDirectionAmount: 0.02
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
@@ -13215,7 +13390,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1.2
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -15191,7 +15366,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.2
+    frequency: 0.3
     damping: 1
     octaves: 1
     octaveMultiplier: 0.5
@@ -15200,7 +15375,7 @@ ParticleSystem:
     scrollSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -15413,7 +15588,7 @@ ParticleSystem:
     positionAmount:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -15466,7 +15641,7 @@ ParticleSystem:
     rotationAmount:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -15519,7 +15694,7 @@ ParticleSystem:
     sizeAmount:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -17111,11 +17286,11 @@ Transform:
   m_GameObject: {fileID: 811824339}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 32.9164, y: 13.164219, z: 0.00020815004}
+  m_LocalPosition: {x: 0.14, y: 8.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 481845727}
+  m_Father: {fileID: 1253408166}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &845535333
 GameObject:
@@ -17150,9 +17325,9 @@ MonoBehaviour:
   m_LightType: 2
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.5653702, g: 0.990566, b: 0.60935605, a: 0.62352943}
-  m_Intensity: 2.3
-  m_LightVolumeIntensity: 0.012
+  m_Color: {r: 0.79294235, g: 0.9716981, b: 0.81228936, a: 1}
+  m_Intensity: 1.4
+  m_LightVolumeIntensity: 0.01
   m_LightVolumeIntensityEnabled: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 21300000, guid: 8aa02c17813ed854bad44420f5417e20, type: 3}
@@ -17163,7 +17338,7 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensityEnabled: 0
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
@@ -22982,9 +23157,9 @@ MonoBehaviour:
   m_LightType: 2
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.86543256, g: 0.9811321, b: 0.87954223, a: 0.8}
-  m_Intensity: 2.3
-  m_LightVolumeIntensity: 0.012
+  m_Color: {r: 0.79294235, g: 0.9716981, b: 0.81228936, a: 1}
+  m_Intensity: 1.4
+  m_LightVolumeIntensity: 0.01
   m_LightVolumeIntensityEnabled: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 21300000, guid: 8aa02c17813ed854bad44420f5417e20, type: 3}
@@ -22995,7 +23170,7 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensityEnabled: 0
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
@@ -29648,9 +29823,9 @@ MonoBehaviour:
   m_LightType: 2
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.86543256, g: 0.9811321, b: 0.87954223, a: 0.8}
-  m_Intensity: 2.3
-  m_LightVolumeIntensity: 0.012
+  m_Color: {r: 0.79294235, g: 0.9716981, b: 0.81228936, a: 1}
+  m_Intensity: 1.4
+  m_LightVolumeIntensity: 0.01
   m_LightVolumeIntensityEnabled: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 21300000, guid: 8aa02c17813ed854bad44420f5417e20, type: 3}
@@ -29661,7 +29836,7 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensityEnabled: 0
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
@@ -29725,7 +29900,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 811824342}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1260515353
@@ -30303,7 +30479,7 @@ GameObject:
   - component: {fileID: 1306486063}
   - component: {fileID: 1306486062}
   m_Layer: 0
-  m_Name: Particle Fireflies (1)
+  m_Name: ParticleFireflies 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47303,7 +47479,7 @@ GameObject:
   - component: {fileID: 1958762919}
   - component: {fileID: 1958762918}
   m_Layer: 0
-  m_Name: Particle Fireflies
+  m_Name: ParticleFireflies 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52720,3 +52896,4 @@ SceneRoots:
   - {fileID: 447252674}
   - {fileID: 636535507}
   - {fileID: 992499346}
+  - {fileID: 50997856}
