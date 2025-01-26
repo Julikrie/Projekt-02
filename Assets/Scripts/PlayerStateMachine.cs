@@ -297,8 +297,6 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
 
-
-
         JumpDust.Play();
         _impulseSource.GenerateImpulse(ShakeForce);
 
@@ -322,9 +320,17 @@ public class PlayerStateMachine : MonoBehaviour
             WallSlideDust.Stop();
         }
 
-        if (_isGrounded)
+        if (_isGrounded && _rb.velocity.y <= 0f)
         {
-            _currentState = MovementState.Moving;
+            if (Mathf.Abs(_movementX) > 0.01f)
+            {
+                _currentState = MovementState.Moving;
+            }
+            else
+            {
+                _currentState = MovementState.Idling;
+            }
+
             _jumpCounter = 0;
         }
 
@@ -332,7 +338,9 @@ public class PlayerStateMachine : MonoBehaviour
         {
             Debug.Log("Ich WALLJUMP!!!");
             _currentState = MovementState.WallJumping;
+            WallSlideDust.Stop();
             ExecuteWallJump();
+
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
@@ -373,6 +381,8 @@ public class PlayerStateMachine : MonoBehaviour
             _rb.velocity = new Vector2(direction * _wallJumpForce.x, _wallJumpForce.y);
 
             transform.position += new Vector3(direction * 0.2f, 0f, 0f);
+
+            _impulseSource.GenerateImpulseWithForce(ShakeForce);
 
             JumpDust.Play();
 
