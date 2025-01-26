@@ -15,6 +15,11 @@ public enum MovementState
 
 public class PlayerStateMachine : MonoBehaviour
 {
+    public float CornerForce;
+    public float CornerCorrectionSide;
+    public float CornerCorrectionUp;
+    public Vector2 CharacterHead;
+
     public float ShakeForce;
     public GameObject DashIndicator;
     public GameObject TrampolinePrefab;
@@ -98,10 +103,6 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]
     private float _wallCheckRayLength = 0.015f;
     [SerializeField]
-    private float _groundOverlapCheckRadius;
-    [SerializeField]
-    private float _wallOverlapCheckRadius;
-    [SerializeField]
     private bool _isOnWall;
     [SerializeField]
     private bool _isGrounded;
@@ -109,8 +110,6 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("CORNER CORRECTION")]
     [SerializeField]
     private float _cornerCheckRayLength;
-    [SerializeField]
-    private float _cornerPushForce;
     [SerializeField]
     private float _offSetUnderCeiling;
 
@@ -373,9 +372,6 @@ public class PlayerStateMachine : MonoBehaviour
 
             _rb.velocity = new Vector2(direction * _wallJumpForce.x, _wallJumpForce.y);
 
-            Debug.Log("Ich Flippe");
-            //Flip();
-
             transform.position += new Vector3(direction * 0.2f, 0f, 0f);
 
             JumpDust.Play();
@@ -433,7 +429,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (dashDirection == Vector2.zero)
         {
-            dashDirection = _isFacingRight ? Vector2.left : Vector2.right;
+            dashDirection = _isFacingRight ? Vector2.right : Vector2.left;
         }
 
         dashDirection = dashDirection.normalized;
@@ -507,35 +503,33 @@ public class PlayerStateMachine : MonoBehaviour
     
     private void CornerCorrection()
     {
-        Vector2 characterTop = (Vector2)transform.position + new Vector2(0f, 0.6f);
+        Vector2 characterTop = (Vector2)transform.position + CharacterHead;
 
-        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(0.3f, 0f), Vector2.right, _cornerCheckRayLength, WallLayer);
-        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(0.4f, 0f), Vector2.up, _cornerCheckRayLength, WallLayer);
+        bool rightWallHit = Physics2D.Raycast(characterTop + new Vector2(CornerCorrectionSide - 0.1f, 0f), Vector2.right, _cornerCheckRayLength, WallLayer);
+        bool rightCeilingHit = Physics2D.Raycast(characterTop + new Vector2(CornerCorrectionUp - 0.1f, 0f), Vector2.up, _cornerCheckRayLength, WallLayer);
         bool isRightCorner = rightWallHit && rightCeilingHit;
 
-        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-0.3f, 0f), Vector2.left, _cornerCheckRayLength, WallLayer);
-        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-0.4f, 0f), Vector2.up, _cornerCheckRayLength, WallLayer);
+        bool leftWallHit = Physics2D.Raycast(characterTop + new Vector2(-CornerCorrectionSide, 0f), Vector2.left, _cornerCheckRayLength, WallLayer);
+        bool leftCeilingHit = Physics2D.Raycast(characterTop + new Vector2(-CornerCorrectionUp, 0f), Vector2.up, _cornerCheckRayLength, WallLayer);
         bool isLeftCorner = leftWallHit && leftCeilingHit;
 
-        Debug.DrawRay(characterTop + new Vector2(0.3f, 0f), Vector2.right * _cornerCheckRayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(0.4f, 0f), Vector2.up * _cornerCheckRayLength, Color.red);
-        Debug.DrawRay(characterTop + new Vector2(-0.3f, 0f), Vector2.left * _cornerCheckRayLength, Color.blue);
-        Debug.DrawRay(characterTop + new Vector2(-0.4f, 0f), Vector2.up * _cornerCheckRayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(CornerCorrectionSide -0.1f, 0f), Vector2.right * _cornerCheckRayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(CornerCorrectionUp -0.1f, 0f), Vector2.up * _cornerCheckRayLength, Color.red);
+        Debug.DrawRay(characterTop + new Vector2(-CornerCorrectionSide, 0f), Vector2.left * _cornerCheckRayLength, Color.blue);
+        Debug.DrawRay(characterTop + new Vector2(-CornerCorrectionUp, 0f), Vector2.up * _cornerCheckRayLength, Color.blue);
 
-        if (isLeftCorner && !isRightCorner && !_isOnWall && !_isGrounded)
+        if (isLeftCorner && !isRightCorner && !_isOnWall && !_isGrounded && _currentState != MovementState.WallSliding)
         {
-            _spriteRenderer.flipX = false;
             RedirectAroundCorner();
         }
-        else if (isRightCorner && !isLeftCorner && !_isOnWall && !_isGrounded)
+        else if (isRightCorner && !isLeftCorner && !_isOnWall && !_isGrounded && _currentState != MovementState.WallSliding)
         {
-            _spriteRenderer.flipX = true;
             RedirectAroundCorner();
         }
     }
     private void RedirectAroundCorner()
     {
-        float pushDirection = _spriteRenderer.flipX ? -1f : 1f;
+        float pushDirection = _isFacingRight ? 1f : -1f;
 
         Vector2 currentPosition = _rb.position;
         Vector2 targetPosition = currentPosition + new Vector2(pushDirection * _offSetUnderCeiling, 0);
@@ -543,7 +537,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         _rb.position = targetPosition;
 
-        _rb.velocity = new Vector2(pushDirection * _cornerPushForce, _jumpForce);
+        _rb.velocity = new Vector2(pushDirection, CornerForce);
     }
 
     private void GroundCheck()
@@ -692,7 +686,6 @@ public class PlayerStateMachine : MonoBehaviour
 
                     StartCoroutine(ReenableCollision(playerCollider, swingCollider, 0.5f));
                 }
-
             }
 
             Vector2 baseJumpVelocity = new Vector2(_movementX * _speed * 1.2f, 12f);
