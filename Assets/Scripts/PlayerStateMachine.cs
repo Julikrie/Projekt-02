@@ -51,8 +51,7 @@ public class PlayerStateMachine : MonoBehaviour
     private float _coyoteTime = 0.2f;
     [SerializeField]
     private float _coyoteTimer;
-    [SerializeField]
-    private float _jumpBufferTime = 0.25f;
+    //private float _jumpBufferTime = 0.25f;
     [SerializeField]
     private float _jumpBufferTimer;
 
@@ -270,7 +269,6 @@ public class PlayerStateMachine : MonoBehaviour
             ExecuteJump();
         }
 
-
         if (_isGrounded && _rb.velocity.y <= 0f)
         {
             if (Mathf.Abs(_movementX) > 0.01f)
@@ -333,6 +331,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (_isOnWall && Mathf.Abs(_rb.velocity.x) >= 0f && Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("Ich WALLJUMP!!!");
             _currentState = MovementState.WallJumping;
             ExecuteWallJump();
         }
@@ -351,16 +350,17 @@ public class PlayerStateMachine : MonoBehaviour
             if (Mathf.Abs(_movementX) > 0.01f)
             {
                 _currentState = MovementState.Moving;
+                _jumpCounter = 0;
             }
             else
             {
                 _currentState = MovementState.Idling;
+                _jumpCounter = 0;
             }
         }
 
         if (_isOnWall && !_isGrounded)
         {
-            Debug.Log("Ich Wall Slide gerade");
             _currentState = MovementState.WallSliding;
         }
     }
@@ -369,13 +369,14 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (_isOnWall && !_isGrounded)
         {
-            float direction = _isFacingRight ? 1 : -1;
+            float direction = _isFacingRight ? -1 : 1;
 
             _rb.velocity = new Vector2(direction * _wallJumpForce.x, _wallJumpForce.y);
 
-            Flip();
+            Debug.Log("Ich Flippe");
+            //Flip();
 
-            transform.position += new Vector3(direction * 0.1f, 0f, 0f);
+            transform.position += new Vector3(direction * 0.2f, 0f, 0f);
 
             JumpDust.Play();
 
@@ -578,11 +579,11 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void FlipSprite()
     {
-        if (_movementX < -0.05f && _isFacingRight)
+        if (_rb.velocity.x < -0.05f && _isFacingRight)
         {
             Flip();
         }
-        else if (_movementX > 0.05f && !_isFacingRight)
+        else if (_rb.velocity.x > 0.05f && !_isFacingRight)
         {
             Flip();
         }
