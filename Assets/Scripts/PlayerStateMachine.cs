@@ -161,6 +161,8 @@ public class PlayerStateMachine : MonoBehaviour
         _impulseSource = GetComponent<CinemachineImpulseSource>();
         _currentState = MovementState.Idling;
 
+        _isFacingRight = true;
+
         _canDash = true;
 
         _saveSpot = transform.position;
@@ -542,6 +544,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         _rb.velocity = new Vector2(pushDirection * _cornerPushForce, _jumpForce);
     }
+
     private void GroundCheck()
     {
         _isGrounded = Physics2D.Raycast(GroundCheckTarget.position, Vector2.down, _groundCheckRayLength);
@@ -575,13 +578,11 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void FlipSprite()
     {
-
-
-        if (_movementX < -0.05f && !_isFacingRight)
+        if (_movementX < -0.05f && _isFacingRight)
         {
             Flip();
         }
-        else if (_movementX > 0.05f && _isFacingRight)
+        else if (_movementX > 0.05f && !_isFacingRight)
         {
             Flip();
         }
