@@ -5895,7 +5895,7 @@ GameObject:
   - component: {fileID: 168008735}
   - component: {fileID: 168008739}
   - component: {fileID: 168008740}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12723,7 +12723,7 @@ GameObject:
   - component: {fileID: 522212026}
   - component: {fileID: 522212025}
   - component: {fileID: 522212024}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35311,7 +35311,7 @@ MonoBehaviour:
   _wallJumpForce: {x: 10, y: 20}
   _slideSpeed: 2
   _dashTime: 0.3
-  _dashCooldown: 2
+  _dashCooldown: 0.2
   _dashRange: 6
   _isDashing: 0
   _canDash: 0
@@ -35321,8 +35321,6 @@ MonoBehaviour:
   _trampolineForce: 25
   _groundCheckRayLength: 0.015
   _wallCheckRayLength: 0.1
-  _groundOverlapCheckRadius: 0.55
-  _wallOverlapCheckRadius: 0.01
   _isOnWall: 0
   _isGrounded: 0
   _cornerCheckRayLength: 0.1
@@ -41259,7 +41257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1272719116
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -41366,7 +41364,7 @@ Transform:
   m_GameObject: {fileID: 1272719115}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.7199993, y: 0.5168, z: 0}
+  m_LocalPosition: {x: 4.7199993, y: 2.5800004, z: 0}
   m_LocalScale: {x: 1, y: 13.101785, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46311,8 +46309,6 @@ MonoBehaviour:
   _trampolineForce: 25
   _groundCheckRayLength: 0.015
   _wallCheckRayLength: 0.015
-  _groundOverlapCheckRadius: 0.55
-  _wallOverlapCheckRadius: 0.01
   _isOnWall: 0
   _isGrounded: 0
   _cornerCheckRayLength: 0
@@ -51741,7 +51737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1398899628
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -51848,7 +51844,7 @@ Transform:
   m_GameObject: {fileID: 1398899627}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.44, y: 3.65, z: 0}
+  m_LocalPosition: {x: -0.44, y: 2.65, z: 0}
   m_LocalScale: {x: 1, y: 12.399948, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

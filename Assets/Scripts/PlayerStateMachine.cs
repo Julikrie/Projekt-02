@@ -317,7 +317,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             WallSlideDust.Play();
         }
-        else if (_isGrounded)
+        else
         {
             WallSlideDust.Stop();
         }
@@ -408,43 +408,38 @@ public class PlayerStateMachine : MonoBehaviour
 
     private IEnumerator ExecuteDash()
     {
+        Debug.Log("Dash started");
         _isDashing = true;
         _canDash = false;
 
         DashIndicator.SetActive(false);
 
-        float originalGravity = 6f;
+        float originalGravity = _rb.gravityScale;
         _rb.gravityScale = 0f;
 
         Vector2 dashDirection = Vector2.zero;
-
-        if (Mathf.Abs(_movementX) > Mathf.Abs(_movementY) && Mathf.Abs(_movementX) > 0.1f)
-        {
-            dashDirection = new Vector2(Mathf.Sign(_movementX), 0);
-        }
-        else if (Mathf.Abs(_movementY) >= Mathf.Abs(_movementX) && Mathf.Abs(_movementY) > 0.1f)
-        {
-            dashDirection = new Vector2(0, Mathf.Sign(_movementY));
-        }
 
         if (dashDirection == Vector2.zero)
         {
             dashDirection = _isFacingRight ? Vector2.right : Vector2.left;
         }
 
-        dashDirection = dashDirection.normalized;
+        Debug.Log($"Dash direction: {dashDirection}");
+        _rb.velocity = dashDirection * (_dashRange / _dashTime);
+        Debug.Log(_rb.velocity);
 
-        _rb.velocity = dashDirection * _dashRange / _dashTime;
 
-        _trailRenderer.enabled = true;
+        // _trailRenderer.enabled = true;
 
         yield return new WaitForSeconds(_dashTime);
 
-        _rb.velocity = Vector2.zero;
+        //_rb.velocity = Vector2.zero;
         _rb.gravityScale = originalGravity;
 
         _isDashing = false;
-        _trailRenderer.enabled = false;
+        //_trailRenderer.enabled = false;
+
+        Debug.Log("Dash ended");
 
         yield return new WaitForSeconds(_dashCooldown);
 
@@ -716,8 +711,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (_rb.velocity.y == 0 && !_isOnPlatform)
         {
-            _saveSpot = transform.position;
-            _rb.velocity = Vector2.zero;
+            _saveSpot = transform.position - new Vector3(0.5f, 0f, 0f);
         }
     }
 
