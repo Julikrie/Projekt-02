@@ -481,8 +481,8 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (collision.collider.CompareTag("Danger"))
         {
-            transform.position = _saveSpot;
-            _rb.velocity = Vector2.zero;
+            StartCoroutine(FreezeTimeOnCollision(0.05f));
+            Invoke("TeleportToSaveSpot", 0.05f);
         }
     }
 
@@ -741,6 +741,12 @@ public class PlayerStateMachine : MonoBehaviour
         {
             _saveSpot = transform.position - new Vector3(0.5f, 0f, 0f);
         }
+    }
+
+    private void TeleportToSaveSpot()
+    {
+        transform.position = _saveSpot;
+        _rb.velocity = Vector2.zero;
     }
 
     private void HandleAnimation()
