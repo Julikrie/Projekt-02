@@ -37756,7 +37756,10 @@ MonoBehaviour:
   CornerCorrectionSide: 0.5
   CornerCorrectionUp: 0.6
   CharacterHead: {x: 0.12, y: 2}
+  _freezeTime: 0
+  _freezeDuration: 0.05
   ShakeForce: 0.05
+  ShakeForceDestroyable: 0.4
   DashIndicator: {fileID: 983225247}
   TrampolinePrefab: {fileID: 6000997960001365919, guid: f28a3ec6db49c254cb2b4c549f353cef, type: 3}
   GroundLayer:
@@ -49104,7 +49107,10 @@ MonoBehaviour:
   CornerCorrectionSide: 0
   CornerCorrectionUp: 0
   CharacterHead: {x: 0, y: 0}
+  _freezeTime: 0
+  _freezeDuration: 0
   ShakeForce: 0
+  ShakeForceDestroyable: 0
   DashIndicator: {fileID: 0}
   TrampolinePrefab: {fileID: 6000997960001365919, guid: f28a3ec6db49c254cb2b4c549f353cef, type: 3}
   GroundLayer:

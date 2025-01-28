@@ -26,6 +26,7 @@ public class PlayerStateMachine : MonoBehaviour
     private float _freezeDuration;
 
     public float ShakeForce;
+    public float ShakeForceDestroyable;
     public GameObject DashIndicator;
     public GameObject TrampolinePrefab;
     public LayerMask GroundLayer;
@@ -500,7 +501,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.gameObject.CompareTag("Destroyable") && _isDashing)
         {
             Destroy(other.transform.parent.gameObject);
-            _impulseSource.GenerateImpulseWithForce(ShakeForce);
+            _impulseSource.GenerateImpulseWithForce(ShakeForceDestroyable);
             StartCoroutine(FreezeTimeOnCollision());
         }
 
