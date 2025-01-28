@@ -34,6 +34,7 @@ public class PlayerStateMachine : MonoBehaviour
     public Transform WallCheckTarget;
     public ParticleSystem JumpDust;
     public ParticleSystem WallSlideDust;
+    public ParticleSystem RespawnParticle;
 
     public bool _isFacingRight;
 
@@ -481,8 +482,9 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (collision.collider.CompareTag("Danger"))
         {
-            StartCoroutine(FreezeTimeOnCollision(0.05f));
-            Invoke("TeleportToSaveSpot", 0.05f);
+            StartCoroutine(FreezeTimeOnCollision(0.1f));
+            RespawnParticle.Play();
+            Invoke("TeleportToSaveSpot", 0.11f);
         }
     }
 
