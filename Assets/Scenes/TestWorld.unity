@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 21932948}
   - component: {fileID: 21932950}
   - component: {fileID: 21932949}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (5)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 26418202}
   - component: {fileID: 26418204}
   - component: {fileID: 26418203}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (16)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ Transform:
   m_GameObject: {fileID: 26418201}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 7.0299997, y: 6.539999, z: 0}
+  m_LocalPosition: {x: 7.0299997, y: 6.5699997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -846,7 +846,7 @@ GameObject:
   - component: {fileID: 62638820}
   - component: {fileID: 62638822}
   - component: {fileID: 62638821}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (13)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -900,9 +900,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000094002223, y: 0.11452095}
+  m_Offset: {x: 0.0000009536743, y: 0.16339347}
   serializedVersion: 2
-  m_Radius: 0.40318772
+  m_Radius: 0.45206025
 --- !u!212 &62638822
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1147,7 +1147,7 @@ GameObject:
   - component: {fileID: 88878770}
   - component: {fileID: 88878772}
   - component: {fileID: 88878771}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (6)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -1450,7 +1450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123368243}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.0000019967554, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0000012665986, w: 1}
   m_LocalPosition: {x: 0.172, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6933,13 +6933,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: DashResetter
       objectReference: {fileID: 0}
+    - target: {fileID: 2441325330579397600, guid: 1c3583b6d6644ff4ab80baf38593ab4c, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4632878532741558693, guid: 1c3583b6d6644ff4ab80baf38593ab4c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4632878532741558693, guid: 1c3583b6d6644ff4ab80baf38593ab4c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.52
+      value: -15.87
       objectReference: {fileID: 0}
     - target: {fileID: 4632878532741558693, guid: 1c3583b6d6644ff4ab80baf38593ab4c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7485,6 +7489,246 @@ Transform:
   m_Children: []
   m_Father: {fileID: 164684385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!1 &245869781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 245869782}
+  - component: {fileID: 245869784}
+  - component: {fileID: 245869783}
+  m_Layer: 11
+  m_Name: Spike (15)
+  m_TagString: Danger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &245869782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245869781}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.01, y: 2.059999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 932023970}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &245869783
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245869781}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0000009536743, y: 0.15850589}
+  serializedVersion: 2
+  m_Radius: 0.44717267
+--- !u!212 &245869784
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245869781}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &254543227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 254543228}
+  - component: {fileID: 254543230}
+  - component: {fileID: 254543229}
+  m_Layer: 11
+  m_Name: Spike (19)
+  m_TagString: Danger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &254543228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254543227}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9, y: 2.059999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 932023970}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &254543229
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254543227}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0000009536743, y: 0.15850589}
+  serializedVersion: 2
+  m_Radius: 0.44717267
+--- !u!212 &254543230
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254543227}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &280052944
 GameObject:
   m_ObjectHideFlags: 0
@@ -12326,7 +12570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 287254186}
   - component: {fileID: 287254187}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DestroyTrigger 1
   m_TagString: Destroyable
   m_Icon: {fileID: 0}
@@ -12895,7 +13139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 422726630}
   m_Layer: 0
-  m_Name: PlatformCheck
+  m_Name: ForbiddenAreaCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12932,7 +13176,7 @@ GameObject:
   - component: {fileID: 433081918}
   - component: {fileID: 433081920}
   - component: {fileID: 433081919}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (10)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -12948,7 +13192,7 @@ Transform:
   m_GameObject: {fileID: 433081917}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 4.99, y: 6.539999, z: 0}
+  m_LocalPosition: {x: 4.99, y: 6.5699997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13052,7 +13296,7 @@ GameObject:
   - component: {fileID: 438305824}
   - component: {fileID: 438305826}
   - component: {fileID: 438305825}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -13298,6 +13542,126 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &448374277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 448374278}
+  - component: {fileID: 448374280}
+  - component: {fileID: 448374279}
+  m_Layer: 11
+  m_Name: Spike (20)
+  m_TagString: Danger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &448374278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448374277}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.97, y: 2.059999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 932023970}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &448374279
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448374277}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0000009536743, y: 0.15606257}
+  serializedVersion: 2
+  m_Radius: 0.44472936
+--- !u!212 &448374280
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448374277}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!4 &461753335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1690886541301461359, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
@@ -13900,7 +14264,7 @@ GameObject:
   - component: {fileID: 497472175}
   - component: {fileID: 497472177}
   - component: {fileID: 497472176}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (7)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -14361,8 +14725,8 @@ Transform:
   m_GameObject: {fileID: 600464707}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3893, y: 0.73, z: 0}
-  m_LocalScale: {x: 4.4747043, y: 1.99715, z: 1}
+  m_LocalPosition: {x: 6.848, y: 0.73, z: 0}
+  m_LocalScale: {x: 7.392108, y: 1.99715, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 932023970}
@@ -19896,7 +20260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717126872}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.00000034272668, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0000047609205, w: 1}
   m_LocalPosition: {x: 0.19, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20129,7 +20493,7 @@ GameObject:
   - component: {fileID: 744630407}
   - component: {fileID: 744630409}
   - component: {fileID: 744630408}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (14)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -26122,6 +26486,9 @@ Transform:
   - {fileID: 2062993393}
   - {fileID: 1024220055}
   - {fileID: 62638820}
+  - {fileID: 254543228}
+  - {fileID: 245869782}
+  - {fileID: 448374278}
   - {fileID: 21932948}
   - {fileID: 1396914286}
   - {fileID: 1632038229}
@@ -31290,7 +31657,7 @@ GameObject:
   - component: {fileID: 1011131436}
   - component: {fileID: 1011131438}
   - component: {fileID: 1011131437}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (17)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -31306,7 +31673,7 @@ Transform:
   m_GameObject: {fileID: 1011131435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 9.09, y: 6.539999, z: 0}
+  m_LocalPosition: {x: 9.09, y: 6.5699997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31410,7 +31777,7 @@ GameObject:
   - component: {fileID: 1024220055}
   - component: {fileID: 1024220057}
   - component: {fileID: 1024220056}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (11)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -31464,9 +31831,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000094002223, y: 0.11452095}
+  m_Offset: {x: 0.0000009536743, y: 0.16095015}
   serializedVersion: 2
-  m_Radius: 0.40318772
+  m_Radius: 0.44961694
 --- !u!212 &1024220057
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -37050,11 +37417,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.35
+      value: 2.95
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.99
+      value: -12.055
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37186,7 +37553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5097787755171852205, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.34207848
+      value: 0.3420754
       objectReference: {fileID: 0}
     - target: {fileID: -5097787755171852205, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalRotation.y
@@ -37194,7 +37561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5097787755171852205, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.9396714
+      value: 0.9396725
       objectReference: {fileID: 0}
     - target: {fileID: -5097787755171852205, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -37502,7 +37869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6580996022299002465, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.3258961
+      value: 0.32590094
       objectReference: {fileID: 0}
     - target: {fileID: 6580996022299002465, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalRotation.y
@@ -37510,7 +37877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6580996022299002465, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.94540566
+      value: -0.945404
       objectReference: {fileID: 0}
     - target: {fileID: 6580996022299002465, guid: ccc0d2a979e5c444e99f9d7ef2d24c1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -37757,7 +38124,6 @@ MonoBehaviour:
   CornerCorrectionUp: 0.6
   CharacterHead: {x: 0.12, y: 2}
   _freezeTime: 0
-  _freezeDuration: 0.05
   ShakeForce: 0.05
   ShakeForceDestroyable: 0.4
   DashIndicator: {fileID: 983225247}
@@ -37768,6 +38134,9 @@ MonoBehaviour:
   WallLayer:
     serializedVersion: 2
     m_Bits: 128
+  forbiddenLayer:
+    serializedVersion: 2
+    m_Bits: 3072
   GroundCheckTarget: {fileID: 579052108}
   WallCheckTarget: {fileID: 1493622820}
   JumpDust: {fileID: 1155038776}
@@ -37798,12 +38167,9 @@ MonoBehaviour:
   _isGrounded: 0
   _cornerCheckRayLength: 0.1
   _offSetUnderCeiling: 0.05
-  _platformRayLength: 0.1
-  _platformLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  _platformCheckTarget: {fileID: 422726630}
-  _isOnPlatform: 0
+  _forbiddenAreaRayLength: 0.1
+  _forbiddenAreaTarget: {fileID: 422726630}
+  _forbiddenArea: 0
 --- !u!70 &1111075550
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -43291,7 +43657,7 @@ GameObject:
   - component: {fileID: 1257015432}
   - component: {fileID: 1257015434}
   - component: {fileID: 1257015433}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (9)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -43495,7 +43861,7 @@ GameObject:
   - component: {fileID: 1263907163}
   - component: {fileID: 1263907165}
   - component: {fileID: 1263907164}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (8)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -44094,7 +44460,7 @@ GameObject:
   - component: {fileID: 1280998542}
   - component: {fileID: 1280998544}
   - component: {fileID: 1280998543}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (1)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -49108,7 +49474,6 @@ MonoBehaviour:
   CornerCorrectionUp: 0
   CharacterHead: {x: 0, y: 0}
   _freezeTime: 0
-  _freezeDuration: 0
   ShakeForce: 0
   ShakeForceDestroyable: 0
   DashIndicator: {fileID: 0}
@@ -49119,6 +49484,9 @@ MonoBehaviour:
   WallLayer:
     serializedVersion: 2
     m_Bits: 128
+  forbiddenLayer:
+    serializedVersion: 2
+    m_Bits: 0
   GroundCheckTarget: {fileID: 0}
   WallCheckTarget: {fileID: 0}
   JumpDust: {fileID: 1155038776}
@@ -49149,12 +49517,9 @@ MonoBehaviour:
   _isGrounded: 0
   _cornerCheckRayLength: 0
   _offSetUnderCeiling: 0.1
-  _platformRayLength: 0
-  _platformLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _platformCheckTarget: {fileID: 0}
-  _isOnPlatform: 0
+  _forbiddenAreaRayLength: 0
+  _forbiddenAreaTarget: {fileID: 0}
+  _forbiddenArea: 0
 --- !u!50 &1314394671
 Rigidbody2D:
   serializedVersion: 4
@@ -54468,7 +54833,7 @@ GameObject:
   - component: {fileID: 1374984131}
   - component: {fileID: 1374984133}
   - component: {fileID: 1374984132}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (12)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -54484,7 +54849,7 @@ Transform:
   m_GameObject: {fileID: 1374984130}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 3.95, y: 6.539999, z: 0}
+  m_LocalPosition: {x: 3.95, y: 6.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54588,7 +54953,7 @@ GameObject:
   - component: {fileID: 1396914286}
   - component: {fileID: 1396914288}
   - component: {fileID: 1396914287}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (4)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -55550,7 +55915,7 @@ GameObject:
   - component: {fileID: 1513447956}
   - component: {fileID: 1513447958}
   - component: {fileID: 1513447957}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (18)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -55566,7 +55931,7 @@ Transform:
   m_GameObject: {fileID: 1513447955}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 8.07, y: 6.539999, z: 0}
+  m_LocalPosition: {x: 8.07, y: 6.5699997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60823,7 +61188,7 @@ GameObject:
   - component: {fileID: 1632038229}
   - component: {fileID: 1632038231}
   - component: {fileID: 1632038230}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (3)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -60943,7 +61308,7 @@ GameObject:
   - component: {fileID: 1632555940}
   - component: {fileID: 1632555939}
   - component: {fileID: 1632555938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DestroyableWall 1
   m_TagString: Destroyable
   m_Icon: {fileID: 0}
@@ -60979,7 +61344,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -67778,7 +68143,7 @@ GameObject:
   - component: {fileID: 2062993393}
   - component: {fileID: 2062993395}
   - component: {fileID: 2062993394}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spike (2)
   m_TagString: Danger
   m_Icon: {fileID: 0}

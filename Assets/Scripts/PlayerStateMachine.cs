@@ -22,8 +22,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     [SerializeField]
     private float _freezeTime;
-    [SerializeField]
-    private float _freezeDuration;
 
     public float ShakeForce;
     public float ShakeForceDestroyable;
@@ -31,6 +29,7 @@ public class PlayerStateMachine : MonoBehaviour
     public GameObject TrampolinePrefab;
     public LayerMask GroundLayer;
     public LayerMask WallLayer;
+    public LayerMask forbiddenLayer;
     public Transform GroundCheckTarget;
     public Transform WallCheckTarget;
     public ParticleSystem JumpDust;
@@ -119,13 +118,11 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]
     private float _offSetUnderCeiling;
 
-    [Header("PLATFORM CHECK")]
+    [Header("FORBIDDEN SAVE SPOT AREAS")]
     [SerializeField] 
-    private float _platformRayLength;
+    private float _forbiddenAreaRayLength;
     [SerializeField]
-    private LayerMask _platformLayer;
-    [SerializeField]
-    private Transform _platformCheckTarget;
+    private Transform _forbiddenAreaTarget;
 
     #endregion Collision Checks
 
@@ -134,7 +131,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("SAVE MECHANIC")]
     private Vector3 _saveSpot;
     [SerializeField]
-    private bool _isOnPlatform = false;
+    private bool _forbiddenArea;
 
     #endregion Saving
 
@@ -187,7 +184,7 @@ public class PlayerStateMachine : MonoBehaviour
         FlipSprite();
         GroundCheck();
         WallCheck();
-        PlatformCheck();
+        ForbiddenSaveAreas();
         SpawnTrampoline();
         CornerCorrection();
         HandleSaveSpot();
@@ -342,7 +339,6 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (_isOnWall && Mathf.Abs(_rb.velocity.x) >= 0f && Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Ich WALLJUMP!!!");
             _currentState = MovementState.WallJumping;
             WallSlideDust.Stop();
             ExecuteWallJump();
@@ -424,7 +420,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     private IEnumerator ExecuteDash()
     {
-        Debug.Log("Dash started");
         _isDashing = true;
         _canDash = false;
 
@@ -440,10 +435,7 @@ public class PlayerStateMachine : MonoBehaviour
             dashDirection = _isFacingRight ? Vector2.right : Vector2.left;
         }
 
-        Debug.Log($"Dash direction: {dashDirection}");
         _rb.velocity = dashDirection * (_dashRange / _dashTime);
-        Debug.Log(_rb.velocity);
-
 
         // _trailRenderer.enabled = true;
 
@@ -454,8 +446,6 @@ public class PlayerStateMachine : MonoBehaviour
 
         _isDashing = false;
         //_trailRenderer.enabled = false;
-
-        Debug.Log("Dash ended");
 
         yield return new WaitForSeconds(_dashCooldown);
 
@@ -502,24 +492,30 @@ public class PlayerStateMachine : MonoBehaviour
         {
             Destroy(other.transform.parent.gameObject);
             _impulseSource.GenerateImpulseWithForce(ShakeForceDestroyable);
-            StartCoroutine(FreezeTimeOnCollision());
+            StartCoroutine(FreezeTimeOnCollision(0.05f));
         }
 
         if (other.gameObject.CompareTag("DashResetter"))
         {
-            Destroy(other.gameObject);
+            _airGravityScale = 6f;
+            _rb.gravityScale = _airGravityScale;
 
             _isDashing = false;
             _canDash = true;
+
+            Destroy(other.gameObject);
+            StartCoroutine(FreezeTimeOnCollision(0.2f));
+
+            DashIndicator.SetActive(true);
         }
     }
 
-    private IEnumerator FreezeTimeOnCollision()
+    private IEnumerator FreezeTimeOnCollision(float freezeDuration)
     {
         float gameTime = Time.timeScale;
         Time.timeScale = _freezeTime;
 
-        yield return new WaitForSecondsRealtime(_freezeDuration);
+        yield return new WaitForSecondsRealtime(freezeDuration);
 
         Time.timeScale = gameTime;
     }
@@ -556,7 +552,6 @@ public class PlayerStateMachine : MonoBehaviour
 
         Vector2 currentPosition = _rb.position;
         Vector2 targetPosition = currentPosition + new Vector2(pushDirection * _offSetUnderCeiling, 0);
-        Debug.Log("Ich Corner Correct");
 
         _rb.position = targetPosition;
 
@@ -589,9 +584,17 @@ public class PlayerStateMachine : MonoBehaviour
 
     }
 
-    private void PlatformCheck()
+    // Areas where the player is not allowed to respawn - could be game breaking
+    private void ForbiddenSaveAreas()
     {
-        _isOnPlatform = Physics2D.Raycast(_platformCheckTarget.position, Vector2.down, _platformRayLength, _platformLayer);
+        _forbiddenArea = Physics2D.Raycast(_forbiddenAreaTarget.position, Vector2.down, _forbiddenAreaRayLength, forbiddenLayer);
+
+        if (_forbiddenArea)
+        {
+            Debug.Log("Touching Forbidden Area");
+        }
+
+        Debug.DrawRay(_forbiddenAreaTarget.position, Vector2.down *_forbiddenAreaRayLength, Color.cyan);
     }
 
     private void FlipSprite()
@@ -737,7 +740,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void HandleSaveSpot()
     {
-        if (_rb.velocity.y == 0 && !_isOnPlatform)
+        if (_isGrounded && !_isOnWall && !_forbiddenArea)
         {
             _saveSpot = transform.position - new Vector3(0.5f, 0f, 0f);
         }
