@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4632878532741558693}
   - component: {fileID: 1512735410443706291}
   - component: {fileID: 5810861809610956143}
-  m_Layer: 0
+  - component: {fileID: 5339162378162421533}
+  m_Layer: 12
   m_Name: DashResetter
   m_TagString: DashResetter
   m_Icon: {fileID: 0}
@@ -120,3 +121,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &5339162378162421533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441325330579397600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f340eee7ce2f7e04998261b3fbe5a6cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RespawnTime: 0
