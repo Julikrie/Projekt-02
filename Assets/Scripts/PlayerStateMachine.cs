@@ -20,6 +20,11 @@ public class PlayerStateMachine : MonoBehaviour
     public float CornerCorrectionUp;
     public Vector2 CharacterHead;
 
+    [SerializeField]
+    private float _freezeTime;
+    [SerializeField]
+    private float _freezeDuration;
+
     public float ShakeForce;
     public GameObject DashIndicator;
     public GameObject TrampolinePrefab;
@@ -495,6 +500,8 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.gameObject.CompareTag("Destroyable") && _isDashing)
         {
             Destroy(other.transform.parent.gameObject);
+            _impulseSource.GenerateImpulseWithForce(ShakeForce);
+            StartCoroutine(FreezeTimeOnCollision());
         }
 
         if (other.gameObject.CompareTag("DashResetter"))
@@ -504,6 +511,16 @@ public class PlayerStateMachine : MonoBehaviour
             _isDashing = false;
             _canDash = true;
         }
+    }
+
+    private IEnumerator FreezeTimeOnCollision()
+    {
+        float gameTime = Time.timeScale;
+        Time.timeScale = _freezeTime;
+
+        yield return new WaitForSecondsRealtime(_freezeDuration);
+
+        Time.timeScale = gameTime;
     }
     
     private void CornerCorrection()
