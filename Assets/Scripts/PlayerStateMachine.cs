@@ -131,7 +131,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("SAVE MECHANIC")]
     private Vector3 _saveSpot;
     [SerializeField]
-    private bool _forbiddenArea;
+    private bool _isInForbiddenArea;
 
     #endregion Saving
 
@@ -497,14 +497,11 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.gameObject.CompareTag("DashResetter"))
         {
-            _airGravityScale = 6f;
-            _rb.gravityScale = _airGravityScale;
+            Destroy(other.gameObject);
+            StopCoroutine(ExecuteDash());
 
             _isDashing = false;
             _canDash = true;
-
-            Destroy(other.gameObject);
-            StartCoroutine(FreezeTimeOnCollision(0.2f));
 
             DashIndicator.SetActive(true);
         }
@@ -587,9 +584,9 @@ public class PlayerStateMachine : MonoBehaviour
     // Areas where the player is not allowed to respawn - could be game breaking
     private void ForbiddenSaveAreas()
     {
-        _forbiddenArea = Physics2D.Raycast(_forbiddenAreaTarget.position, Vector2.down, _forbiddenAreaRayLength, forbiddenLayer);
+        _isInForbiddenArea = Physics2D.Raycast(_forbiddenAreaTarget.position, Vector2.down, _forbiddenAreaRayLength, forbiddenLayer);
 
-        if (_forbiddenArea)
+        if (_isInForbiddenArea)
         {
             Debug.Log("Touching Forbidden Area");
         }
@@ -740,7 +737,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void HandleSaveSpot()
     {
-        if (_isGrounded && !_isOnWall && !_forbiddenArea)
+        if (_isGrounded && !_isOnWall && !_isInForbiddenArea)
         {
             _saveSpot = transform.position - new Vector3(0.5f, 0f, 0f);
         }
