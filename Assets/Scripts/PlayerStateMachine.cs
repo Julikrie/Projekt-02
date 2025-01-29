@@ -21,6 +21,9 @@ public class PlayerStateMachine : MonoBehaviour
     public Vector2 CharacterHead;
 
     [SerializeField]
+    private bool _canTrampoline;
+
+    [SerializeField]
     private float _freezeTime;
 
     public float ShakeForce;
@@ -29,7 +32,8 @@ public class PlayerStateMachine : MonoBehaviour
     public GameObject TrampolinePrefab;
     public LayerMask GroundLayer;
     public LayerMask WallLayer;
-    public LayerMask forbiddenLayer;
+    public LayerMask ForbiddenLayer;
+    public LayerMask TrampolineLayer;
     public Transform GroundCheckTarget;
     public Transform WallCheckTarget;
     public ParticleSystem JumpDust;
@@ -302,6 +306,9 @@ public class PlayerStateMachine : MonoBehaviour
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
 
         JumpDust.Play();
+        _canTrampoline = true;
+
+
         _impulseSource.GenerateImpulse(ShakeForce);
 
         if (_isGrounded && _coyoteTimer > 0 && _jumpBufferTimer > 0)
@@ -456,11 +463,13 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void SpawnTrampoline()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !_isGrounded && _canTrampoline)
         {
-            Vector3 spawnPosition = transform.position + new Vector3(0f, -1f, 0f);
+            Vector3 spawnPosition = transform.position + new Vector3(0f, -0.5f, 0f);
 
             GameObject spawnedTrampoline = Instantiate(TrampolinePrefab, spawnPosition, Quaternion.identity);
+
+            _canTrampoline = false;
 
             _jumpCounterLimit = 2;
 
@@ -563,7 +572,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void GroundCheck()
     {
-        _isGrounded = Physics2D.Raycast(GroundCheckTarget.position, Vector2.down, _groundCheckRayLength);
+        _isGrounded = Physics2D.Raycast(GroundCheckTarget.position, Vector2.down, _groundCheckRayLength) 
+            && !Physics2D.Raycast(GroundCheckTarget.position, Vector2.down, _groundCheckRayLength, TrampolineLayer);
 
         Debug.DrawRay(GroundCheckTarget.position, Vector2.down * _groundCheckRayLength, Color.blue);
 
@@ -590,7 +600,7 @@ public class PlayerStateMachine : MonoBehaviour
     // Areas where the player is not allowed to respawn - could be game breaking
     private void ForbiddenSaveAreas()
     {
-        _isInForbiddenArea = Physics2D.Raycast(_forbiddenAreaTarget.position, Vector2.down, _forbiddenAreaRayLength, forbiddenLayer);
+        _isInForbiddenArea = Physics2D.Raycast(_forbiddenAreaTarget.position, Vector2.down, _forbiddenAreaRayLength, ForbiddenLayer);
 
         if (_isInForbiddenArea)
         {
