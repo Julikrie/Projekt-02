@@ -14,7 +14,7 @@ public class RespawnObjects : MonoBehaviour
 
     private void Update()
     {
-        RespawnPlatform();
+        StartCoroutine(RespawnPlatform());
     }
 
     private IEnumerator RespawnPlatform()

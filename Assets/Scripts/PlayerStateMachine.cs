@@ -482,9 +482,10 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (collision.collider.CompareTag("Danger"))
         {
-            StartCoroutine(FreezeTimeOnCollision(0.1f));
-            RespawnParticle.Play();
-            Invoke("TeleportToSaveSpot", 0.11f);
+            // StartCoroutine(FreezeTimeOnCollision(0.1f));
+            // RespawnParticle.Play();
+            // Invoke("TeleportToSaveSpot", 0.11f);
+            TeleportToSaveSpot();
         }
     }
 
@@ -499,7 +500,8 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.gameObject.CompareTag("DashResetter"))
         {
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<Renderer>().enabled = false;
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
             StopCoroutine(ExecuteDash());
 
             _isDashing = false;
