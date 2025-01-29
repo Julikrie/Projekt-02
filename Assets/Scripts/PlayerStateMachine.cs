@@ -462,6 +462,8 @@ public class PlayerStateMachine : MonoBehaviour
 
             GameObject spawnedTrampoline = Instantiate(TrampolinePrefab, spawnPosition, Quaternion.identity);
 
+            _jumpCounterLimit = 2;
+
             Destroy(spawnedTrampoline, 0.5f);
         }
     }
