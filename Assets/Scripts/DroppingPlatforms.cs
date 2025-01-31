@@ -55,7 +55,5 @@ public class DroppingPlatforms : MonoBehaviour
 
         _rb.bodyType = RigidbodyType2D.Kinematic;
         _rb.velocity = Vector3.zero;
-
-        gameObject.SetActive(true);
     }
 }

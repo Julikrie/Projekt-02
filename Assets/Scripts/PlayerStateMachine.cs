@@ -511,13 +511,12 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.gameObject.CompareTag("DashResetter"))
         {
-            other.gameObject.GetComponent<Renderer>().enabled = false;
-            other.gameObject.GetComponent<Collider2D>().enabled = false;
             StopCoroutine(ExecuteDash());
 
             _isDashing = false;
             _canDash = true;
 
+            other.gameObject.SetActive(false);
             DashIndicator.SetActive(true);
         }
     }
@@ -601,11 +600,6 @@ public class PlayerStateMachine : MonoBehaviour
     private void ForbiddenSaveAreas()
     {
         _isInForbiddenArea = Physics2D.Raycast(_forbiddenAreaTarget.position, Vector2.down, _forbiddenAreaRayLength, ForbiddenLayer);
-
-        if (_isInForbiddenArea)
-        {
-            Debug.Log("Touching Forbidden Area");
-        }
 
         Debug.DrawRay(_forbiddenAreaTarget.position, Vector2.down *_forbiddenAreaRayLength, Color.cyan);
     }
