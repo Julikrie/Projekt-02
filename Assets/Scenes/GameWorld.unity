@@ -69259,7 +69259,6 @@ GameObject:
   - component: {fileID: 1632555940}
   - component: {fileID: 1632555939}
   - component: {fileID: 1632555938}
-  - component: {fileID: 1632555941}
   m_Layer: 8
   m_Name: DestroyableWall 01
   m_TagString: Destroyable
@@ -69380,20 +69379,6 @@ Transform:
   - {fileID: 287254186}
   m_Father: {fileID: 932023970}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1632555941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632555937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f340eee7ce2f7e04998261b3fbe5a6cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RespawnTime: 1
-  _originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1645200995
 GameObject:
   m_ObjectHideFlags: 0
@@ -75325,7 +75310,6 @@ GameObject:
   - component: {fileID: 1778904582}
   - component: {fileID: 1778904581}
   - component: {fileID: 1778904580}
-  - component: {fileID: 1778904583}
   m_Layer: 8
   m_Name: DestroyableWall 02
   m_TagString: Destroyable
@@ -75446,20 +75430,6 @@ Transform:
   - {fileID: 1861524568}
   m_Father: {fileID: 932023970}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1778904583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778904579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f340eee7ce2f7e04998261b3fbe5a6cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RespawnTime: 2
-  _originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1818886438 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7299671409122805104, guid: 10af422ddd2868f44ba19ab47be08fc9, type: 3}

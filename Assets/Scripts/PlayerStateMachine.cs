@@ -516,7 +516,6 @@ public class PlayerStateMachine : MonoBehaviour
             _isDashing = false;
             _canDash = true;
 
-            other.gameObject.SetActive(false);
             DashIndicator.SetActive(true);
         }
     }
@@ -749,7 +748,14 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (_isGrounded && !_isOnWall && !_isInForbiddenArea)
         {
-            _saveSpot = transform.position - new Vector3(0.5f, 0f, 0f);
+            if (_isFacingRight)
+            {
+                _saveSpot = transform.position - new Vector3(0.5f, 0f, 0f);
+            }
+            else
+            {
+                _saveSpot = transform.position + new Vector3(0.5f, 0f, 0f);
+            }
         }
     }
 
