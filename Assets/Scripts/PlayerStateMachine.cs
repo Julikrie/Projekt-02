@@ -716,7 +716,7 @@ public class PlayerStateMachine : MonoBehaviour
                 {
                     Physics2D.IgnoreCollision(playerCollider, swingCollider, true);
 
-                    StartCoroutine(ReenableCollision(playerCollider, swingCollider, 0.5f));
+                    StartCoroutine(ReenableCollision(playerCollider, swingCollider, 1.2f));
                 }
             }
 
