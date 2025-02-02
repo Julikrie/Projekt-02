@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class RoomSwitcher : MonoBehaviour
+public class RoomChanger : MonoBehaviour
 {
     public GameObject CameraTarget;
     public GameObject Player;
