@@ -265,6 +265,11 @@ public class PlayerStateMachine : MonoBehaviour
             StartCoroutine(ExecuteDash());
             _currentState = MovementState.Dashing;
         }
+
+        if (_isOnWall && _rb.velocity.y < 0)
+        {
+            _currentState = MovementState.WallSliding;
+        }
     }
 
     private void HandleJump()
@@ -547,13 +552,15 @@ public class PlayerStateMachine : MonoBehaviour
         Debug.DrawRay(characterTop + new Vector2(-CornerCorrectionSide, 0f), Vector2.left * _cornerCheckRayLength, Color.blue);
         Debug.DrawRay(characterTop + new Vector2(-CornerCorrectionUp, 0f), Vector2.up * _cornerCheckRayLength, Color.blue);
 
-        if (isLeftCorner && !isRightCorner && !_isOnWall && !_isGrounded && _currentState != MovementState.WallSliding)
+        if (isLeftCorner && !isRightCorner && !_isOnWall && !_isGrounded && _currentState != MovementState.WallSliding && _rb.velocity.y < 0)
         {
             RedirectAroundCorner();
+            Debug.Log("Corner Correction left");
         }
-        else if (isRightCorner && !isLeftCorner && !_isOnWall && !_isGrounded && _currentState != MovementState.WallSliding)
+        else if (isRightCorner && !isLeftCorner && !_isOnWall && !_isGrounded && _currentState != MovementState.WallSliding && _rb.velocity.y < 0)
         {
             RedirectAroundCorner();
+            Debug.Log("Corner Correction right");
         }
     }
     private void RedirectAroundCorner()
