@@ -41108,9 +41108,6 @@ MonoBehaviour:
   CornerCorrectionSide: 0.5
   CornerCorrectionUp: 0.6
   CharacterHead: {x: 0.12, y: 2}
-  explosionForce: 5
-  explosionRadius: 3
-  torqueForce: 5
   _canTrampoline: 0
   _freezeTime: 0
   ShakeForce: 0.05

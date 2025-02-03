@@ -20,10 +20,6 @@ public class PlayerStateMachine : MonoBehaviour
     public float CornerCorrectionUp;
     public Vector2 CharacterHead;
 
-    public float explosionForce = 5f;
-    public float explosionRadius = 3f;
-    public float torqueForce = 5f;
-
     [SerializeField]
     private bool _canTrampoline;
 
@@ -183,7 +179,6 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _movementX = Input.GetAxis("Horizontal");
         _movementY = Input.GetAxis("Vertical");
-
 
         if (_swingAttachCooldown > 0f)
         {
