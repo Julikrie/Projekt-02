@@ -445,6 +445,8 @@ public class PlayerStateMachine : MonoBehaviour
 
         _rb.velocity = dashDirection * (_dashRange / _dashTime);
 
+        EventManager.Instance.SlowTime(0.03f);
+
         // _trailRenderer.enabled = true;
 
         yield return new WaitForSeconds(_dashTime);
