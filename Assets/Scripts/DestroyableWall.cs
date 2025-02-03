@@ -33,7 +33,6 @@ public class DestroyableWall : MonoBehaviour
             BreakWall();
             _impulseSource.GenerateImpulse(ShakeIntensity);
             EventManager.Instance.SlowTime(0.02f);
-
             _boxCollider.enabled = false;
         }
     }

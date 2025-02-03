@@ -5609,6 +5609,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DestroyableWall
       objectReference: {fileID: 0}
+    - target: {fileID: 7111634477514926916, guid: 36da55322629c8b4287cba904049b782, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111634477514926916, guid: 36da55322629c8b4287cba904049b782, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8619975386378890356, guid: 36da55322629c8b4287cba904049b782, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.06
@@ -34147,6 +34155,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8943254776161605116, guid: 36da55322629c8b4287cba904049b782, type: 3}
+      propertyPath: ParticleSystem
+      value: 
+      objectReference: {fileID: 1703627136}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43341,6 +43353,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!198 &1703627136 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7111634477514926916, guid: 36da55322629c8b4287cba904049b782, type: 3}
+  m_PrefabInstance: {fileID: 267841949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1704513572
 PrefabInstance:
   m_ObjectHideFlags: 0
