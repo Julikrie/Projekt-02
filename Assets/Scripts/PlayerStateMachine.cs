@@ -24,10 +24,7 @@ public class PlayerStateMachine : MonoBehaviour
     private bool _canTrampoline;
 
     [SerializeField]
-    private float _freezeTime;
-
-    public float ShakeForce;
-    public float ShakeForceDestroyable;
+    public float ShakeIntensityJump;
     public GameObject DashIndicator;
     public GameObject TrampolinePrefab;
     public LayerMask GroundLayer;
@@ -312,8 +309,7 @@ public class PlayerStateMachine : MonoBehaviour
         JumpDust.Play();
         _canTrampoline = true;
 
-
-        _impulseSource.GenerateImpulse(ShakeForce);
+        _impulseSource.GenerateImpulse(ShakeIntensityJump);
 
         if (_isGrounded && _coyoteTimer > 0 && _jumpBufferTimer > 0)
         {
@@ -396,7 +392,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             transform.position += new Vector3(direction * 0.2f, 0f, 0f);
 
-            _impulseSource.GenerateImpulseWithForce(ShakeForce);
+            _impulseSource.GenerateImpulse(ShakeIntensityJump);
 
             JumpDust.Play();
 

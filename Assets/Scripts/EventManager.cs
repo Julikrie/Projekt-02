@@ -6,9 +6,8 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     public static EventManager Instance { get; private set; }
-
+    
     private float _freezeTime;
-    private CinemachineImpulseSource _impulseSource;
 
     void Awake()
     {
@@ -21,10 +20,6 @@ public class EventManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void Start()
-    {
-        _impulseSource = GetComponent<CinemachineImpulseSource>();
-    }
 
     public IEnumerator GameTimeChanger (float duration)
     {
@@ -34,10 +29,5 @@ public class EventManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(duration);
 
         Time.timeScale = gameTime;
-    }
-
-    public void CameraShake(float shakeIntensity)
-    {
-        _impulseSource.GenerateImpulseWithForce(shakeIntensity);
     }
 }

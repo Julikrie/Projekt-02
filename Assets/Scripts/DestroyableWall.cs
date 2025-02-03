@@ -19,7 +19,6 @@ public class DestroyableWall : MonoBehaviour
         _collider = GetComponentsInChildren<PolygonCollider2D>();
         _playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         _playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
