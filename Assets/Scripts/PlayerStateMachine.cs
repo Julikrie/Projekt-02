@@ -184,6 +184,7 @@ public class PlayerStateMachine : MonoBehaviour
         _movementX = Input.GetAxis("Horizontal");
         _movementY = Input.GetAxis("Vertical");
 
+
         if (_swingAttachCooldown > 0f)
         {
             _swingAttachCooldown -= Time.deltaTime;
@@ -781,10 +782,9 @@ public class PlayerStateMachine : MonoBehaviour
     private void HandleAnimation()
     {
         _animator.SetBool("isIdling", _currentState == MovementState.Idling);
-        _animator.SetBool("isRunning", _currentState == MovementState.Moving);
+        _animator.SetBool("isMoving", _currentState == MovementState.Moving);
         _animator.SetBool("isJumping", _currentState == MovementState.Jumping);
         _animator.SetBool("isWallSliding", _currentState == MovementState.WallSliding);
-        _animator.SetBool("isWallJumping", _currentState == MovementState.WallJumping);
     }
 }
 

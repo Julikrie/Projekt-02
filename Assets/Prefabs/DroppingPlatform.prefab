@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlatformCrumble: {fileID: 7331541294023607048}
-  ShakeForce: 1.5
+  ShakeForce: 0.5
   DropDelay: 1
   RespawnTime: 4
 --- !u!114 &5969672456291110795
@@ -230,7 +230,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!251 &6758356523155457423
 PlatformEffector2D:
   m_ObjectHideFlags: 0
