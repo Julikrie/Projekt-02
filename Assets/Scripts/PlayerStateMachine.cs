@@ -20,6 +20,10 @@ public class PlayerStateMachine : MonoBehaviour
     public float CornerCorrectionUp;
     public Vector2 CharacterHead;
 
+    public float explosionForce = 5f;
+    public float explosionRadius = 3f;
+    public float torqueForce = 5f;
+
     [SerializeField]
     private bool _canTrampoline;
 
@@ -79,14 +83,13 @@ public class PlayerStateMachine : MonoBehaviour
     private float _slideSpeed;
 
     [Header("DASH")]
+    public bool _isDashing;
     [SerializeField]
     private float _dashTime;
     [SerializeField]
     private float _dashCooldown;
     [SerializeField]
     private float _dashRange;
-    [SerializeField]
-    private bool _isDashing;
     [SerializeField]
     private bool _canDash;
 
@@ -507,12 +510,14 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        /*
         if (other.gameObject.CompareTag("Destroyable") && _isDashing)
         {
             Destroy(other.transform.parent.gameObject);
             _impulseSource.GenerateImpulseWithForce(ShakeForceDestroyable);
             StartCoroutine(FreezeTimeOnCollision(0.05f));
         }
+
 
         if (other.gameObject.CompareTag("DashResetter"))
         {
@@ -523,7 +528,9 @@ public class PlayerStateMachine : MonoBehaviour
 
             DashIndicator.SetActive(true);
         }
+           */
     }
+
 
     private IEnumerator FreezeTimeOnCollision(float freezeDuration)
     {

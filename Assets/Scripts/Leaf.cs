@@ -19,6 +19,7 @@ public class Leaf : MonoBehaviour
         {
             Player = GameObject.FindGameObjectWithTag("Player");
         }
+
         _playerStateMachine = Player.GetComponent<PlayerStateMachine>();
         _playerRigidbody = Player.GetComponent<Rigidbody2D>();
     }

@@ -24,9 +24,9 @@ TagManager:
   - Thorn
   - DashResetter
   - Trampoline
-  - 
+  - Player
   - PostProcessing
-  - 
+  - NotColliding
   - 
   - 
   - 
