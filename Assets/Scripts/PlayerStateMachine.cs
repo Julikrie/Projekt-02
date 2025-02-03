@@ -784,6 +784,7 @@ public class PlayerStateMachine : MonoBehaviour
         _animator.SetBool("isRunning", _currentState == MovementState.Moving);
         _animator.SetBool("isJumping", _currentState == MovementState.Jumping);
         _animator.SetBool("isWallSliding", _currentState == MovementState.WallSliding);
+        _animator.SetBool("isWallJumping", _currentState == MovementState.WallJumping);
     }
 }
 
