@@ -526,16 +526,6 @@ public class PlayerStateMachine : MonoBehaviour
         }
  
     }
-
-    private IEnumerator FreezeTimeOnCollision(float freezeDuration)
-    {
-        float gameTime = Time.timeScale;
-        Time.timeScale = _freezeTime;
-
-        yield return new WaitForSecondsRealtime(freezeDuration);
-
-        Time.timeScale = gameTime;
-    }
     
     private void CornerCorrection()
     {
