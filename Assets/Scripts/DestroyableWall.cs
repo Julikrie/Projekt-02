@@ -5,7 +5,6 @@ using UnityEngine;
 public class DestroyableWall : MonoBehaviour
 {
     public float CollisionForce;
-    public float DestroyTimer;
     public float IgnoreCollisionDuration = 2f;
 
     private Rigidbody2D[] _rb;
@@ -38,9 +37,6 @@ public class DestroyableWall : MonoBehaviour
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
             rigidbody.AddForce(Vector2.right * CollisionForce, ForceMode2D.Impulse);
         }
-
-        //StartCoroutine(IgnorePlayerCollisionTemporarily());
-        //Destroy(gameObject, DestroyTimer);
 
         foreach (PolygonCollider2D collider in _collider)
         {
