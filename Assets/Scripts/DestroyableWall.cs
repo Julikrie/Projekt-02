@@ -10,15 +10,17 @@ public class DestroyableWall : MonoBehaviour
     public float ShakeIntensity;
 
     private Rigidbody2D[] _rb;
-    private PolygonCollider2D[] _collider;
-    private PlayerStateMachine _playerStateMachine;
+    private PolygonCollider2D[] _polygonCollider;
+    private BoxCollider2D _boxCollider;
     private Collider2D _playerCollider;
+    private PlayerStateMachine _playerStateMachine;
     private CinemachineImpulseSource _impulseSource;
 
     private void Start()
     {
         _rb = GetComponentsInChildren<Rigidbody2D>();
-        _collider = GetComponentsInChildren<PolygonCollider2D>();
+        _polygonCollider = GetComponentsInChildren<PolygonCollider2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
         _playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         _playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
@@ -30,6 +32,9 @@ public class DestroyableWall : MonoBehaviour
         {
             BreakWall();
             _impulseSource.GenerateImpulse(ShakeIntensity);
+            EventManager.Instance.SlowTime(0.02f);
+
+            _boxCollider.enabled = false;
         }
     }
 
@@ -41,13 +46,11 @@ public class DestroyableWall : MonoBehaviour
             rigidbody.AddForce(Vector2.right * CollisionForce, ForceMode2D.Impulse);
         }
 
-        foreach (PolygonCollider2D collider in _collider)
+        foreach (PolygonCollider2D collider in _polygonCollider)
         {
             Physics2D.IgnoreCollision(_playerCollider, collider, true);
         }
-
     }
-
-
 }
+
 
