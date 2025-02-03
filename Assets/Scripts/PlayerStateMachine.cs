@@ -517,7 +517,7 @@ public class PlayerStateMachine : MonoBehaviour
             _impulseSource.GenerateImpulseWithForce(ShakeForceDestroyable);
             StartCoroutine(FreezeTimeOnCollision(0.05f));
         }
-
+                  */
 
         if (other.gameObject.CompareTag("DashResetter"))
         {
@@ -528,9 +528,8 @@ public class PlayerStateMachine : MonoBehaviour
 
             DashIndicator.SetActive(true);
         }
-           */
+ 
     }
-
 
     private IEnumerator FreezeTimeOnCollision(float freezeDuration)
     {
