@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,13 @@ public class DestroyableWall : MonoBehaviour
 {
     public float CollisionForce;
     public float IgnoreCollisionDuration = 2f;
+    public float ShakeIntensity;
 
     private Rigidbody2D[] _rb;
     private PolygonCollider2D[] _collider;
     private PlayerStateMachine _playerStateMachine;
     private Collider2D _playerCollider;
-
+    private CinemachineImpulseSource _impulseSource;
 
     private void Start()
     {
@@ -19,6 +21,7 @@ public class DestroyableWall : MonoBehaviour
         _collider = GetComponentsInChildren<PolygonCollider2D>();
         _playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         _playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -26,6 +29,7 @@ public class DestroyableWall : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && _playerStateMachine._isDashing)
         {
             BreakWall();
+            _impulseSource.GenerateImpulse(ShakeIntensity);
         }
     }
 
