@@ -7,8 +7,6 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager Instance { get; private set; }
     
-    private float _freezeTime;
-
     void Awake()
     {
         if (Instance == null)
@@ -23,8 +21,9 @@ public class EventManager : MonoBehaviour
 
     private IEnumerator SlowTimeCoroutine (float duration)
     {
+        
         float gameTime = Time.timeScale;
-        Time.timeScale = _freezeTime;
+        Time.timeScale = 0;
 
         yield return new WaitForSecondsRealtime(duration);
 

@@ -531,9 +531,9 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Danger"))
         {
-            EventManager.Instance.SlowTime(0.3f);
-            StartCoroutine(DissolvePlayer(0.31f));
-            Invoke("TeleportToSaveSpot", 0.31f);
+            EventManager.Instance.SlowTime(0.1f);
+            StartCoroutine(DissolvePlayer(0.11f));
+            Invoke("TeleportToSaveSpot", 0.11f);
             RespawnParticle.Play();
         }
     }
