@@ -9,6 +9,8 @@ TagManager:
   - Trampoline
   - SwingObject
   - Danger
+  - DashItem
+  - SwingItem
   layers:
   - Default
   - TransparentFX
