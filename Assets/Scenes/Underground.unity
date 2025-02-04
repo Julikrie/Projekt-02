@@ -40727,6 +40727,11 @@ MonoBehaviour:
   CornerCorrectionUp: 0.6
   CharacterHead: {x: 0.12, y: 2}
   DashTrail: {fileID: 2138639629}
+  GrassFootsteps:
+  - {fileID: 8300000, guid: 527888b794e386141843eebb1cc64720, type: 3}
+  - {fileID: 8300000, guid: 3a535945923134144ae4b2d68d43b432, type: 3}
+  - {fileID: 8300000, guid: 0e255dd1bd857d94489a33bb9a25f487, type: 3}
+  - {fileID: 8300000, guid: 49529e5ac3dc55944829f7a8b0b3b666, type: 3}
   CollectSound: {fileID: 8300000, guid: 01e53cf5e883d2e4a9b7a752210b7f10, type: 3}
   JumpSound: {fileID: 8300000, guid: d987d4df78834f44e99ec3ed31fe51ae, type: 3}
   _canTrampoline: 0
@@ -43403,7 +43408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5756205902852620131, guid: 073fd197598596f43968647632512224, type: 3}
       propertyPath: m_Volume
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5756205902852620131, guid: 073fd197598596f43968647632512224, type: 3}
       propertyPath: m_Enabled
