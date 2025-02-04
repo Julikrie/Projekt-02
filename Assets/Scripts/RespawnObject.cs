@@ -11,7 +11,7 @@ public class RespawnObject : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.RespawnObject(gameObject, RespawnTime);
+            RespawnManager.Instance.RespawnObject(gameObject, RespawnTime);
         }
     }
 }

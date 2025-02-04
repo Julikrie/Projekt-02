@@ -40,7 +40,7 @@ public class BouncyLeaves : MonoBehaviour
             _playerRigidbody.AddForce(Vector2.up * ForcePower, ForceMode2D.Impulse);
 
             _playerStateMachine.JumpDust.Play();
-            _audioSource.PlayOneShot(BounceSound, 0.3f);
+            _audioSource.PlayOneShot(BounceSound, 0.5f);
         }
     }
 }
