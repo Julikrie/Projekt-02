@@ -40959,7 +40959,14 @@ MonoBehaviour:
   CornerCorrectionUp: 0.6
   CharacterHead: {x: 0.12, y: 2}
   DashTrail: {fileID: 2138639629}
-  GrassFootstepSound: []
+  FootStepSound:
+  - {fileID: 8300000, guid: dce8358b1a631d94d8077861cfbd6234, type: 3}
+  - {fileID: 8300000, guid: 03bea4422c196ce4daf6e142a6cbcd09, type: 3}
+  - {fileID: 8300000, guid: 03f1e55a8e4bc04458532ca9977b4da0, type: 3}
+  - {fileID: 8300000, guid: a43eb825dbff18e45ade667827e8425a, type: 3}
+  - {fileID: 8300000, guid: e1e09a2389f6a724383b7e3c996c870e, type: 3}
+  - {fileID: 8300000, guid: b7dbe03e07ee0b448884f56d81ef85d1, type: 3}
+  - {fileID: 8300000, guid: d62e5e13b58829348b4aa2951d3edeac, type: 3}
   CollectSound: {fileID: 8300000, guid: 01e53cf5e883d2e4a9b7a752210b7f10, type: 3}
   JumpSound: {fileID: 8300000, guid: d987d4df78834f44e99ec3ed31fe51ae, type: 3}
   DashSound: {fileID: 8300000, guid: 12c1b3a4d7d63844e9722127c5e65db9, type: 3}
@@ -42488,7 +42495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632878532741558693, guid: 1c3583b6d6644ff4ab80baf38593ab4c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.01
+      value: 8.13
       objectReference: {fileID: 0}
     - target: {fileID: 4632878532741558693, guid: 1c3583b6d6644ff4ab80baf38593ab4c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -43742,7 +43749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5756205902852620131, guid: 073fd197598596f43968647632512224, type: 3}
       propertyPath: m_Volume
-      value: 0.1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5756205902852620131, guid: 073fd197598596f43968647632512224, type: 3}
       propertyPath: m_Enabled

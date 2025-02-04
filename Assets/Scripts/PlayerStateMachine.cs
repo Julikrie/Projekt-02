@@ -22,7 +22,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public TrailRenderer DashTrail;
 
-    public AudioClip[] GrassFootstepSound;
+    public AudioClip[] FootStepSound;      
     public AudioClip CollectSound;
     public AudioClip JumpSound;
     public AudioClip DashSound;
@@ -451,6 +451,7 @@ public class PlayerStateMachine : MonoBehaviour
         _canDash = false;
 
         _audioSource.PlayOneShot(DashSound, 0.5f);
+
         DashIndicator.SetActive(false);
         DashTrail.emitting = true;
 
@@ -527,7 +528,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("DashResetter"))
         {
-            _audioSource.PlayOneShot(CollectSound, 0.5f);
+            _audioSource.PlayOneShot(CollectSound, 0.35f);
 
             StopCoroutine(ExecuteDash());
 
@@ -784,10 +785,10 @@ public class PlayerStateMachine : MonoBehaviour
     // Used in the Animation Running as Event
     private void PlayFootsteps()
     {
-        if (GrassFootstepSound.Length > 0)
+        if (FootStepSound.Length > 0)
         {
-            int footstepIndex = Random.Range(0, GrassFootstepSound.Length);
-            _audioSource.PlayOneShot(GrassFootstepSound[footstepIndex], 0.25f);
+            int footstepIndex = Random.Range(0, FootStepSound.Length);
+            _audioSource.PlayOneShot(FootStepSound[footstepIndex], 0.3f);
         }
     }
 
