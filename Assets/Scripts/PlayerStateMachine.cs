@@ -20,6 +20,8 @@ public class PlayerStateMachine : MonoBehaviour
     public float CornerCorrectionUp;
     public Vector2 CharacterHead;
 
+    public TrailRenderer DashTrail;
+
     [SerializeField]
     private bool _canTrampoline;
 
@@ -147,8 +149,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     [Header("COMPONENTS")]
     private Rigidbody2D _rb;
-    private SpriteRenderer _spriteRenderer;
-    private TrailRenderer _trailRenderer;
     private HingeJoint2D _hingeJoint;
     private Animator _animator;
 
@@ -157,9 +157,7 @@ public class PlayerStateMachine : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        _trailRenderer = GetComponent<TrailRenderer>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
         _currentState = MovementState.Idling;
 
@@ -432,6 +430,7 @@ public class PlayerStateMachine : MonoBehaviour
         _canDash = false;
 
         DashIndicator.SetActive(false);
+        DashTrail.emitting = true;
 
         float originalGravity = _rb.gravityScale;
         _rb.gravityScale = 0f;
@@ -447,15 +446,14 @@ public class PlayerStateMachine : MonoBehaviour
 
         EventManager.Instance.SlowTime(0.03f);
 
-        // _trailRenderer.enabled = true;
-
         yield return new WaitForSeconds(_dashTime);
 
         //_rb.velocity = Vector2.zero;
         _rb.gravityScale = originalGravity;
 
         _isDashing = false;
-        //_trailRenderer.enabled = false;
+
+        DashTrail.emitting = false;
 
         yield return new WaitForSeconds(_dashCooldown);
 
@@ -619,6 +617,7 @@ public class PlayerStateMachine : MonoBehaviour
         Vector3 flipScale = transform.localScale;
         flipScale.x *= -1;
         transform.localScale = flipScale;
+        JumpDust.Play();
     }
 
     private void HandleSwing()
