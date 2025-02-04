@@ -25,6 +25,7 @@ public class PlayerStateMachine : MonoBehaviour
     public AudioClip[] GrassFootstepSound;
     public AudioClip CollectSound;
     public AudioClip JumpSound;
+    public AudioClip DashSound;
     private AudioSource _audioSource;
 
     [SerializeField]
@@ -449,6 +450,7 @@ public class PlayerStateMachine : MonoBehaviour
         _isDashing = true;
         _canDash = false;
 
+        _audioSource.PlayOneShot(DashSound, 0.5f);
         DashIndicator.SetActive(false);
         DashTrail.emitting = true;
 

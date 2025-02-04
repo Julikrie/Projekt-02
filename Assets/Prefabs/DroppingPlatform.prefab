@@ -104,10 +104,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlatformCrumble: {fileID: 7331541294023607048}
-  ShakeForce: 0.4
+  ShakeForce: 0.6
   DropDelay: 0.4
   RespawnTime: 3
-  RumbleSound: {fileID: 8300000, guid: 750f5bc66683dd940bbdd9c32cbb4daa, type: 3}
+  RumbleSound: {fileID: 8300000, guid: 4dfdb1020a4b0c44bb09bd701ef7b154, type: 3}
   RumbleSoundLength: 1
 --- !u!114 &5969672456291110795
 MonoBehaviour:

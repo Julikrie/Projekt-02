@@ -32224,6 +32224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroppingPlatform 03
       objectReference: {fileID: 0}
+    - target: {fileID: 7659435933565403960, guid: 10af422ddd2868f44ba19ab47be08fc9, type: 3}
+      propertyPath: DropDelay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32500,14 +32504,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroppingPlatform 01
       objectReference: {fileID: 0}
-    - target: {fileID: 7659435933565403960, guid: 10af422ddd2868f44ba19ab47be08fc9, type: 3}
-      propertyPath: RumbleSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 25f42ed6d560f9442bad408865ad7bba, type: 3}
-    - target: {fileID: 7659435933565403960, guid: 10af422ddd2868f44ba19ab47be08fc9, type: 3}
-      propertyPath: RumbleSoundLength
-      value: 0.7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32692,7 +32688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7659435933565403960, guid: 10af422ddd2868f44ba19ab47be08fc9, type: 3}
       propertyPath: ShakeForce
-      value: 0.4
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7659435933565403960, guid: 10af422ddd2868f44ba19ab47be08fc9, type: 3}
       propertyPath: RespawnTime
@@ -32701,10 +32697,10 @@ PrefabInstance:
     - target: {fileID: 7659435933565403960, guid: 10af422ddd2868f44ba19ab47be08fc9, type: 3}
       propertyPath: RumbleSound
       value: 
-      objectReference: {fileID: 8300000, guid: 750f5bc66683dd940bbdd9c32cbb4daa, type: 3}
+      objectReference: {fileID: 8300000, guid: 4dfdb1020a4b0c44bb09bd701ef7b154, type: 3}
     - target: {fileID: 7659435933565403960, guid: 10af422ddd2868f44ba19ab47be08fc9, type: 3}
       propertyPath: RumbleSoundLength
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -40966,6 +40962,7 @@ MonoBehaviour:
   GrassFootstepSound: []
   CollectSound: {fileID: 8300000, guid: 01e53cf5e883d2e4a9b7a752210b7f10, type: 3}
   JumpSound: {fileID: 8300000, guid: d987d4df78834f44e99ec3ed31fe51ae, type: 3}
+  DashSound: {fileID: 8300000, guid: 12c1b3a4d7d63844e9722127c5e65db9, type: 3}
   _canTrampoline: 0
   ShakeIntensity: 0.03
   DashIndicator: {fileID: 530047950}
@@ -43584,6 +43581,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroppingPlatform 02
       objectReference: {fileID: 0}
+    - target: {fileID: 7659435933565403960, guid: 10af422ddd2868f44ba19ab47be08fc9, type: 3}
+      propertyPath: DropDelay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43701,11 +43702,11 @@ PrefabInstance:
       objectReference: {fileID: 1743420043}
     - target: {fileID: 3875656022011912342, guid: 073fd197598596f43968647632512224, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 4.2
       objectReference: {fileID: 0}
     - target: {fileID: 3875656022011912342, guid: 073fd197598596f43968647632512224, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.2
+      value: 3.9
       objectReference: {fileID: 0}
     - target: {fileID: 3875656022011912342, guid: 073fd197598596f43968647632512224, type: 3}
       propertyPath: m_LocalPosition.z
@@ -43755,6 +43756,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7668857147714601752, guid: 073fd197598596f43968647632512224, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43785,7 +43790,7 @@ Transform:
   m_GameObject: {fileID: 1743420042}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 4.2, z: 3.5}
+  m_LocalPosition: {x: 4.2, y: 3.9, z: 3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
