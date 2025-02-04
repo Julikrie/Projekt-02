@@ -548,6 +548,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.gameObject.CompareTag("DashItem"))
         {
+            _audioSource.PlayOneShot(CollectSound, 0.35f);
             _unlockedDashing = true;
             Destroy(other.gameObject);
         }
@@ -801,7 +802,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (FootStepSound.Length > 0)
         {
             int footstepIndex = Random.Range(0, FootStepSound.Length);
-            _audioSource.PlayOneShot(FootStepSound[footstepIndex], 0.3f);
+            _audioSource.PlayOneShot(FootStepSound[footstepIndex], 0.15f);
         }
     }
 
