@@ -249,7 +249,6 @@ public class PlayerStateMachine : MonoBehaviour
     private void HandleMove()
     {
         _rb.velocity = new Vector2(_movementX * _speed, _rb.velocity.y);
-        PlayFootsteps();
 
         if (Mathf.Abs(_movementX) < 0.1f)
         {
@@ -780,12 +779,12 @@ public class PlayerStateMachine : MonoBehaviour
         _rb.velocity = Vector2.zero;
     }
 
-    private void PlayFootsteps()
+    public void PlayFootsteps()
     {
         if (GrassFootsteps.Length > 0)
         {
             int footstepIndex = Random.Range(0, GrassFootsteps.Length);
-            _audioSource.PlayOneShot(GrassFootsteps[footstepIndex], 1f);
+            _audioSource.PlayOneShot(GrassFootsteps[footstepIndex], 0.7f);
         }
     }
 
