@@ -22,7 +22,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public TrailRenderer DashTrail;
 
-    public AudioClip[] GrassFootsteps;
+    public AudioClip[] GrassFootstepSound;
     public AudioClip CollectSound;
     public AudioClip JumpSound;
     private AudioSource _audioSource;
@@ -779,12 +779,12 @@ public class PlayerStateMachine : MonoBehaviour
         _rb.velocity = Vector2.zero;
     }
 
-    public void PlayFootsteps()
+    private void PlayFootsteps()
     {
-        if (GrassFootsteps.Length > 0)
+        if (GrassFootstepSound.Length > 0)
         {
-            int footstepIndex = Random.Range(0, GrassFootsteps.Length);
-            _audioSource.PlayOneShot(GrassFootsteps[footstepIndex], 0.7f);
+            int footstepIndex = Random.Range(0, GrassFootstepSound.Length);
+            _audioSource.PlayOneShot(GrassFootstepSound[footstepIndex], 0.2f);
         }
     }
 

@@ -8,12 +8,14 @@ public class DestroyableWall : MonoBehaviour
     public float CollisionForce;
     public float IgnoreCollisionDuration = 2f;
     public float ShakeIntensity;
+    public AudioClip DestroyWallSound;
 
     private Rigidbody2D[] _rb;
     private PolygonCollider2D[] _polygonCollider;
     private BoxCollider2D _boxCollider;
     private Collider2D _playerCollider;
     private PlayerStateMachine _playerStateMachine;
+    private AudioSource _audioSource;
     private CinemachineImpulseSource _impulseSource;
 
     private void Start()
@@ -23,6 +25,7 @@ public class DestroyableWall : MonoBehaviour
         _boxCollider = GetComponent<BoxCollider2D>();
         _playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         _playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+        _audioSource = GetComponent<AudioSource>(); 
         _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
@@ -31,6 +34,7 @@ public class DestroyableWall : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && _playerStateMachine._isDashing)
         {
             BreakWall();
+            _audioSource.PlayOneShot(DestroyWallSound, 1f);
             _impulseSource.GenerateImpulse(ShakeIntensity);
             EventManager.Instance.SlowTime(0.02f);
             _boxCollider.enabled = false;
