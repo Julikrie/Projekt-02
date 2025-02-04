@@ -27,6 +27,11 @@ public class PlayerStateMachine : MonoBehaviour
     public AudioClip JumpSound;
     public AudioClip DashSound;
     private AudioSource _audioSource;
+    
+    [SerializeField]
+    private bool _unlockedDashing = false;
+    [SerializeField]
+    private bool _unlockedSwinging = false;
 
     [SerializeField]
     private bool _canTrampoline;
@@ -240,7 +245,7 @@ public class PlayerStateMachine : MonoBehaviour
             ExecuteJump();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash && _unlockedDashing)
         {
             StartCoroutine(ExecuteDash());
             _currentState = MovementState.Dashing;
@@ -262,7 +267,7 @@ public class PlayerStateMachine : MonoBehaviour
             ExecuteJump();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash && _unlockedDashing)
         {
             StartCoroutine(ExecuteDash());
             _currentState = MovementState.Dashing;
@@ -303,7 +308,7 @@ public class PlayerStateMachine : MonoBehaviour
             _currentState = MovementState.WallSliding;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash && _unlockedDashing)
         {
             StartCoroutine(ExecuteDash());
             _currentState = MovementState.Dashing;
@@ -365,7 +370,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash && _unlockedDashing)
         {
             StartCoroutine(ExecuteDash());
             _currentState = MovementState.Dashing;
@@ -447,42 +452,45 @@ public class PlayerStateMachine : MonoBehaviour
 
     private IEnumerator ExecuteDash()
     {
-        _isDashing = true;
-        _canDash = false;
-
-        _audioSource.PlayOneShot(DashSound, 0.5f);
-
-        DashIndicator.SetActive(false);
-        DashTrail.emitting = true;
-
-        float originalGravity = _rb.gravityScale;
-        _rb.gravityScale = 0f;
-
-        Vector2 dashDirection = Vector2.zero;
-
-        if (dashDirection == Vector2.zero)
+        if (_unlockedDashing)
         {
-            dashDirection = _isFacingRight ? Vector2.right : Vector2.left;
+            _isDashing = true;
+            _canDash = false;
+
+            _audioSource.PlayOneShot(DashSound, 0.5f);
+
+            DashIndicator.SetActive(false);
+            DashTrail.emitting = true;
+
+            float originalGravity = _rb.gravityScale;
+            _rb.gravityScale = 0f;
+
+            Vector2 dashDirection = Vector2.zero;
+
+            if (dashDirection == Vector2.zero)
+            {
+                dashDirection = _isFacingRight ? Vector2.right : Vector2.left;
+            }
+
+            _rb.velocity = dashDirection * (_dashRange / _dashTime);
+
+            EventManager.Instance.SlowTime(0.02f);
+
+            yield return new WaitForSeconds(_dashTime);
+
+            //_rb.velocity = Vector2.zero;
+
+            _rb.gravityScale = originalGravity;
+
+            _isDashing = false;
+
+            DashTrail.emitting = false;
+
+            yield return new WaitForSeconds(_dashCooldown);
+
+            _canDash = true;
+            DashIndicator.SetActive(true);
         }
-
-        _rb.velocity = dashDirection * (_dashRange / _dashTime);
-
-        EventManager.Instance.SlowTime(0.02f);
-
-        yield return new WaitForSeconds(_dashTime);
-
-        //_rb.velocity = Vector2.zero;
-
-        _rb.gravityScale = originalGravity;
-
-        _isDashing = false;
-
-        DashTrail.emitting = false;
-
-        yield return new WaitForSeconds(_dashCooldown);
-
-        _canDash = true;
-        DashIndicator.SetActive(true);
     }
 
     private void SpawnTrampoline()
@@ -535,8 +543,13 @@ public class PlayerStateMachine : MonoBehaviour
             _isDashing = false;
             _canDash = true;
 
-
             DashIndicator.SetActive(true);
+        }
+
+        if (other.gameObject.CompareTag("DashItem"))
+        {
+            _unlockedDashing = true;
+            Destroy(other.gameObject);
         }
     }
     

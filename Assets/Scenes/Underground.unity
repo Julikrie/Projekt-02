@@ -41015,6 +41015,8 @@ MonoBehaviour:
   CollectSound: {fileID: 8300000, guid: 01e53cf5e883d2e4a9b7a752210b7f10, type: 3}
   JumpSound: {fileID: 8300000, guid: d987d4df78834f44e99ec3ed31fe51ae, type: 3}
   DashSound: {fileID: 8300000, guid: 12c1b3a4d7d63844e9722127c5e65db9, type: 3}
+  _unlockedDashing: 0
+  _unlockedSwinging: 0
   _canTrampoline: 0
   ShakeIntensity: 0.03
   DashIndicator: {fileID: 530047950}
@@ -41049,7 +41051,7 @@ MonoBehaviour:
   _slideSpeed: 2
   _isDashing: 0
   _dashTime: 0.3
-  _dashCooldown: 2
+  _dashCooldown: 1.5
   _dashRange: 5
   _canDash: 0
   _detachJumpForce: 700
@@ -43177,7 +43179,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
