@@ -22,6 +22,10 @@ public class PlayerStateMachine : MonoBehaviour
 
     public TrailRenderer DashTrail;
 
+    public AudioClip CollectSound;
+    public AudioClip JumpSound;
+    private AudioSource _audioSource;
+
     [SerializeField]
     private bool _canTrampoline;
 
@@ -159,6 +163,8 @@ public class PlayerStateMachine : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
+        _audioSource = GetComponent<AudioSource>();
+
         _currentState = MovementState.Idling;
 
         _isFacingRight = true;
@@ -280,10 +286,12 @@ public class PlayerStateMachine : MonoBehaviour
             if (Mathf.Abs(_movementX) > 0.01f)
             {
                 _currentState = MovementState.Moving;
+                JumpDust.Play();
             }
             else
             {
                 _currentState = MovementState.Idling;
+                JumpDust.Play();
             }
             _jumpCounter = 0;
         }
@@ -305,6 +313,8 @@ public class PlayerStateMachine : MonoBehaviour
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
 
         JumpDust.Play();
+        _audioSource.PlayOneShot(JumpSound, 0.4f);
+
         _canTrampoline = true;
 
         _impulseSource.GenerateImpulse(ShakeIntensity);
@@ -334,10 +344,12 @@ public class PlayerStateMachine : MonoBehaviour
             if (Mathf.Abs(_movementX) > 0.01f)
             {
                 _currentState = MovementState.Moving;
+                JumpDust.Play();
             }
             else
             {
                 _currentState = MovementState.Idling;
+                JumpDust.Play();
             }
 
             _jumpCounter = 0;
@@ -365,11 +377,15 @@ public class PlayerStateMachine : MonoBehaviour
             if (Mathf.Abs(_movementX) > 0.01f)
             {
                 _currentState = MovementState.Moving;
+                JumpDust.Play();
+
                 _jumpCounter = 0;
             }
             else
             {
                 _currentState = MovementState.Idling;
+                JumpDust.Play();
+
                 _jumpCounter = 0;
             }
         }
@@ -393,6 +409,7 @@ public class PlayerStateMachine : MonoBehaviour
             _impulseSource.GenerateImpulse(ShakeIntensity);
 
             JumpDust.Play();
+            _audioSource.PlayOneShot(JumpSound, 0.4f);
 
             _isOnWall = false;
         }
@@ -405,10 +422,12 @@ public class PlayerStateMachine : MonoBehaviour
             if (Mathf.Abs(_movementX) > 0.01f)
             {
                 _currentState = MovementState.Moving;
+                JumpDust.Play();
             }
             else
             {
                 _currentState = MovementState.Idling;
+                JumpDust.Play();
             }
             _jumpCounter = 0;
         }
@@ -444,11 +463,12 @@ public class PlayerStateMachine : MonoBehaviour
 
         _rb.velocity = dashDirection * (_dashRange / _dashTime);
 
-        EventManager.Instance.SlowTime(0.03f);
+        EventManager.Instance.SlowTime(0.02f);
 
         yield return new WaitForSeconds(_dashTime);
 
         //_rb.velocity = Vector2.zero;
+
         _rb.gravityScale = originalGravity;
 
         _isDashing = false;
@@ -502,25 +522,18 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        /*
-        if (other.gameObject.CompareTag("Destroyable") && _isDashing)
-        {
-            Destroy(other.transform.parent.gameObject);
-            _impulseSource.GenerateImpulseWithForce(ShakeForceDestroyable);
-            StartCoroutine(FreezeTimeOnCollision(0.05f));
-        }
-                  */
-
         if (other.gameObject.CompareTag("DashResetter"))
         {
+            _audioSource.PlayOneShot(CollectSound, 0.3f);
+
             StopCoroutine(ExecuteDash());
 
             _isDashing = false;
             _canDash = true;
 
+
             DashIndicator.SetActive(true);
         }
- 
     }
     
     private void CornerCorrection()
@@ -617,7 +630,11 @@ public class PlayerStateMachine : MonoBehaviour
         Vector3 flipScale = transform.localScale;
         flipScale.x *= -1;
         transform.localScale = flipScale;
-        JumpDust.Play();
+
+        if(_isGrounded)
+        {
+            JumpDust.Play();
+        }
     }
 
     private void HandleSwing()
