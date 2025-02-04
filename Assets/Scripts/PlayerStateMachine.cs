@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Cinemachine;
+using UnityEditor;
+using UnityEngine.Assertions.Must;
 
 public enum MovementState
 {
@@ -19,6 +21,8 @@ public class PlayerStateMachine : MonoBehaviour
     public float CornerCorrectionSide;
     public float CornerCorrectionUp;
     public Vector2 CharacterHead;
+
+    public SpriteRenderer[] SpriteRenderer;
 
     public TrailRenderer DashTrail;
 
@@ -482,8 +486,6 @@ public class PlayerStateMachine : MonoBehaviour
 
             yield return new WaitForSeconds(_dashTime);
 
-            //_rb.velocity = Vector2.zero;
-
             _rb.gravityScale = originalGravity;
 
             _isDashing = false;
@@ -527,12 +529,12 @@ public class PlayerStateMachine : MonoBehaviour
             ExecuteAttachToSwing(collision.gameObject);
         }
 
-        if (collision.collider.CompareTag("Danger"))
+        if (collision.gameObject.CompareTag("Danger"))
         {
-            // StartCoroutine(FreezeTimeOnCollision(0.1f));
-            // RespawnParticle.Play();
-            // Invoke("TeleportToSaveSpot", 0.11f);
-            TeleportToSaveSpot();
+            EventManager.Instance.SlowTime(0.3f);
+            StartCoroutine(DissolvePlayer(0.31f));
+            Invoke("TeleportToSaveSpot", 0.31f);
+            RespawnParticle.Play();
         }
     }
 
@@ -808,6 +810,23 @@ public class PlayerStateMachine : MonoBehaviour
             int footstepIndex = Random.Range(0, FootStepSound.Length);
             _audioSource.PlayOneShot(FootStepSound[footstepIndex], 0.15f);
         }
+    }
+
+    private IEnumerator DissolvePlayer(float delay)
+    {
+        foreach (SpriteRenderer bodyparts in SpriteRenderer)
+        {
+            bodyparts.enabled = false;
+        }
+
+        yield return new WaitForSeconds(delay);
+
+        foreach (SpriteRenderer bodyparts in SpriteRenderer)
+        {
+            bodyparts.enabled = true;
+        }
+
+
     }
 
     private void HandleAnimation()
