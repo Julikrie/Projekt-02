@@ -294,11 +294,13 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 _currentState = MovementState.Moving;
                 JumpDust.Play();
+                _impulseSource.GenerateImpulse(ShakeIntensity);
             }
             else
             {
                 _currentState = MovementState.Idling;
                 JumpDust.Play();
+                _impulseSource.GenerateImpulse(ShakeIntensity);
             }
             _jumpCounter = 0;
         }
@@ -385,6 +387,7 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 _currentState = MovementState.Moving;
                 JumpDust.Play();
+                _impulseSource.GenerateImpulse(ShakeIntensity);
 
                 _jumpCounter = 0;
             }
@@ -392,6 +395,7 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 _currentState = MovementState.Idling;
                 JumpDust.Play();
+                _impulseSource.GenerateImpulse(ShakeIntensity);
 
                 _jumpCounter = 0;
             }

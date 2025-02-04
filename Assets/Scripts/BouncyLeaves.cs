@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Leaf : MonoBehaviour
+public class BouncyLeaves : MonoBehaviour
 {
     public float ForcePower;
     public float MoveDirection;
     public float Speed;
     public GameObject Player;
+    public AudioClip BounceSound;
 
     private PlayerStateMachine _playerStateMachine;
     private Rigidbody2D _playerRigidbody;
+    private AudioSource _audioSource;
 
     private void Start()
     {
@@ -22,6 +24,7 @@ public class Leaf : MonoBehaviour
 
         _playerStateMachine = Player.GetComponent<PlayerStateMachine>();
         _playerRigidbody = Player.GetComponent<Rigidbody2D>();
+        _audioSource = Player.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -37,6 +40,7 @@ public class Leaf : MonoBehaviour
             _playerRigidbody.AddForce(Vector2.up * ForcePower, ForceMode2D.Impulse);
 
             _playerStateMachine.JumpDust.Play();
+            _audioSource.PlayOneShot(BounceSound, 0.3f);
         }
     }
 }

@@ -32883,6 +32883,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 24bc525ed3f0b8a42b8e7b3174ff736b, type: 2}
+  - {fileID: 2100000, guid: bb6e752de5d8cfa4e8f18b1f59a8901f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -33071,7 +33072,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.2
+      scalar: 2.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -33772,7 +33773,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 17
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -36836,7 +36837,7 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 0
+    enabled: 1
     mode: 0
     ratio: 1
     lifetime:
@@ -45848,7 +45849,7 @@ MonoBehaviour:
   _unlockedDashing: 0
   _unlockedSwinging: 0
   _canTrampoline: 0
-  ShakeIntensity: 0.03
+  ShakeIntensity: 0.035
   DashIndicator: {fileID: 530047950}
   TrampolinePrefab: {fileID: 6000997960001365919, guid: f28a3ec6db49c254cb2b4c549f353cef, type: 3}
   GroundLayer:
@@ -47266,6 +47267,37 @@ Transform:
   - {fileID: 2138639628}
   - {fileID: 1522030712}
   m_Father: {fileID: 1252861241}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1423504668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1423504669}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1423504669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423504668}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5455611, y: -0.293183, z: -0.04596964}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1425572188
 GameObject:
@@ -70633,3 +70665,4 @@ SceneRoots:
   - {fileID: 565405412}
   - {fileID: 111790203}
   - {fileID: 1536139864}
+  - {fileID: 1423504669}
