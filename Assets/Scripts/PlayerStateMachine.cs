@@ -525,7 +525,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("DashResetter"))
         {
-            _audioSource.PlayOneShot(CollectSound, 0.3f);
+            _audioSource.PlayOneShot(CollectSound, 0.5f);
 
             StopCoroutine(ExecuteDash());
 
@@ -779,12 +779,13 @@ public class PlayerStateMachine : MonoBehaviour
         _rb.velocity = Vector2.zero;
     }
 
+    // Used in the Animation Running as Event
     private void PlayFootsteps()
     {
         if (GrassFootstepSound.Length > 0)
         {
             int footstepIndex = Random.Range(0, GrassFootstepSound.Length);
-            _audioSource.PlayOneShot(GrassFootstepSound[footstepIndex], 0.2f);
+            _audioSource.PlayOneShot(GrassFootstepSound[footstepIndex], 0.25f);
         }
     }
 

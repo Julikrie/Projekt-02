@@ -9,15 +9,19 @@ public class DroppingPlatforms : MonoBehaviour
     public float ShakeForce = 1f;
     public float DropDelay;
     public float RespawnTime;
+    public AudioClip RumbleSound;
+    public float RumbleSoundLength;
 
     private Rigidbody2D _rb;
     private Vector3 _originalPosition;
+    private AudioSource _audioSource;
     private CinemachineImpulseSource _impulseSource;
 
     public void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _originalPosition = transform.position;
+        _audioSource = GetComponent<AudioSource>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
 
         PlatformCrumble.SetActive(false);
@@ -27,6 +31,7 @@ public class DroppingPlatforms : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            StartCoroutine(PlayRumbleForSeconds());
             StartCoroutine(DroppingPlatform());
             StartCoroutine(RespawnPlatform());
 
@@ -55,5 +60,14 @@ public class DroppingPlatforms : MonoBehaviour
 
         _rb.bodyType = RigidbodyType2D.Kinematic;
         _rb.velocity = Vector3.zero;
+    }
+
+    IEnumerator PlayRumbleForSeconds()
+    {
+        _audioSource.clip = RumbleSound;
+        _audioSource.volume = 1f;
+        _audioSource.Play();
+        yield return new WaitForSeconds(RumbleSoundLength);
+        _audioSource.Stop();
     }
 }
