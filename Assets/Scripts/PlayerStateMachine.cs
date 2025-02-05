@@ -538,7 +538,7 @@ public class PlayerStateMachine : MonoBehaviour
             EventManager.Instance.SlowTime(0.1f);
             StartCoroutine(DissolvePlayer(0.11f));
             Invoke("TeleportToSaveSpot", 0.11f);
-            _audioSource.PlayOneShot(DamageSound, 0.5f);
+            _audioSource.PlayOneShot(DamageSound, 0.4f);
             RespawnParticle.Play();
         }
     }
