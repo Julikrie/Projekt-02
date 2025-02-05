@@ -563,6 +563,13 @@ public class PlayerStateMachine : MonoBehaviour
             _unlockedDashing = true;
             Destroy(other.gameObject);
         }
+
+        if (other.gameObject.CompareTag("SwingItem"))
+        {
+            _audioSource.PlayOneShot(CollectSound, 0.35f);
+            _unlockedSwinging = true;
+            Destroy(other.gameObject);
+        }
     }
     
     private void CornerCorrection()
@@ -643,7 +650,9 @@ public class PlayerStateMachine : MonoBehaviour
     private void FlipSprite()
     {
         if (_currentState == MovementState.Swinging)
-            return; 
+        {
+            return;
+        }
 
         if (_rb.velocity.x < -0.05f && _isFacingRight)
         {
@@ -673,61 +682,67 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _swingAttachCooldown = 0.2f;
 
-        if (_hingeJoint == null || _hingeJoint.connectedBody == null)
+        if (_unlockedSwinging)
         {
-            return;
-        }
+            if (_hingeJoint == null || _hingeJoint.connectedBody == null)
+            {
+                return;
+            }
 
-        Rigidbody2D swingRb = _hingeJoint.connectedBody;
+            Rigidbody2D swingRb = _hingeJoint.connectedBody;
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            swingRb.AddTorque(_swingForce);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            swingRb.AddTorque(-_swingForce);
-        }
+            if (Input.GetKey(KeyCode.D))
+            {
+                swingRb.AddTorque(_swingForce);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                swingRb.AddTorque(-_swingForce);
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ExecuteDetachFromSwing();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ExecuteDetachFromSwing();
+            }
         }
     }
 
     private void ExecuteAttachToSwing(GameObject swingableObject)
     {
-        if (_swingAttachCooldown > 0f) return;
-
-        if (_currentState != MovementState.Swinging)
+        if (_unlockedSwinging)
         {
-            _currentState = MovementState.Swinging;
+            if (_swingAttachCooldown > 0f) return;
 
-            _rb.freezeRotation = true;
-
-            if (_hingeJoint == null)
+            if (_currentState != MovementState.Swinging)
             {
-                _hingeJoint = gameObject.AddComponent<HingeJoint2D>();
+                _currentState = MovementState.Swinging;
+
+                _rb.freezeRotation = true;
+
+                if (_hingeJoint == null)
+                {
+                    _hingeJoint = gameObject.AddComponent<HingeJoint2D>();
+                }
+
+                Rigidbody2D swingRb = swingableObject.GetComponent<Rigidbody2D>();
+
+                if (swingRb == null)
+                {
+                    return;
+                }
+
+                _hingeJoint.connectedBody = swingRb;
+
+                _hingeJoint.autoConfigureConnectedAnchor = false;
+
+                _hingeJoint.anchor = Vector2.zero;
+
+                Vector2 localGrabPoint = swingRb.transform.InverseTransformPoint(transform.position);
+                _hingeJoint.connectedAnchor = localGrabPoint;
+
+                Vector2 playerVelocity = _rb.velocity;
+                swingRb.AddForceAtPosition(playerVelocity * _rb.mass * 0.2f, transform.position, ForceMode2D.Impulse);
             }
-
-            Rigidbody2D swingRb = swingableObject.GetComponent<Rigidbody2D>();
-
-            if (swingRb == null)
-            {
-                return;
-            }
-
-            _hingeJoint.connectedBody = swingRb;
-
-            _hingeJoint.autoConfigureConnectedAnchor = false;
-
-            _hingeJoint.anchor = Vector2.zero;
-
-            Vector2 localGrabPoint = swingRb.transform.InverseTransformPoint(transform.position);
-            _hingeJoint.connectedAnchor = localGrabPoint;
-
-            Vector2 playerVelocity = _rb.velocity;
-            swingRb.AddForceAtPosition(playerVelocity * _rb.mass * 0.2f, transform.position, ForceMode2D.Impulse);
         }
     }
 
