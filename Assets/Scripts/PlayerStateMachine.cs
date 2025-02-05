@@ -22,6 +22,8 @@ public class PlayerStateMachine : MonoBehaviour
     public float CornerCorrectionUp;
     public Vector2 CharacterHead;
 
+    public GameObject DashControl;
+
     public SpriteRenderer[] SpriteRenderer;
 
     public TrailRenderer DashTrail;
@@ -561,6 +563,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             _audioSource.PlayOneShot(CollectSound, 0.35f);
             _unlockedDashing = true;
+            StartCoroutine(ShowControls());
             Destroy(other.gameObject);
         }
 
@@ -851,6 +854,15 @@ public class PlayerStateMachine : MonoBehaviour
         }
 
 
+    }
+
+    private IEnumerator ShowControls()
+    {
+        DashControl.SetActive(true);
+
+        yield return new WaitForSeconds(5f);
+
+        DashControl.SetActive(false);
     }
 
     private void HandleAnimation()
