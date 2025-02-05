@@ -29,7 +29,10 @@ public class PlayerStateMachine : MonoBehaviour
     public AudioClip[] FootStepSound;      
     public AudioClip CollectSound;
     public AudioClip JumpSound;
+    public AudioClip TrampolineSound;
     public AudioClip DashSound;
+    public AudioClip DamageSound;
+
     private AudioSource _audioSource;
     
     [SerializeField]
@@ -522,6 +525,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             _rb.velocity = new Vector2(_movementX, 0);
             _rb.AddForce(Vector2.up * _trampolineForce, ForceMode2D.Impulse);
+            _audioSource.PlayOneShot(TrampolineSound, 0.3f);
         }
 
         if (collision.gameObject.CompareTag("SwingObject"))
@@ -534,6 +538,7 @@ public class PlayerStateMachine : MonoBehaviour
             EventManager.Instance.SlowTime(0.1f);
             StartCoroutine(DissolvePlayer(0.11f));
             Invoke("TeleportToSaveSpot", 0.11f);
+            _audioSource.PlayOneShot(DamageSound, 0.5f);
             RespawnParticle.Play();
         }
     }
@@ -768,6 +773,7 @@ public class PlayerStateMachine : MonoBehaviour
             _rb.velocity = detachVelocity;
 
             JumpDust.Play();
+            _audioSource.PlayOneShot(JumpSound, 0.4f);
         }
     }
 
