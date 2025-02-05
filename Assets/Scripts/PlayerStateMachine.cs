@@ -642,6 +642,9 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void FlipSprite()
     {
+        if (_currentState == MovementState.Swinging)
+            return; 
+
         if (_rb.velocity.x < -0.05f && _isFacingRight)
         {
             Flip();
@@ -840,7 +843,7 @@ public class PlayerStateMachine : MonoBehaviour
         _animator.SetBool("isIdling", _currentState == MovementState.Idling);
         _animator.SetBool("isMoving", _currentState == MovementState.Moving);
         _animator.SetBool("isJumping", _currentState == MovementState.Jumping);
-        _animator.SetBool("isWallSliding", _currentState == MovementState.WallSliding);
+        _animator.SetBool("isWallSliding", _currentState == MovementState.WallSliding || _currentState == MovementState.Swinging);
     }
 }
 
