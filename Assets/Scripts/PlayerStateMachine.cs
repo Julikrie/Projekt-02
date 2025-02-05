@@ -346,7 +346,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void HandleWallSlide()
     {
-        if (_isOnWall && !_isGrounded)
+        if (_isOnWall && !_isGrounded && _rb.velocity.x > 0.10f)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, -_slideSpeed);
 
