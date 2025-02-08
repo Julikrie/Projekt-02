@@ -24,12 +24,12 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if (_inRange && Input.GetKeyDown(KeyCode.F))
+        if (_inRange && !_isChatting && Input.GetKeyDown(KeyCode.F))
         {
             StartDialogue();
         }
 
-        if (_isChatting && Input.GetKeyDown(KeyCode.X))
+        if (_isChatting && Input.GetKeyDown(KeyCode.F))
         {
             NextLine();
         }
