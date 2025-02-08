@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI DialogueText;
     public GameObject DialogueWindow;
     public GameObject DialogueButton;
+    public GameObject ShiftButtonIndicator;
     public string[] DialogueLines;
 
     private int _currentLine;
@@ -37,6 +38,15 @@ public class DialogueManager : MonoBehaviour
         {
             StartDialogue();
             DialogueButton.SetActive(false);
+        }
+
+        if (_currentLine == 2)
+        {
+            ShiftButtonIndicator.SetActive(true);
+        }
+        else
+        {
+            ShiftButtonIndicator.SetActive(false);
         }
 
     }

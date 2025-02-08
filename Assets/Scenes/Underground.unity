@@ -5690,6 +5690,81 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &264363468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 264363469}
+  - component: {fileID: 264363472}
+  - component: {fileID: 264363471}
+  m_Layer: 5
+  m_Name: LShiftButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &264363469
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264363468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.37, y: 0.37, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1884820885}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 87, y: 108.5}
+  m_SizeDelta: {x: 492, y: 256}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &264363471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264363468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: f0471cea2f74b5a4d9508cf9fa992364, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &264363472
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264363468}
+  m_CullTransparentMesh: 1
 --- !u!1001 &267841949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6351,10 +6426,11 @@ MonoBehaviour:
   DialogueText: {fileID: 1772287239}
   DialogueWindow: {fileID: 1884820884}
   DialogueButton: {fileID: 1045020940}
+  ShiftButtonIndicator: {fileID: 264363468}
   DialogueLines:
   - Hey <b>Name</b>, nice to see you again.
   - You can only pass through the passage behind me with your new ability.
-  - Use <b><color=#3BA65C>DASH</color></b> and collect the<b> <color=#3BA65C>GREEN
+  - Use <b><color=#3BA65C>DASH</color></b>            and collect the<b> <color=#3BA65C>GREEN
     ORBS</color></b> to reset your Dash cooldown.
   _isChatting: 0
 --- !u!212 &325549607
@@ -6418,7 +6494,7 @@ Transform:
   m_GameObject: {fileID: 325549604}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.73, y: -0.65, z: 0}
+  m_LocalPosition: {x: -5.94, y: -0.65, z: 0}
   m_LocalScale: {x: 1, y: 2.0363, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48397,7 +48473,7 @@ Transform:
   m_GameObject: {fileID: 1536139862}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.24535654, w: 0.96943295}
-  m_LocalPosition: {x: -7.69, y: -0.23, z: 0}
+  m_LocalPosition: {x: -4.4, y: 5.12, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -54097,14 +54173,14 @@ RectTransform:
   m_GameObject: {fileID: 1717136218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1884820885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 155.5, y: -63.4}
+  m_AnchoredPosition: {x: 209.7, y: -87.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1717136220
@@ -54400,8 +54476,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 300}
+  m_AnchoredPosition: {x: -37, y: 13.5}
+  m_SizeDelta: {x: 300, y: 298.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1772287239
 MonoBehaviour:
@@ -54423,7 +54499,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Use <b><color=#3BA65C>DASH</color></b> (        ) and collect the<b> <color=#3BA65C>GREEN
+    ORBS</color></b> to reset your Dash cooldown.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -54450,8 +54527,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 44
+  m_fontSizeBase: 44
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -54462,7 +54539,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 30
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -54486,7 +54563,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -34.023544, y: 31.948883, z: -45.826935, w: 49.444656}
+  m_margin: {x: -26.529907, y: 27.3488, z: -150.27309, w: 6.0783844}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -64740,12 +64817,13 @@ RectTransform:
   m_Children:
   - {fileID: 1772287238}
   - {fileID: 1717136219}
+  - {fileID: 264363469}
   m_Father: {fileID: 2012689690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 64.9, y: -8.1}
-  m_SizeDelta: {x: 560, y: 560}
+  m_SizeDelta: {x: 720, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1884820886
 MonoBehaviour:
@@ -65475,7 +65553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -4.9900002, y: 3.13}
+  m_AnchoredPosition: {x: -7.2000003, y: 3.13}
   m_SizeDelta: {x: 1920.0001, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2028547228
