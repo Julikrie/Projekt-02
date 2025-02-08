@@ -7,40 +7,44 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI DialogueText;
     public GameObject DialogueWindow;
-    public GameObject ChatButton;
+    public GameObject DialogueButton;
     public string[] DialogueLines;
 
     private int _currentLine;
     [SerializeField]
-    private bool _isChatting;
+    private bool _isChatting =false;
     private bool _inRange = false;
 
     void Start()
     {
-        _isChatting = false;
         DialogueWindow.SetActive(false);
-        ChatButton.SetActive(false);
+        DialogueButton.SetActive(false);
     }
 
     void Update()
     {
-        if (_inRange && !_isChatting && Input.GetKeyDown(KeyCode.F))
-        {
-            StartDialogue();
-        }
 
         if (_isChatting && Input.GetKeyDown(KeyCode.F))
         {
             NextLine();
         }
-    }
+        if (_inRange && !_isChatting && Input.GetKeyDown(KeyCode.F))
+        {
+            StartDialogue();
+            DialogueButton.SetActive(false);
+        }
 
+    }
     private void StartDialogue()
     {
         _isChatting = true;
         DialogueWindow.SetActive(true);
+
         _currentLine = 0;
+
         DialogueText.text = DialogueLines[_currentLine];
+
+        EventManager.Instance.SlowTime(1f);
     }
 
     private void NextLine()
@@ -55,6 +59,9 @@ public class DialogueManager : MonoBehaviour
         {
             DialogueWindow.SetActive(false);
             _isChatting = false;
+            gameObject.SetActive(false);
+
+            EventManager.Instance.SlowTime(0f);
         }
     }
 
@@ -63,7 +70,7 @@ public class DialogueManager : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             _inRange = true;
-            ChatButton.SetActive(true);
+            DialogueButton.SetActive(true);
         }
     }
 
@@ -72,7 +79,7 @@ public class DialogueManager : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             _inRange = false;
-            ChatButton.SetActive(false);
+            DialogueButton.SetActive(false);
         }
     }
 }
