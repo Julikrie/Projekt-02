@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEditor.Tilemaps;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -14,11 +15,15 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private bool _isChatting =false;
     private bool _inRange = false;
+    private SpriteRenderer _spriteRenderer;
 
     void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
         DialogueWindow.SetActive(false);
         DialogueButton.SetActive(false);
+        _spriteRenderer.enabled = false;
     }
 
     void Update()
@@ -43,8 +48,6 @@ public class DialogueManager : MonoBehaviour
         _currentLine = 0;
 
         DialogueText.text = DialogueLines[_currentLine];
-
-        EventManager.Instance.SlowTime(1f);
     }
 
     private void NextLine()
@@ -60,8 +63,6 @@ public class DialogueManager : MonoBehaviour
             DialogueWindow.SetActive(false);
             _isChatting = false;
             gameObject.SetActive(false);
-
-            EventManager.Instance.SlowTime(0f);
         }
     }
 
@@ -71,6 +72,7 @@ public class DialogueManager : MonoBehaviour
         {
             _inRange = true;
             DialogueButton.SetActive(true);
+            _spriteRenderer.enabled = true;
         }
     }
 
@@ -80,6 +82,8 @@ public class DialogueManager : MonoBehaviour
         {
             _inRange = false;
             DialogueButton.SetActive(false);
+            _spriteRenderer.enabled = false;
         }
     }
+
 }
