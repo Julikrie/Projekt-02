@@ -7,6 +7,7 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI DialogueText;
     public GameObject DialogueWindow;
+    public GameObject ChatButton;
     public string[] DialogueLines;
 
     private int _currentLine;
@@ -18,11 +19,12 @@ public class DialogueManager : MonoBehaviour
     {
         _isChatting = false;
         DialogueWindow.SetActive(false);
+        ChatButton.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (_inRange && Input.GetKeyDown(KeyCode.F))
         {
             StartDialogue();
         }
@@ -53,6 +55,24 @@ public class DialogueManager : MonoBehaviour
         {
             DialogueWindow.SetActive(false);
             _isChatting = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            _inRange = true;
+            ChatButton.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            _inRange = false;
+            ChatButton.SetActive(false);
         }
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - Danger
   - DashItem
   - SwingItem
+  - NPC
   layers:
   - Default
   - TransparentFX
