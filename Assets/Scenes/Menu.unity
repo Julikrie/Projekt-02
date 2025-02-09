@@ -379,6 +379,8 @@ MonoBehaviour:
   MenuBackground: {fileID: 515653051}
   ControlBackground: {fileID: 63268684}
   ReturnButton: {fileID: 0}
+  _isPaused: 0
+  _inGame: 0
 --- !u!1 &322163780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,7 +1732,7 @@ Canvas:
   m_GameObject: {fileID: 2077329003}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1728205360}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
