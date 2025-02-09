@@ -14303,7 +14303,7 @@ SpriteRenderer:
   m_Size: {x: 3.68, y: 0.67}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &776381513
@@ -41843,7 +41843,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24bc525ed3f0b8a42b8e7b3174ff736b, type: 2}
+  - {fileID: 2100000, guid: bb6e752de5d8cfa4e8f18b1f59a8901f, type: 2}
   - {fileID: 2100000, guid: bb6e752de5d8cfa4e8f18b1f59a8901f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -46701,7 +46701,7 @@ SpriteRenderer:
   m_Size: {x: 28.444445, y: 16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1436044949
@@ -57707,7 +57707,6 @@ MonoBehaviour:
   CornerCorrectionSide: 0.5
   CornerCorrectionUp: 0.6
   CharacterHead: {x: 0.12, y: 2}
-  DashControl: {fileID: 0}
   SpriteRenderer:
   - {fileID: 51262079}
   - {fileID: 393811278}
@@ -62840,7 +62839,7 @@ SpriteRenderer:
   m_Size: {x: 28.44, y: 3.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1558713413
@@ -67905,7 +67904,7 @@ SpriteRenderer:
   m_Size: {x: 5.6, y: 16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1586508620
@@ -80141,7 +80140,7 @@ SpriteRenderer:
   m_Size: {x: 4.61, y: 1.03}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &2043659969
