@@ -52,6 +52,8 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    // In Game 
+
     private void CheckForCurrentScene()
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
@@ -66,6 +68,13 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    // Start Menu
+
     public void StartGame()
     {
         SceneManager.LoadScene("Forest 01");
@@ -77,7 +86,7 @@ public class MenuManager : MonoBehaviour
         ControlBackground.SetActive(true);
     }
 
-    public void ReturnToMainMenu()
+    public void ReturnToMenu()
     {
         MenuBackground.SetActive(true);
         ControlBackground.SetActive(false);
