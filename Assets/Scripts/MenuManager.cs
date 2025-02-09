@@ -73,7 +73,7 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    // Start Menu
+    // Main Menu
 
     public void StartGame()
     {
