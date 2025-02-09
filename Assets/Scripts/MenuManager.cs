@@ -33,9 +33,11 @@ public class MenuManager : MonoBehaviour
         StopGame();
     }
 
+    // In Game 
+
     private void StopGame()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && _inGame)
         {
             _isPaused = !_isPaused;
 
@@ -52,7 +54,6 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    // In Game 
 
     private void CheckForCurrentScene()
     {
