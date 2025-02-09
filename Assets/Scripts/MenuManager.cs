@@ -68,9 +68,9 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void BackToMenu()
+    public void BackToMainMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     // Start Menu
