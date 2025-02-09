@@ -50,6 +50,7 @@ public class MenuManager : MonoBehaviour
             {
                 Time.timeScale = 1;
                 MenuBackground.SetActive(false);
+                ControlBackground.SetActive(false);
             }
         }
     }
@@ -79,6 +80,7 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("Forest 01");
+        Time.timeScale = 1f;
     }
 
     public void ShowControls()
