@@ -46654,7 +46654,7 @@ MonoBehaviour:
   _coyoteTime: 0.3
   _coyoteTimer: 0
   _jumpBufferTimer: 0
-  _wallJumpForce: {x: 10, y: 18}
+  _wallJumpForce: {x: 10, y: 20}
   _slideSpeed: 2
   _isDashing: 0
   _dashTime: 0.3
