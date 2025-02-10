@@ -487,7 +487,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             EventManager.Instance.FreezeTime(0.02f);
 
-            yield return new WaitForSeconds(_dashTime);
+            yield return new WaitForSecondsRealtime(_dashTime);
 
             _rb.gravityScale = originalGravity;
 
@@ -495,7 +495,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             DashTrail.emitting = false;
 
-            yield return new WaitForSeconds(_dashCooldown);
+            yield return new WaitForSecondsRealtime(_dashCooldown);
 
             _canDash = true;
             DashIndicator.SetActive(true);
@@ -535,9 +535,8 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Danger"))
         {
-            EventManager.Instance.FreezeTime(0.1f);
-            StartCoroutine(DissolvePlayer(0.1f));
-            Invoke("TeleportToSaveSpot", 0.11f);
+            StartCoroutine(DissolvePlayer(0.11f));
+            StartCoroutine(TeleportToSaveSpot(0.11f));
             _audioSource.PlayOneShot(DamageSound, 0.4f);
             RespawnParticle.Play();
         }
@@ -562,7 +561,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.gameObject.CompareTag("DashItem"))
         {
             _audioSource.PlayOneShot(CollectSound, 0.35f);
-            DashIndicator.SetActive(true)
+            DashIndicator.SetActive(true);
             _unlockedDashing = true;
             Destroy(other.gameObject);
         }
@@ -800,7 +799,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private IEnumerator ReenableCollision(Collider2D playerCollider, Collider2D swingCollider, float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
 
         if (playerCollider != null && swingCollider != null)
         {
@@ -823,8 +822,10 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-    private void TeleportToSaveSpot()
+    private IEnumerator TeleportToSaveSpot(float delay)
     {
+        yield return new WaitForSecondsRealtime(delay);
+
         transform.position = _saveSpot;
         _rb.velocity = Vector2.zero;
     }
@@ -846,7 +847,7 @@ public class PlayerStateMachine : MonoBehaviour
             bodyparts.enabled = false;
         }
 
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
 
         foreach (SpriteRenderer bodyparts in SpriteRenderer)
         {
