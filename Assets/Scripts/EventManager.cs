@@ -19,7 +19,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SlowTimeCoroutine (float duration)
+    private IEnumerator FreezeTimeCoroutine(float duration)
     {
         
         float gameTime = Time.timeScale;
@@ -30,8 +30,8 @@ public class EventManager : MonoBehaviour
         Time.timeScale = gameTime;
     }
 
-    public void SlowTime(float duration)
+    public void FreezeTime(float duration)
     {
-        StartCoroutine(SlowTimeCoroutine(duration));
+        StartCoroutine(FreezeTimeCoroutine(duration));
     }
 }

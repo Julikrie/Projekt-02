@@ -182,11 +182,11 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState = MovementState.Idling;
 
         _isFacingRight = true;
-
         _canDash = true;
 
         _saveSpot = transform.position;
 
+        DashIndicator.SetActive(false);
         _jumpCounter = 0f;
     }
 
@@ -485,7 +485,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             _rb.velocity = dashDirection * (_dashRange / _dashTime);
 
-            EventManager.Instance.SlowTime(0.02f);
+            EventManager.Instance.FreezeTime(0.02f);
 
             yield return new WaitForSeconds(_dashTime);
 
@@ -535,8 +535,8 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Danger"))
         {
-            EventManager.Instance.SlowTime(0.1f);
-            StartCoroutine(DissolvePlayer(0.11f));
+            EventManager.Instance.FreezeTime(0.1f);
+            StartCoroutine(DissolvePlayer(0.1f));
             Invoke("TeleportToSaveSpot", 0.11f);
             _audioSource.PlayOneShot(DamageSound, 0.4f);
             RespawnParticle.Play();
@@ -562,6 +562,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.gameObject.CompareTag("DashItem"))
         {
             _audioSource.PlayOneShot(CollectSound, 0.35f);
+            DashIndicator.SetActive(true)
             _unlockedDashing = true;
             Destroy(other.gameObject);
         }

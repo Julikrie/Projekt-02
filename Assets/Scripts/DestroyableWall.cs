@@ -36,7 +36,7 @@ public class DestroyableWall : MonoBehaviour
             BreakWall();
             _audioSource.PlayOneShot(DestroyWallSound, 1f);
             _impulseSource.GenerateImpulse(ShakeIntensity);
-            EventManager.Instance.SlowTime(0.02f);
+            EventManager.Instance.FreezeTime(0.02f);
             _boxCollider.enabled = false;
         }
     }

@@ -40213,39 +40213,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1401894942887248306, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3175332639543170520, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3175332639543170520, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3175332639543170520, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3175332639543170520, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3175332639543170520, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5107431583706985812, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5107431583706985812, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5107431583706985812, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5107431583706985812, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -27
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7190172147272510719, guid: 23729ee1487c5e445994b4c1e20270ad, type: 3}
       propertyPath: m_Camera
