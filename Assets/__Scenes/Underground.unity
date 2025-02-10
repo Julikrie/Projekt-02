@@ -46636,7 +46636,7 @@ MonoBehaviour:
     m_Bits: 128
   ForbiddenLayer:
     serializedVersion: 2
-    m_Bits: 77056
+    m_Bits: 212736
   TrampolineLayer:
     serializedVersion: 2
     m_Bits: 8192

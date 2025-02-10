@@ -551,6 +551,8 @@ public class PlayerStateMachine : MonoBehaviour
 
             StopCoroutine(ExecuteDash());
 
+            _rb.gravityScale = 6f;
+            
             _isDashing = false;
             _canDash = true;
 
