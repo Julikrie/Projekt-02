@@ -55,7 +55,6 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-
     private void CheckForCurrentScene()
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;

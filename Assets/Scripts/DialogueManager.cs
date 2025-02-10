@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -21,15 +19,12 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-        _spriteRenderer = GetComponents<SpriteRenderer>();
+        CheckForCurrentScene();
+
+        _spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
 
         DialogueWindow.SetActive(false);
         DialogueButton.SetActive(false);
-
-        foreach (SpriteRenderer sprite in _spriteRenderer)
-        {
-            sprite.enabled = false;
-        }
     }
 
     void Update()
@@ -105,6 +100,25 @@ public class DialogueManager : MonoBehaviour
             _inRange = false;
             DialogueButton.SetActive(false);
             
+            foreach (SpriteRenderer sprite in _spriteRenderer)
+            {
+                sprite.enabled = false;
+            }
+        }
+    }
+    private void CheckForCurrentScene()
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentScene == 1)
+        {
+            foreach (SpriteRenderer sprite in _spriteRenderer)
+            {
+                sprite.enabled = true;
+            }
+        }
+        else if (currentScene == 2 || currentScene == 3)
+        {
             foreach (SpriteRenderer sprite in _spriteRenderer)
             {
                 sprite.enabled = false;
