@@ -16,15 +16,20 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private bool _isChatting =false;
     private bool _inRange = false;
-    private SpriteRenderer _spriteRenderer;
+    [SerializeField]
+    private SpriteRenderer[] _spriteRenderer;
 
     void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponents<SpriteRenderer>();
 
         DialogueWindow.SetActive(false);
         DialogueButton.SetActive(false);
-        _spriteRenderer.enabled = false;
+
+        foreach (SpriteRenderer sprite in _spriteRenderer)
+        {
+            sprite.enabled = false;
+        }
     }
 
     void Update()
@@ -40,16 +45,19 @@ public class DialogueManager : MonoBehaviour
             DialogueButton.SetActive(false);
         }
 
-        if (_currentLine == 2)
+        if (ShiftButtonIndicator != null)
         {
-            ShiftButtonIndicator.SetActive(true);
+            if (_currentLine == 2)
+            {
+                ShiftButtonIndicator.SetActive(true);
+            }
+            else
+            {
+                ShiftButtonIndicator.SetActive(false);
+            }
         }
-        else
-        {
-            ShiftButtonIndicator.SetActive(false);
-        }
-
     }
+
     private void StartDialogue()
     {
         _isChatting = true;
@@ -82,7 +90,11 @@ public class DialogueManager : MonoBehaviour
         {
             _inRange = true;
             DialogueButton.SetActive(true);
-            _spriteRenderer.enabled = true;
+            
+            foreach (SpriteRenderer sprite in _spriteRenderer)
+            {
+                sprite.enabled = true;
+            }
         }
     }
 
@@ -92,8 +104,11 @@ public class DialogueManager : MonoBehaviour
         {
             _inRange = false;
             DialogueButton.SetActive(false);
-            _spriteRenderer.enabled = false;
+            
+            foreach (SpriteRenderer sprite in _spriteRenderer)
+            {
+                sprite.enabled = false;
+            }
         }
     }
-
 }
