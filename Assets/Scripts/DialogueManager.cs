@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI DialogueText;
+    public TextMeshProUGUI IntroText;
     public GameObject DialogueWindow;
     public GameObject DialogueButton;
     public GameObject ShiftButtonIndicator;
@@ -51,6 +52,8 @@ public class DialogueManager : MonoBehaviour
                 ShiftButtonIndicator.SetActive(false);
             }
         }
+
+        Destroy(IntroText, 4.1f);
     }
 
     private void StartDialogue()
