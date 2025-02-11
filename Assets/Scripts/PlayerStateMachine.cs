@@ -45,6 +45,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     [SerializeField]
     public float ShakeIntensity;
+    public float ShakeTrampoline;
+    public float ShakeDash;
     public GameObject DashIndicator;
     public GameObject TrampolinePrefab;
     public LayerMask GroundLayer;
@@ -475,7 +477,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             DashIndicator.SetActive(false);
             DashTrail.emitting = true;
-            _impulseSource.GenerateImpulseWithForce(ShakeIntensity);
+            _impulseSource.GenerateImpulseWithForce(ShakeDash);
 
             float originalGravity = _rb.gravityScale;
             _rb.gravityScale = 0f;
@@ -529,7 +531,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             _rb.velocity = new Vector2(_movementX, 0);
             _rb.AddForce(Vector2.up * _trampolineForce, ForceMode2D.Impulse);
-            _impulseSource.GenerateImpulseWithForce(ShakeIntensity);
+            _impulseSource.GenerateImpulseWithForce(ShakeTrampoline);
             _audioSource.PlayOneShot(TrampolineSound, 0.3f);
         }
 
