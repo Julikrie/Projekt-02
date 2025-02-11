@@ -331,7 +331,10 @@ public class PlayerStateMachine : MonoBehaviour
         JumpDust.Play();
         _audioSource.PlayOneShot(JumpSound, 0.4f);
 
-        _canTrampoline = true;
+        if (_jumpCounter < 1)
+        {
+            _canTrampoline = true;
+        }
 
         _impulseSource.GenerateImpulse(ShakeIntensity);
 
@@ -472,6 +475,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             DashIndicator.SetActive(false);
             DashTrail.emitting = true;
+            _impulseSource.GenerateImpulseWithForce(ShakeIntensity);
 
             float originalGravity = _rb.gravityScale;
             _rb.gravityScale = 0f;
@@ -525,6 +529,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             _rb.velocity = new Vector2(_movementX, 0);
             _rb.AddForce(Vector2.up * _trampolineForce, ForceMode2D.Impulse);
+            _impulseSource.GenerateImpulseWithForce(ShakeIntensity);
             _audioSource.PlayOneShot(TrampolineSound, 0.3f);
         }
 
