@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8674445007123853735}
   - component: {fileID: 3475024978322089555}
   m_Layer: 12
-  m_Name: Light 2D
+  m_Name: DashLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
