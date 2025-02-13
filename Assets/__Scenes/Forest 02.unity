@@ -24514,8 +24514,8 @@ Transform:
   m_GameObject: {fileID: 881964927}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.81, y: -3.7566578, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 42.2498, y: -3.7566578, z: 0}
+  m_LocalScale: {x: 0.47643435, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 368882691}
@@ -37357,7 +37357,7 @@ AreaEffector2D:
     m_Bits: 4294967295
   m_UseGlobalAngle: 0
   m_ForceAngle: 90
-  m_ForceMagnitude: 80
+  m_ForceMagnitude: 90
   m_ForceVariation: 20
   m_ForceTarget: 0
   m_Drag: 0

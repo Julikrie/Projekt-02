@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
@@ -9,8 +8,8 @@ public class DroppingPlatforms : MonoBehaviour
     public float ShakeForce = 1f;
     public float DropDelay;
     public float RespawnTime;
-    public AudioClip RumbleSound;
     public float RumbleSoundLength;
+    public AudioClip RumbleSound;
 
     private Rigidbody2D _rb;
     private Vector3 _originalPosition;
@@ -23,7 +22,6 @@ public class DroppingPlatforms : MonoBehaviour
         _originalPosition = transform.position;
         _audioSource = GetComponent<AudioSource>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
-
         PlatformCrumble.SetActive(false);
     }
 
@@ -34,9 +32,7 @@ public class DroppingPlatforms : MonoBehaviour
             StartCoroutine(PlayRumbleForSeconds());
             StartCoroutine(DroppingPlatform());
             StartCoroutine(RespawnPlatform());
-
             _impulseSource.GenerateImpulseWithForce(ShakeForce);
-
             PlatformCrumble.SetActive(true);
         }
         else
@@ -45,28 +41,29 @@ public class DroppingPlatforms : MonoBehaviour
         }
     }
 
+    // Sets the body to Dynamic, plattform is falling after Drop Delay
     private IEnumerator DroppingPlatform()
     {
         yield return new WaitForSeconds(DropDelay);
-
         _rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
+    // Resets the platform after Respawn Time
     private IEnumerator RespawnPlatform()
     {
         yield return new WaitForSeconds(RespawnTime);
-
         transform.position = _originalPosition;
-
         _rb.bodyType = RigidbodyType2D.Kinematic;
         _rb.velocity = Vector3.zero;
     }
 
+    // Plays the rumble for Rumble Sound Length time
     IEnumerator PlayRumbleForSeconds()
     {
         _audioSource.clip = RumbleSound;
         _audioSource.volume = 1f;
         _audioSource.Play();
+
         yield return new WaitForSeconds(RumbleSoundLength);
         _audioSource.Stop();
     }

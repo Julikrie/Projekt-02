@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DestroyableWall : MonoBehaviour
@@ -41,6 +39,7 @@ public class DestroyableWall : MonoBehaviour
         }
     }
 
+    // Pushes every stone separately away
     private void BreakWall()
     {
         foreach (Rigidbody2D rigidbody in _rb)

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class BouncyLeaves : MonoBehaviour
 {
@@ -21,24 +18,24 @@ public class BouncyLeaves : MonoBehaviour
         {
             Player = GameObject.FindGameObjectWithTag("Player");
         }
-
         _playerStateMachine = Player.GetComponent<PlayerStateMachine>();
         _playerRigidbody = Player.GetComponent<Rigidbody2D>();
         _audioSource = Player.GetComponent<AudioSource>();
     }
 
+    // Moves the Leaf in MoveDirection
     private void Update()
     {
         transform.position += new Vector3(0f, MoveDirection, 0f) * Speed * Time.deltaTime;
     }
 
+    // When the player collides with a leaf he bounces upwards
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, 0);
             _playerRigidbody.AddForce(Vector2.up * ForcePower, ForceMode2D.Impulse);
-
             _playerStateMachine.JumpDust.Play();
             _audioSource.PlayOneShot(BounceSound, 0.5f);
         }

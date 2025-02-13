@@ -12,35 +12,34 @@ public class DialogueManager : MonoBehaviour
     public string[] DialogueLines;
 
     private int _currentLine;
-    [SerializeField]
-    private bool _isChatting =false;
+    private bool _isChatting = false;
     private bool _inRange = false;
-    [SerializeField]
     private SpriteRenderer[] _spriteRenderer;
 
     void Start()
     {
         CheckForCurrentScene();
-
         _spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
-
         DialogueWindow.SetActive(false);
         DialogueButton.SetActive(false);
     }
 
     void Update()
     {
-
+        // Gets next line when pressing F
         if (_isChatting && Input.GetKeyDown(KeyCode.F))
         {
             NextLine();
         }
+
+        // Starts the dialogue window, when pressing F
         if (_inRange && !_isChatting && Input.GetKeyDown(KeyCode.F))
         {
             StartDialogue();
             DialogueButton.SetActive(false);
         }
 
+        // Activates the Shift Button on line 2 in Underground section
         if (ShiftButtonIndicator != null)
         {
             if (_currentLine == 2)
@@ -53,19 +52,20 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
+        // Destroys the intro text from the Timeline
         Destroy(IntroText, 4.1f);
     }
 
+    // Starts the dialogue
     private void StartDialogue()
     {
         _isChatting = true;
         DialogueWindow.SetActive(true);
-
         _currentLine = 0;
-
         DialogueText.text = DialogueLines[_currentLine];
     }
 
+    // Goes to the next line and after last dialogue line closes the window
     private void NextLine()
     {
         _currentLine++;
@@ -82,6 +82,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // If player is in Collider of the Elder, show elder sprite and dialogue button
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -96,6 +97,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // When leaving Collider, let the elder dissapear
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -109,6 +111,8 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
+
+    // If the player is in Forest 01, the elder is already active for the intro dialogue, else not active
     private void CheckForCurrentScene()
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;

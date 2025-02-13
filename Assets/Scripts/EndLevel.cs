@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,13 +18,13 @@ public class EndLevel : MonoBehaviour
             StartCoroutine(StartEnding());
         }
     }
-
+    
+    // Starts the ending screen, when player collides with collider and switches automatically to Main Menu after 3 seconds
     private IEnumerator StartEnding()
     {
         EndingBackground.SetActive(true);
 
         yield return new WaitForSeconds(3f);
-
         EndingBackground.SetActive(false);
         SceneManager.LoadScene("MainMenu");
     }
