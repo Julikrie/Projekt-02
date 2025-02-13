@@ -24,7 +24,7 @@ public class EndLevel : MonoBehaviour
     {
         EndingBackground.SetActive(true);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
         EndingBackground.SetActive(false);
         SceneManager.LoadScene("MainMenu");
     }

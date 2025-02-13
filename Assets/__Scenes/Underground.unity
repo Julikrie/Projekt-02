@@ -6014,7 +6014,7 @@ GameObject:
   - component: {fileID: 294330600}
   - component: {fileID: 294330599}
   m_Layer: 0
-  m_Name: SceneChanger
+  m_Name: LevelChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6323,66 +6323,6 @@ PrefabInstance:
 --- !u!1 &295850939 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850940 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1300142661454288029, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850941 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -8913533962594999635, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850942 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -4457772106480614152, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850943 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 5838552553471336640, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850944 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2294477311205073507, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850945 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -7177796038800571695, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850946 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7955536874385295780, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850947 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -8089108032486474258, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850948 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -5220851208984371554, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850949 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -6333079902775923140, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850950 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -2762914173614684467, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 295850938}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &295850951 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -150593363753521078, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
   m_PrefabInstance: {fileID: 295850938}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &317547108
@@ -6799,8 +6739,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraTarget: {fileID: 1743420042}
   Player: {fileID: 1252861256}
-  TargetNewPosition: {x: 28.47, y: 0, z: 0}
   CloseTime: 1
+  TargetNewPosition: {x: 28.47, y: 0, z: 0}
   _moveCharacter: {x: 1.5, y: 0, z: 0}
 --- !u!61 &350851336
 BoxCollider2D:
@@ -11807,20 +11747,6 @@ MonoBehaviour:
   - You can only pass through the passage behind me with your new ability.
   - Use <b><color=#3BA65C>DASH</color></b>            and collect the<b> <color=#3BA65C>GREEN
     ORBS</color></b> to reset your Dash cooldown.
-  _isChatting: 0
-  _spriteRenderer:
-  - {fileID: 295850951}
-  - {fileID: 295850950}
-  - {fileID: 295850949}
-  - {fileID: 295850948}
-  - {fileID: 295850947}
-  - {fileID: 295850946}
-  - {fileID: 295850945}
-  - {fileID: 295850944}
-  - {fileID: 295850943}
-  - {fileID: 295850942}
-  - {fileID: 295850941}
-  - {fileID: 295850940}
 --- !u!210 &401845234
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -36843,21 +36769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3663c6e908addff46b550f8aa5f53d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CornerForce: 10
-  CornerCorrectionSide: 0.5
-  CornerCorrectionUp: 0.6
-  CharacterHead: {x: 0.12, y: 2}
-  SpriteRenderer:
-  - {fileID: 790298500}
-  - {fileID: 942360419}
-  - {fileID: 1710055848}
-  - {fileID: 1860509417}
-  - {fileID: 2091741568}
-  - {fileID: 1381099868}
-  - {fileID: 1334346097}
-  - {fileID: 1317771831}
-  - {fileID: 928198705}
-  DashTrail: {fileID: 2138639629}
   FootStepSound:
   - {fileID: 8300000, guid: dce8358b1a631d94d8077861cfbd6234, type: 3}
   - {fileID: 8300000, guid: 03bea4422c196ce4daf6e142a6cbcd09, type: 3}
@@ -36871,12 +36782,13 @@ MonoBehaviour:
   TrampolineSound: {fileID: 8300000, guid: 4f250bcceae673149a811f41430a8045, type: 3}
   DashSound: {fileID: 8300000, guid: 12c1b3a4d7d63844e9722127c5e65db9, type: 3}
   DamageSound: {fileID: 8300000, guid: 20dc5c6374e5c784ba543a66092fe0bf, type: 3}
-  _unlockedDashing: 0
-  _unlockedSwinging: 0
-  _canTrampoline: 0
   ShakeIntensity: 0.02
   ShakeTrampoline: 0.05
   ShakeDash: 0.04
+  CornerForce: 10
+  CornerCorrectionSide: 0.5
+  CornerCorrectionUp: 0.6
+  CharacterHead: {x: 0.12, y: 2}
   DashIndicator: {fileID: 530047950}
   TrampolinePrefab: {fileID: 6000997960001365919, guid: f28a3ec6db49c254cb2b4c549f353cef, type: 3}
   GroundLayer:
@@ -36896,7 +36808,17 @@ MonoBehaviour:
   JumpDust: {fileID: 125073594}
   WallSlideDust: {fileID: 355671379}
   RespawnParticle: {fileID: 522847149}
-  _isFacingRight: 0
+  DashTrail: {fileID: 2138639629}
+  SpriteRenderer:
+  - {fileID: 790298500}
+  - {fileID: 942360419}
+  - {fileID: 1710055848}
+  - {fileID: 1860509417}
+  - {fileID: 2091741568}
+  - {fileID: 1381099868}
+  - {fileID: 1334346097}
+  - {fileID: 1317771831}
+  - {fileID: 928198705}
   _currentState: 0
   _speed: 8
   _jumpForce: 20

@@ -19383,6 +19383,7 @@ MonoBehaviour:
   Player: {fileID: 1461521542}
   CloseTime: 0.1
   TargetNewPosition: {x: 28.5, y: 0, z: 0}
+  _moveCharacter: {x: 1.5, y: 0, z: 0}
 --- !u!212 &804997661
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class RoomChanger : MonoBehaviour
     public float CloseTime = 1f;
     public Vector3 TargetNewPosition;
 
+    [SerializeField]
     private Vector3 _moveCharacter;
     private BoxCollider2D _collider;
 

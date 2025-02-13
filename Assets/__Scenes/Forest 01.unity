@@ -646,11 +646,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 721702056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &81873452 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 5838552553471336640, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &102823845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,8 +1002,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraTarget: {fileID: 1253408165}
   Player: {fileID: 729500096}
-  TargetNewPosition: {x: 28.47, y: 0, z: 0}
   CloseTime: 0.1
+  TargetNewPosition: {x: 28.47, y: 0, z: 0}
   _moveCharacter: {x: 1.5, y: 0, z: 0}
 --- !u!212 &145442884
 SpriteRenderer:
@@ -16623,11 +16618,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!212 &303506367 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -8089108032486474258, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &304012771
 GameObject:
   m_ObjectHideFlags: 0
@@ -17089,11 +17079,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1974427718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &419814335 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -150593363753521078, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &431478754
 GameObject:
   m_ObjectHideFlags: 0
@@ -17379,8 +17364,8 @@ MonoBehaviour:
   ShakeForce: 1.5
   DropDelay: 1
   RespawnTime: 4
-  RumbleSound: {fileID: 8300000, guid: 4dfdb1020a4b0c44bb09bd701ef7b154, type: 3}
   RumbleSoundLength: 1
+  RumbleSound: {fileID: 8300000, guid: 4dfdb1020a4b0c44bb09bd701ef7b154, type: 3}
 --- !u!212 &465466983
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17703,11 +17688,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwaySpeed: 2
   SwayAmount: 2.5
---- !u!212 &472482325 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7955536874385295780, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &481845726
 GameObject:
   m_ObjectHideFlags: 0
@@ -18627,11 +18607,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwaySpeed: 1.5
   SwayAmount: 6
---- !u!212 &592172624 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -4457772106480614152, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &649273072
 GameObject:
   m_ObjectHideFlags: 0
@@ -18694,11 +18669,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 114553217}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &678093944 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2294477311205073507, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &721702053
 GameObject:
   m_ObjectHideFlags: 0
@@ -19918,12 +19888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3663c6e908addff46b550f8aa5f53d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CornerForce: 10
-  CornerCorrectionSide: 0.5
-  CornerCorrectionUp: 0.6
-  CharacterHead: {x: 0.12, y: 2}
-  SpriteRenderer: []
-  DashTrail: {fileID: 776977694}
   FootStepSound:
   - {fileID: 8300000, guid: 68217380651a90e48a99b6a5868f424b, type: 3}
   - {fileID: 8300000, guid: b30c05dec9f565245aa0405dc3091e19, type: 3}
@@ -19937,12 +19901,13 @@ MonoBehaviour:
   TrampolineSound: {fileID: 8300000, guid: 4f250bcceae673149a811f41430a8045, type: 3}
   DashSound: {fileID: 8300000, guid: 12c1b3a4d7d63844e9722127c5e65db9, type: 3}
   DamageSound: {fileID: 8300000, guid: 20dc5c6374e5c784ba543a66092fe0bf, type: 3}
-  _unlockedDashing: 0
-  _unlockedSwinging: 0
-  _canTrampoline: 0
   ShakeIntensity: 0.035
   ShakeTrampoline: 0
   ShakeDash: 0
+  CornerForce: 10
+  CornerCorrectionSide: 0.5
+  CornerCorrectionUp: 0.6
+  CharacterHead: {x: 0.12, y: 2}
   DashIndicator: {fileID: 247394924}
   TrampolinePrefab: {fileID: 6000997960001365919, guid: f28a3ec6db49c254cb2b4c549f353cef, type: 3}
   GroundLayer:
@@ -19962,7 +19927,8 @@ MonoBehaviour:
   JumpDust: {fileID: 1565135751}
   WallSlideDust: {fileID: 1583447118}
   RespawnParticle: {fileID: 1077387837}
-  _isFacingRight: 0
+  DashTrail: {fileID: 776977694}
+  SpriteRenderer: []
   _currentState: 0
   _speed: 8
   _jumpForce: 20
@@ -25441,11 +25407,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1974427718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &849609882 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -2762914173614684467, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &851603824
 GameObject:
   m_ObjectHideFlags: 0
@@ -25943,20 +25904,6 @@ MonoBehaviour:
   - You have to fulfill my duty from now on.
   - An afterimage of me will guide you!
   - Go now! Find the source of the <b>pollution!</b>
-  _isChatting: 0
-  _spriteRenderer:
-  - {fileID: 419814335}
-  - {fileID: 849609882}
-  - {fileID: 1649222625}
-  - {fileID: 1839277258}
-  - {fileID: 303506367}
-  - {fileID: 472482325}
-  - {fileID: 1638783447}
-  - {fileID: 678093944}
-  - {fileID: 81873452}
-  - {fileID: 592172624}
-  - {fileID: 1044313613}
-  - {fileID: 1646907868}
 --- !u!58 &962479440
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -31107,11 +31054,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!212 &1044313613 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -8913533962594999635, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1058554661
 GameObject:
   m_ObjectHideFlags: 0
@@ -36361,7 +36303,7 @@ GameObject:
   - component: {fileID: 1102274473}
   - component: {fileID: 1102274476}
   m_Layer: 0
-  m_Name: SceneChanger
+  m_Name: LevelChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36710,8 +36652,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraTarget: {fileID: 1253408165}
   Player: {fileID: 729500096}
-  TargetNewPosition: {x: 28.47, y: 0, z: 0}
   CloseTime: 0.1
+  TargetNewPosition: {x: 28.47, y: 0, z: 0}
   _moveCharacter: {x: 1.5, y: 0, z: 0}
 --- !u!212 &1167571763
 SpriteRenderer:
@@ -46939,7 +46881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1333301636}
   m_Layer: 0
-  m_Name: ---- RoomSwitcher ----
+  m_Name: ---- RoomSwitcher/LevelChanger----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62459,21 +62401,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 729500081}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1638783447 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -7177796038800571695, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1646907868 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1300142661454288029, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1649222625 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -6333079902775923140, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1659834002
 GameObject:
   m_ObjectHideFlags: 0
@@ -67834,11 +67761,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1960761032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1839277258 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -5220851208984371554, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 190126694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1847516894
 GameObject:
   m_ObjectHideFlags: 0
