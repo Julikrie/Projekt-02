@@ -12,6 +12,7 @@ public class PlantSway : MonoBehaviour
         _startRotation = transform.eulerAngles.z;
     }
 
+    // Rotates the Object left and right
     void Update()
     {
         float sway = Mathf.Sin(Time.time * SwaySpeed) * SwayAmount;

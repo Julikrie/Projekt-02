@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RespawnObject : MonoBehaviour
 {
     public float RespawnTime;
 
-
+    // When Colliding with a "Player"-Tagged Object respawn after set RespawnTime
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
