@@ -1004,7 +1004,7 @@ MonoBehaviour:
   Player: {fileID: 729500096}
   CloseTime: 0.1
   TargetNewPosition: {x: 28.47, y: 0, z: 0}
-  _moveCharacter: {x: 1.5, y: 0, z: 0}
+  _moveCharacter: {x: 1, y: 0, z: 0}
 --- !u!212 &145442884
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36654,7 +36654,7 @@ MonoBehaviour:
   Player: {fileID: 729500096}
   CloseTime: 0.1
   TargetNewPosition: {x: 28.47, y: 0, z: 0}
-  _moveCharacter: {x: 1.5, y: 0, z: 0}
+  _moveCharacter: {x: 1, y: 0, z: 0}
 --- !u!212 &1167571763
 SpriteRenderer:
   m_ObjectHideFlags: 0

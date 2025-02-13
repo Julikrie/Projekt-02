@@ -1039,8 +1039,6 @@ MonoBehaviour:
   MenuBackground: {fileID: 515653051}
   ControlBackground: {fileID: 63268684}
   ReturnButton: {fileID: 322163780}
-  _isPaused: 0
-  _inGame: 0
 --- !u!1 &297559080
 GameObject:
   m_ObjectHideFlags: 0

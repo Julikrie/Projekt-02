@@ -6741,7 +6741,7 @@ MonoBehaviour:
   Player: {fileID: 1252861256}
   CloseTime: 1
   TargetNewPosition: {x: 28.47, y: 0, z: 0}
-  _moveCharacter: {x: 1.5, y: 0, z: 0}
+  _moveCharacter: {x: 1, y: 0, z: 0}
 --- !u!61 &350851336
 BoxCollider2D:
   m_ObjectHideFlags: 0
