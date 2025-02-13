@@ -19381,9 +19381,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraTarget: {fileID: 1750333456}
   Player: {fileID: 1461521542}
-  TargetNewPosition: {x: 28.5, y: 0, z: 0}
   CloseTime: 0.1
-  _moveCharacter: {x: 1.5, y: 0, z: 0}
+  TargetNewPosition: {x: 28.5, y: 0, z: 0}
 --- !u!212 &804997661
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -37579,20 +37578,6 @@ MonoBehaviour:
   ShiftButtonIndicator: {fileID: 0}
   DialogueLines:
   - Nice to meet you again! This gloves make it possible to swing on <b>Vines!</b>
-  _isChatting: 0
-  _spriteRenderer:
-  - {fileID: 1347650561}
-  - {fileID: 1347650560}
-  - {fileID: 1347650559}
-  - {fileID: 1347650558}
-  - {fileID: 1347650557}
-  - {fileID: 1347650556}
-  - {fileID: 1347650555}
-  - {fileID: 1347650554}
-  - {fileID: 1347650553}
-  - {fileID: 1347650552}
-  - {fileID: 1347650551}
-  - {fileID: 1347650550}
 --- !u!210 &1344413094
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -37805,66 +37790,6 @@ PrefabInstance:
 --- !u!1 &1347650549 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650550 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1300142661454288029, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650551 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -8913533962594999635, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650552 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -4457772106480614152, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650553 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 5838552553471336640, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650554 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2294477311205073507, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650555 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -7177796038800571695, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650556 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7955536874385295780, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650557 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -8089108032486474258, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650558 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -5220851208984371554, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650559 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -6333079902775923140, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650560 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -2762914173614684467, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
-  m_PrefabInstance: {fileID: 1347650548}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1347650561 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -150593363753521078, guid: 596c64562f4ea6542b75a1fdaf99dcef, type: 3}
   m_PrefabInstance: {fileID: 1347650548}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1360549418
@@ -58668,21 +58593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3663c6e908addff46b550f8aa5f53d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CornerForce: 10
-  CornerCorrectionSide: 0.5
-  CornerCorrectionUp: 0.6
-  CharacterHead: {x: 0.12, y: 2}
-  SpriteRenderer:
-  - {fileID: 51262079}
-  - {fileID: 393811278}
-  - {fileID: 315826552}
-  - {fileID: 1592402330}
-  - {fileID: 702002849}
-  - {fileID: 102789632}
-  - {fileID: 2009560644}
-  - {fileID: 994676862}
-  - {fileID: 631332667}
-  DashTrail: {fileID: 382114792}
   FootStepSound:
   - {fileID: 8300000, guid: 68217380651a90e48a99b6a5868f424b, type: 3}
   - {fileID: 8300000, guid: b30c05dec9f565245aa0405dc3091e19, type: 3}
@@ -58696,12 +58606,13 @@ MonoBehaviour:
   TrampolineSound: {fileID: 8300000, guid: 4f250bcceae673149a811f41430a8045, type: 3}
   DashSound: {fileID: 8300000, guid: 12c1b3a4d7d63844e9722127c5e65db9, type: 3}
   DamageSound: {fileID: 8300000, guid: 20dc5c6374e5c784ba543a66092fe0bf, type: 3}
-  _unlockedDashing: 1
-  _unlockedSwinging: 0
-  _canTrampoline: 0
   ShakeIntensity: 0.035
   ShakeTrampoline: 0
   ShakeDash: 0
+  CornerForce: 10
+  CornerCorrectionSide: 0.5
+  CornerCorrectionUp: 0.6
+  CharacterHead: {x: 0.12, y: 2}
   DashIndicator: {fileID: 1480321778}
   TrampolinePrefab: {fileID: 6000997960001365919, guid: f28a3ec6db49c254cb2b4c549f353cef, type: 3}
   GroundLayer:
@@ -58721,7 +58632,17 @@ MonoBehaviour:
   JumpDust: {fileID: 2055227378}
   WallSlideDust: {fileID: 1360562720}
   RespawnParticle: {fileID: 611734504}
-  _isFacingRight: 0
+  DashTrail: {fileID: 382114792}
+  SpriteRenderer:
+  - {fileID: 51262079}
+  - {fileID: 393811278}
+  - {fileID: 315826552}
+  - {fileID: 1592402330}
+  - {fileID: 702002849}
+  - {fileID: 102789632}
+  - {fileID: 2009560644}
+  - {fileID: 994676862}
+  - {fileID: 631332667}
   _currentState: 0
   _speed: 8
   _jumpForce: 20

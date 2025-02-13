@@ -89,7 +89,12 @@ public class DialogueManager : MonoBehaviour
         {
             _inRange = true;
             DialogueButton.SetActive(true);
-            
+
+            if (_spriteRenderer == null)
+            {
+                return;
+            }
+
             foreach (SpriteRenderer sprite in _spriteRenderer)
             {
                 sprite.enabled = true;
@@ -104,7 +109,12 @@ public class DialogueManager : MonoBehaviour
         {
             _inRange = false;
             DialogueButton.SetActive(false);
-            
+
+            if (_spriteRenderer == null)
+            {
+                return;
+            }
+
             foreach (SpriteRenderer sprite in _spriteRenderer)
             {
                 sprite.enabled = false;
@@ -116,6 +126,11 @@ public class DialogueManager : MonoBehaviour
     private void CheckForCurrentScene()
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        if (_spriteRenderer == null)
+        {
+            return;
+        }
 
         if (currentScene == 1)
         {
