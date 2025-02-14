@@ -45,6 +45,7 @@ public class PlayerStateMachine : MonoBehaviour
     public SpriteRenderer[] SpriteRenderer;
 
     private AudioSource _audioSource;
+    [SerializeField]
     private bool _unlockedDashing = false;
     private bool _unlockedSwinging = false;
     private bool _canTrampoline;
@@ -60,7 +61,6 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]
     private float _speed;
     private float _movementX;
-    private float _movementY;
 
     [Header("JUMP")]
     [SerializeField]
@@ -69,12 +69,10 @@ public class PlayerStateMachine : MonoBehaviour
     private int _jumpCounterLimit = 2;
     [SerializeField]
     private float _jumpCounter;
-    private float _airGravityScale;
     [SerializeField]
     private float _coyoteTime = 0.2f;
     [SerializeField]
     private float _coyoteTimer;
-    //private float _jumpBufferTime = 0.25f;
     [SerializeField]
     private float _jumpBufferTimer;
 
@@ -180,7 +178,6 @@ public class PlayerStateMachine : MonoBehaviour
     private void Update()
     {
         _movementX = Input.GetAxis("Horizontal");
-        _movementY = Input.GetAxis("Vertical");
 
         if (_swingAttachCooldown > 0f)
         {

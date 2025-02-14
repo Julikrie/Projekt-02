@@ -19929,6 +19929,7 @@ MonoBehaviour:
   RespawnParticle: {fileID: 1077387837}
   DashTrail: {fileID: 776977694}
   SpriteRenderer: []
+  _unlockedDashing: 0
   _currentState: 0
   _speed: 8
   _jumpForce: 20
@@ -25899,7 +25900,7 @@ MonoBehaviour:
   DialogueButton: {fileID: 1692955267}
   ShiftButtonIndicator: {fileID: 0}
   DialogueLines:
-  - There you are <b>Koda!</b>    I the Elder have summoned you today.
+  - There you are <b>Koda!</b>    I, the Elder have summoned you today.
   - I'm too old and can't guard the forest anymore.
   - You have to fulfill my duty from now on.
   - An afterimage of me will guide you!
